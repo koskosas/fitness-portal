@@ -42,7 +42,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
 .forbidden-box h3 { font-size: 13px; font-weight: 500; color: #be123c; margin-bottom: 8px; }
 .forbidden-list { list-style: none; display: flex; flex-direction: column; gap: 5px; }
 .forbidden-list li { font-size: 13px; color: #be123c; display: flex; align-items: flex-start; gap: 6px; }
-.forbidden-list li::before { content: "×"; font-weight: 600; flex-shrink: 0; margin-top: 1px; }
+.forbidden-list li::before { content: "x"; font-weight: 600; flex-shrink: 0; margin-top: 1px; }
 .section { margin: 0 20px 16px; }
 .section-title { font-size: 11px; font-weight: 500; color: #888; text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 10px; }
 .warmup-box { background: #f9f9f7; border-radius: 10px; padding: 14px 16px; }
@@ -77,6 +77,17 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
 .video-btn:hover { background: #f9f9f7; }
 .video-btn.has-video { color: #dc2626; border-color: #dc2626; border-style: solid; background: #fff1f2; }
 .extra-note { padding: 10px 16px; background: #f9f9f7; border-top: 1px solid #e8e8e6; font-size: 12px; color: #555; }
+.alert-note { padding: 10px 16px; font-size: 12px; border-top: 1px solid #e8e8e6; }
+.alert-note.orange { background: #fff7ed; color: #92400e; }
+.alert-note.red { background: #fff1f2; color: #be123c; }
+.nutrition-section { margin: 0 20px 16px; }
+.nutrition-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.nutrition-table th { text-align: left; padding: 7px 10px; font-size: 11px; font-weight: 500; color: #888; border-bottom: 1px solid #e8e8e6; background: #f9f9f7; }
+.nutrition-table td { padding: 8px 10px; border-bottom: 1px solid #f0f0ee; vertical-align: top; line-height: 1.5; font-size: 13px; }
+.nutrition-table tr:last-child td { border-bottom: none; }
+.nutrition-personal { margin-top: 10px; background: #f9f9f7; border-radius: 8px; padding: 12px 14px; }
+.nutrition-personal p { font-size: 13px; line-height: 1.6; color: #444; margin-bottom: 6px; }
+.nutrition-personal li { font-size: 13px; line-height: 1.7; color: #444; margin-left: 16px; }
 @media (max-width: 480px) {
   .exercise-table th:nth-child(3), .exercise-table td:nth-child(3) { display: none; }
 }
@@ -86,7 +97,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
 
 <!-- HOME -->
 <div id="home-page" class="page active">
-  <div class="nav"><span class="nav-brand">🏋️ Fitness Portal</span></div>
+  <div class="nav"><span class="nav-brand">Fitness Portal</span></div>
   <div class="home-header">
     <h1>Προγράμματα προπόνησης</h1>
     <p>Επίλεξε τον λογαριασμό σου για να δεις το πρόγραμμά σου.</p>
@@ -113,21 +124,21 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
   </div>
   <div class="client-header">
     <div class="client-header-avatar avatar-p">ΠΚ</div>
-    <div><h2>Πέτρος</h2><p>Εβδομάδες 1–2 · Τεχνική &amp; ανοχή ώμου</p></div>
+    <div><h2>Πέτρος</h2><p>Εβδομάδες 1-2 · Τεχνική &amp; ανοχή ώμου</p></div>
   </div>
   <div class="safety-banner">
-    <h3>⚠️ Κανόνας πόνου — διάβασέ το πριν ξεκινήσεις</h3>
+    <h3>Κανόνας πόνου — διάβασέ το πριν ξεκινήσεις</h3>
     <table class="pain-table">
       <tr><th>Επίπεδο πόνου</th><th>Τι κάνεις</th></tr>
-      <tr><td><span class="badge go">0–2/10</span></td><td>Συνεχίζεις κανονικά</td></tr>
+      <tr><td><span class="badge go">0-2/10</span></td><td>Συνεχίζεις κανονικά</td></tr>
       <tr><td><span class="badge warn">3/10</span></td><td>Μειώνεις εύρος, ένταση ή αλλάζεις άσκηση</td></tr>
       <tr><td><span class="badge stop">4+/10</span></td><td>Σταματάς αμέσως</td></tr>
-      <tr><td>Πόνος 24–48ω μετά</td><td>Μείωση φορτίου στην επόμενη</td></tr>
-      <tr><td><span class="badge stop">Νυχτερινός / sharp</span></td><td>Επικοινωνία με φυσικοθεραπευτή</td></tr>
+      <tr><td>Πόνος 24-48ω μετά</td><td>Μείωση φορτίου στην επόμενη</td></tr>
+      <tr><td><span class="badge stop">Νυχτερινός / sharp</span></td><td>Επικοινωνία με φυσιοθεραπευτή</td></tr>
     </table>
   </div>
   <div class="forbidden-box">
-    <h3>🚫 Απαγορευμένες ασκήσεις αυτή την περίοδο</h3>
+    <h3>Απαγορευμένες ασκήσεις αυτή την περίοδο</h3>
     <ul class="forbidden-list">
       <li>Κανονικά push-ups (και βαθιά / μέχρι αποτυχία)</li>
       <li>Plank αν υπάρχει πόνος στον ώμο</li>
@@ -137,17 +148,17 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
     </ul>
   </div>
   <div class="section">
-    <div class="section-title">Ζέσταμα — πριν από κάθε προπόνηση (8–10 λεπτά)</div>
+    <div class="section-title">Ζέσταμα — πριν από κάθε προπόνηση (8-10 λεπτά)</div>
     <div class="warmup-box">
       <ol class="warmup-list">
         <li>Marching in place — 2 λεπτά</li>
-        <li>Cat-cow — 8–10 reps</li>
+        <li>Cat-cow — 8-10 reps</li>
         <li>Thoracic rotations — 8/πλευρά</li>
         <li>Hip hinge drill — 10 reps</li>
         <li>Bodyweight squat — 10 reps</li>
         <li>Scapular retractions με λάστιχο ή χωρίς — 12 reps</li>
         <li>Wall slides μέχρι ανώδυνο εύρος — 8 reps</li>
-        <li>External rotation isometric με πετσέτα — 2×15 sec/πλευρά</li>
+        <li>External rotation isometric με πετσέτα — 2x15 sec/πλευρά</li>
       </ol>
     </div>
   </div>
@@ -159,7 +170,27 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
       <div class="day-card" onclick="showWorkout('p-day3','petros',this)"><div class="day-label">Ημέρα 3</div><div class="day-title">Full body conditioning</div><span class="day-badge pink">Circuit · 3 γύροι</span></div>
       <div class="day-card" onclick="showWorkout('p-day4','petros',this)"><div class="day-label">Ημέρα 4</div><div class="day-title">Lower/glutes + intervals</div><span class="day-badge amber">6 ασκήσεις + cardio</span></div>
     </div>
-    <div class="daily-note">🚶 Καθημερινά: βήματα + mobility breaks</div>
+    <div class="daily-note">Καθημερινά: βήματα + mobility breaks</div>
+  </div>
+  <div class="section nutrition-section">
+    <div class="section-title">Διατροφικές κατευθύνσεις</div>
+    <table class="nutrition-table">
+      <tr><th>Κανόνας</th><th>Στόχος</th></tr>
+      <tr><td>Πρωτεΐνη σε κάθε γεύμα</td><td>Κορεσμός και μυϊκή διατήρηση</td></tr>
+      <tr><td>2-3 λίτρα νερό/ημέρα</td><td>Ενυδάτωση και ενέργεια</td></tr>
+      <tr><td>1-2 μερίδες λαχανικά/ημέρα αρχικά</td><td>Καλύτερος κορεσμός</td></tr>
+      <tr><td>80% σπιτικό φαγητό</td><td>Έλεγχος θερμίδων</td></tr>
+      <tr><td>Περιορισμός υγρών θερμίδων</td><td>Καφές με ζάχαρη, αναψυκτικά, αλκοόλ</td></tr>
+      <tr><td>Σταθερά γεύματα</td><td>Λιγότερο τσιμπολόγημα</td></tr>
+    </table>
+    <div class="nutrition-personal">
+      <p>Για τον Πέτρο:</p>
+      <ul>
+        <li>Πρωτεΐνη σε 2-3 γεύματα/ημέρα</li>
+        <li>Μείωση delivery/fast food κατά 30-50%</li>
+        <li>10 λεπτά περπάτημα μετά από ένα βασικό γεύμα</li>
+      </ul>
+    </div>
   </div>
   <div id="petros-workout-area" class="workout-area"></div>
 </div>
@@ -172,24 +203,24 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
   </div>
   <div class="client-header">
     <div class="client-header-avatar avatar-m">ΜΡ</div>
-    <div><h2>Μιρέλα</h2><p>Εβδομάδες 1–2 · Βάση, ασφάλεια, έλεγχος</p></div>
+    <div><h2>Μιρέλα</h2><p>Εβδομάδες 1-2 · Βάση, ασφάλεια, έλεγχος</p></div>
   </div>
   <div class="safety-banner">
-    <h3>⚠️ Κανόνας πόνου — διάβασέ το πριν ξεκινήσεις</h3>
+    <h3>Κανόνας πόνου — διάβασέ το πριν ξεκινήσεις</h3>
     <table class="pain-table">
       <tr><th>Επίπεδο πόνου</th><th>Τι κάνεις</th></tr>
-      <tr><td><span class="badge go">0–2/10</span></td><td>Συνεχίζεις κανονικά</td></tr>
+      <tr><td><span class="badge go">0-2/10</span></td><td>Συνεχίζεις κανονικά</td></tr>
       <tr><td><span class="badge warn">3/10</span></td><td>Μειώνεις εύρος, ένταση ή αλλάζεις άσκηση</td></tr>
       <tr><td><span class="badge stop">4+/10</span></td><td>Σταματάς αμέσως</td></tr>
-      <tr><td>Πόνος 24–48ω μετά</td><td>Μείωση φορτίου στην επόμενη</td></tr>
-      <tr><td><span class="badge stop">Νυχτερινός / sharp</span></td><td>Επικοινωνία με φυσικοθεραπευτή</td></tr>
+      <tr><td>Πόνος 24-48ω μετά</td><td>Μείωση φορτίου στην επόμενη</td></tr>
+      <tr><td><span class="badge stop">Νυχτερινός / sharp</span></td><td>Επικοινωνία με φυσιοθεραπευτή</td></tr>
     </table>
   </div>
   <div class="forbidden-box">
-    <h3>🚫 Απαγορευμένες ασκήσεις αυτή την περίοδο</h3>
+    <h3>Απαγορευμένες ασκήσεις αυτή την περίοδο</h3>
     <ul class="forbidden-list">
       <li>Overhead πιέσεις</li>
-      <li>Πλάγιες / μπροστινές άρσεις πάνω από 70–80°</li>
+      <li>Πλάγιες / μπροστινές άρσεις πάνω από 70-80 μοίρες</li>
       <li>Burpees &amp; Dips</li>
       <li>Κανονικά push-ups στο πάτωμα</li>
       <li>Απότομες κινήσεις / άλματα με συμμετοχή χεριών</li>
@@ -197,7 +228,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
     </ul>
   </div>
   <div class="section">
-    <div class="section-title">Ζέσταμα — πριν από κάθε προπόνηση (8–12 λεπτά)</div>
+    <div class="section-title">Ζέσταμα — πριν από κάθε προπόνηση (8-12 λεπτά)</div>
     <div class="warmup-box">
       <ol class="warmup-list">
         <li>Ήπιο περπάτημα ή marching — 2 λεπτά</li>
@@ -206,9 +237,9 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
         <li>Thoracic rotation πλάγια — 8/πλευρά</li>
         <li>Glute bridge — 10 reps</li>
         <li>Sit-to-stand — 8 reps</li>
-        <li>Scapular setting — 2×8</li>
-        <li>External rotation isometric με πετσέτα — 2×15 sec/πλευρά</li>
-        <li>Wall slide μέχρι 70–80° μόνο — 6–8 reps, χωρίς πόνο</li>
+        <li>Scapular setting — 2x8</li>
+        <li>External rotation isometric με πετσέτα — 2x15 sec/πλευρά</li>
+        <li>Wall slide μέχρι 70-80 μοίρες μόνο — 6-8 reps, χωρίς πόνο</li>
       </ol>
     </div>
   </div>
@@ -220,84 +251,119 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
       <div class="day-card" onclick="showWorkout('m-day3','mirela',this)"><div class="day-label">Ημέρα 3</div><div class="day-title">Low-impact full body</div><span class="day-badge pink">Circuit · 3 γύροι</span></div>
       <div class="day-card" onclick="showWorkout('m-day4','mirela',this)"><div class="day-label">Ημέρα 4</div><div class="day-title">Glutes + core + cardio</div><span class="day-badge amber">6 ασκήσεις + περπάτημα</span></div>
     </div>
-    <div class="daily-note">🚶 Καθημερινά: βήματα + mobility breaks · Στόχος: να τελειώνεις νιώθοντας ότι μπορείς λίγο ακόμα</div>
+    <div class="daily-note">Καθημερινά: βήματα + mobility breaks · Στόχος: να τελειώνεις νιώθοντας ότι μπορείς λίγο ακόμα</div>
+  </div>
+  <div class="section nutrition-section">
+    <div class="section-title">Διατροφικές κατευθύνσεις</div>
+    <table class="nutrition-table">
+      <tr><th>Κανόνας</th><th>Στόχος</th></tr>
+      <tr><td>Πρωτεΐνη σε κάθε γεύμα</td><td>Κορεσμός και μυϊκή διατήρηση</td></tr>
+      <tr><td>2-3 λίτρα νερό/ημέρα</td><td>Ενυδάτωση και ενέργεια</td></tr>
+      <tr><td>1-2 μερίδες λαχανικά/ημέρα αρχικά</td><td>Καλύτερος κορεσμός</td></tr>
+      <tr><td>80% σπιτικό φαγητό</td><td>Έλεγχος θερμίδων</td></tr>
+      <tr><td>Περιορισμός υγρών θερμίδων</td><td>Καφές με ζάχαρη, αναψυκτικά, αλκοόλ</td></tr>
+      <tr><td>Σταθερά γεύματα</td><td>Λιγότερο τσιμπολόγημα</td></tr>
+    </table>
+    <div class="nutrition-personal">
+      <p>Για τη Μιρέλα:</p>
+      <ul>
+        <li>Να δίνει προτεραιότητα στην πρωτεΐνη</li>
+        <li>Να πίνει αρκετό νερό</li>
+        <li>Να προσέχει ναυτία / ζάλη / υπερβολική κόπωση</li>
+        <li>Να αποφεύγει πολύ βαριά/λιπαρά γεύματα κοντά στην προπόνηση</li>
+        <li>Αν έχει έντονη αδυναμία ή παρενέργειες, να ενημερώσει τον γιατρό της</li>
+      </ul>
+    </div>
   </div>
   <div id="mirela-workout-area" class="workout-area"></div>
 </div>
 
 <script>
-// ================================================================
-// ΔΕΔΟΜΕΝΑ — για να προσθέσεις βίντεο, βάλε το YouTube link στο video: ""
-// Παράδειγμα: video: "https://youtu.be/XXXXXXXXX"
-// ================================================================
 const workouts = {
   'p-day1': { title:'Ημέρα 1 — Lower body + core', circuit:false, exercises:[
-    {name:'Box squat ή chair squat', sets:'3 × 10–12', note:'RPE 6', video:''},
-    {name:'Glute bridge', sets:'3 × 12–15', note:'RPE 6', video:''},
-    {name:'Reverse lunge ή split squat μικρό εύρος', sets:'2–3 × 8/πόδι', note:'RPE 6', video:''},
-    {name:'Romanian deadlift με σακίδιο', sets:'3 × 10', note:'RPE 6', video:''},
-    {name:'Dead bug', sets:'3 × 8/πλευρά', note:'Αργά', video:''},
-    {name:'Side plank από γόνατα', sets:'2 × 20–30 sec', note:'Ελεγχόμενα', video:''},
-    {name:'Walking cooldown', sets:'5–8 λεπτά', note:'Ήπια', video:''},
+    {name:'Box squat ή chair squat', sets:'3 x 10-12', note:'RPE 6', video:''},
+    {name:'Glute bridge', sets:'3 x 12-15', note:'RPE 6', video:''},
+    {name:'Reverse lunge ή split squat μικρό εύρος', sets:'2-3 x 8/πόδι', note:'RPE 6', video:''},
+    {name:'Romanian deadlift με σακίδιο', sets:'3 x 10', note:'RPE 6', video:''},
+    {name:'Dead bug', sets:'3 x 8/πλευρά', note:'Αργά', video:''},
+    {name:'Side plank από γόνατα', sets:'2 x 20-30 sec', note:'Ελεγχόμενα', video:''},
+    {name:'Walking cooldown', sets:'5-8 λεπτά', note:'Ήπια', video:''},
   ]},
   'p-day2': { title:'Ημέρα 2 — Upper rehab + posture + zone 2', circuit:false, exercises:[
-    {name:'Band row', sets:'3 × 12–15', note:'Χωρίς πόνο', video:''},
-    {name:'Band pull-apart χαμηλά', sets:'2 × 12', note:'Όχι πάνω από ώμο', video:''},
-    {name:'Wall push-up σε ψηλό τοίχο', sets:'3 × 6–8', note:'Μόνο αν πόνος 0–2/10', video:''},
-    {name:'External rotation με λάστιχο', sets:'2–3 × 12/πλ.', note:'Αγκώνας κοντά στο σώμα', video:''},
-    {name:'Scapular setting', sets:'2 × 10', note:'"Κάτω και πίσω" απαλά', video:''},
-    {name:'Bird dog', sets:'3 × 8/πλευρά', note:'Σταθερή λεκάνη', video:''},
-    {name:'Zone 2 περπάτημα', sets:'15–20 λεπτά', note:'Να μπορεί να μιλάει', video:''},
+    {name:'Band row', sets:'3 x 12-15', note:'Χωρίς πόνο', video:''},
+    {name:'Band pull-apart χαμηλά', sets:'2 x 12', note:'Όχι πάνω από ώμο', video:''},
+    {name:'Wall push-up σε ψηλό τοίχο', sets:'3 x 6-8', note:'Μόνο αν πόνος 0-2/10', video:''},
+    {name:'External rotation με λάστιχο', sets:'2-3 x 12/πλ.', note:'Αγκώνας κοντά στο σώμα', video:''},
+    {name:'Scapular setting', sets:'2 x 10', note:'"Κάτω και πίσω" απαλά', video:''},
+    {name:'Bird dog', sets:'3 x 8/πλευρά', note:'Σταθερή λεκάνη', video:''},
+    {name:'Zone 2 περπάτημα', sets:'15-20 λεπτά', note:'Να μπορεί να μιλάει', video:''},
   ]},
-  'p-day3': { title:'Ημέρα 3 — Full body conditioning', circuit:true, circuitNote:'3 γύροι · Διάλειμμα 60–90 sec ανά γύρο', exercises:[
-    {name:'Squat to chair', sets:'12 reps', note:'', video:''},
-    {name:'Step-ups σε χαμηλό σκαλί', sets:'10/πόδι', note:'', video:''},
-    {name:'Band row', sets:'12 reps', note:'', video:''},
-    {name:'Glute bridge march', sets:'8/πόδι', note:'', video:''},
-    {name:'Marching high knees', sets:'40 sec', note:'', video:''},
-    {name:'Dead bug', sets:'8/πλευρά', note:'', video:''},
-  ]},
-  'p-day4': { title:'Ημέρα 4 — Lower/glutes + intervals', circuit:false, extra:'🏃 Intervals: 6 γύροι × 30 sec γρήγορο περπάτημα / 60 sec χαλαρό', exercises:[
-    {name:'Tempo squat 3 sec κάτω', sets:'3 × 8–10', note:'', video:''},
-    {name:'Hip thrust σε καναπέ', sets:'3 × 10–12', note:'', video:''},
-    {name:'Lateral walk με λάστιχο', sets:'3 × 10/πλευρά', note:'', video:''},
-    {name:'Calf raises', sets:'3 × 15–20', note:'', video:''},
-    {name:'Pallof press με λάστιχο', sets:'3 × 10/πλευρά', note:'', video:''},
-    {name:'Wall sit', sets:'3 × 20–30 sec', note:'', video:''},
-  ]},
+  'p-day3': {
+    title:'Ημέρα 3 — Full body conditioning',
+    circuit:true,
+    circuitNote:'3 γύροι · Διάλειμμα 60-90 sec ανά γύρο · RPE 6/10 — να τελειώνει με 2-4 επαναλήψεις "στον κουβά". Δεν κυνηγάμε εξάντληση.',
+    exercises:[
+      {name:'Squat to chair', sets:'12 reps', note:'Έλεγχος στο κατέβασμα, γόνατα στην ίδια κατεύθυνση με τα δάχτυλα. Να μη "πέφτει" στην καρέκλα.', video:''},
+      {name:'Step-ups σε χαμηλό σκαλί', sets:'10/πόδι', note:'Πίεση από τη φτέρνα του ποδιού που ανεβαίνει. Κορμός όρθιος, χωρίς σπρώξιμο από το πίσω πόδι.', video:''},
+      {name:'Band row', sets:'12 reps', note:'Τράβηγμα με αγκώνες κοντά στο σώμα. Στο τέλος ενώνουν απαλά οι ωμοπλάτες, χωρίς να σηκώνει ώμους.', video:''},
+      {name:'Glute bridge march', sets:'8/πόδι', note:'Η λεκάνη μένει σταθερή. Δεν αφήνει τη μέση να κάνει υπερέκταση. Αν χαλάει η τεχνική, κάνει απλό glute bridge.', video:''},
+      {name:'Marching high knees', sets:'40 sec', note:'Ρυθμός μέτριος, όχι sprint. Στόχος να ανεβάσει παλμούς χωρίς να χάνει αναπνοή τελείως.', video:''},
+      {name:'Dead bug', sets:'8/πλευρά', note:'Μέση κολλημένη στο πάτωμα. Αργή εκτέλεση, εκπνοή όταν τεντώνει πόδι/χέρι.', video:''},
+    ]
+  },
+  'p-day4': {
+    title:'Ημέρα 4 — Lower/glutes + intervals',
+    circuit:false,
+    extra:'Intervals μετά: 6 γύροι x 30 sec γρήγορο περπάτημα / 60 sec χαλαρό. Στόχος της ημέρας: πόδια, γλουτοί, κορμός και καρδιοαναπνευστική βάση — δεν θέλουμε να βγει καμένος.',
+    exercises:[
+      {name:'Tempo squat 3 sec κάτω', sets:'3 x 8-10', note:'Κατέβασμα αργό σε 3 δευτερόλεπτα, μικρή παύση κάτω, ανέβασμα ελεγχόμενο. Δεν χρειάζεται μεγάλο βάθος αν χαλάει η τεχνική.', video:''},
+      {name:'Hip thrust σε καναπέ', sets:'3 x 10-12', note:'Πηγούνι ελαφρώς μέσα, πλευρά "κάτω", πίεση από φτέρνες. Να νιώθει κυρίως γλουτούς, όχι μέση.', video:''},
+      {name:'Lateral walk με λάστιχο', sets:'3 x 10/πλευρά', note:'Μικρά βήματα, γόνατα ελαφρώς λυγισμένα, λεκάνη σταθερή. Να μη γέρνει δεξιά-αριστερά.', video:''},
+      {name:'Calf raises', sets:'3 x 15-20', note:'Πλήρης έλεγχος πάνω-κάτω. Μικρή παύση στην κορυφή, όχι αναπήδηση.', video:''},
+      {name:'Pallof press με λάστιχο', sets:'3 x 10/πλευρά', note:'Ο κορμός δεν στρίβει. Πιέζει το λάστιχο μπροστά αργά και επιστρέφει ελεγχόμενα.', video:''},
+      {name:'Wall sit', sets:'3 x 20-30 sec', note:'Πλάτη στον τοίχο, γόνατα περίπου 90 μοίρες ή λίγο πιο ψηλά αν ζορίζεται. Όχι μέχρι πλήρη κατάρρευση.', video:''},
+    ]
+  },
   'm-day1': { title:'Ημέρα 1 — Lower body + core', circuit:false, exercises:[
-    {name:'Sit-to-stand από καρέκλα', sets:'3 × 8–10', note:'Αργό κατέβασμα', video:''},
-    {name:'Glute bridge', sets:'3 × 12', note:'Παύση 1 sec πάνω', video:''},
-    {name:'Step-up χαμηλό', sets:'2 × 8/πόδι', note:'Χαμηλό ύψος', video:''},
-    {name:'Supported split squat', sets:'2 × 6–8/πόδι', note:'Κρατιέται για ισορροπία', video:''},
-    {name:'Dead bug heel taps', sets:'3 × 6/πλευρά', note:'Μέση σταθερή', video:''},
-    {name:'Side plank από γόνατα', sets:'2 × 10–20 sec', note:'Ανώδυνο', video:''},
+    {name:'Sit-to-stand από καρέκλα', sets:'3 x 8-10', note:'Αργό κατέβασμα', video:''},
+    {name:'Glute bridge', sets:'3 x 12', note:'Παύση 1 sec πάνω', video:''},
+    {name:'Step-up χαμηλό', sets:'2 x 8/πόδι', note:'Χαμηλό ύψος', video:''},
+    {name:'Supported split squat', sets:'2 x 6-8/πόδι', note:'Κρατιέται για ισορροπία', video:''},
+    {name:'Dead bug heel taps', sets:'3 x 6/πλευρά', note:'Μέση σταθερή', video:''},
+    {name:'Side plank από γόνατα', sets:'2 x 10-20 sec', note:'Ανώδυνο', video:''},
     {name:'Breathing reset', sets:'2 λεπτά', note:'Ρινική αναπνοή', video:''},
   ]},
   'm-day2': { title:'Ημέρα 2 — Shoulder-safe upper + posture', circuit:false, exercises:[
-    {name:'Band row (με στήριξη πλάτης)', sets:'3 × 12', note:'Χωρίς πόνο στη μέση', video:''},
-    {name:'Wall push-up', sets:'2–3 × 8–12', note:'Μόνο άνετο εύρος', video:''},
-    {name:'External rotation με λάστιχο', sets:'2 × 10–12', note:'Πολύ ήπια', video:''},
-    {name:'Isometric shoulder flexion στον τοίχο', sets:'2 × 10 sec', note:'Κάτω από 90°', video:''},
-    {name:'Isometric abduction στον τοίχο', sets:'2 × 10 sec', note:'Κάτω από 60–70°', video:''},
-    {name:'Pallof press', sets:'2–3 × 8/πλ.', note:'Σταθερή λεκάνη', video:''},
-    {name:'Περπάτημα', sets:'10–15 λεπτά', note:'Ήπια', video:''},
+    {name:'Band row (με στήριξη πλάτης)', sets:'3 x 12', note:'Χωρίς πόνο στη μέση', video:''},
+    {name:'Wall push-up', sets:'2-3 x 8-12', note:'Μόνο άνετο εύρος', video:''},
+    {name:'External rotation με λάστιχο', sets:'2 x 10-12', note:'Πολύ ήπια', video:''},
+    {name:'Isometric shoulder flexion στον τοίχο', sets:'2 x 10 sec', note:'Κάτω από 90 μοίρες', video:''},
+    {name:'Isometric abduction στον τοίχο', sets:'2 x 10 sec', note:'Κάτω από 60-70 μοίρες', video:''},
+    {name:'Pallof press', sets:'2-3 x 8/πλ.', note:'Σταθερή λεκάνη', video:''},
+    {name:'Περπάτημα', sets:'10-15 λεπτά', note:'Ήπια', video:''},
   ]},
-  'm-day3': { title:'Ημέρα 3 — Low-impact full body', circuit:true, circuitNote:'3 γύροι · Χαλαρό προς μέτριο', exercises:[
-    {name:'Sit-to-stand', sets:'10 reps', note:'', video:''},
-    {name:'Glute bridge', sets:'12 reps', note:'', video:''},
-    {name:'Step jacks χωρίς έντονα χέρια', sets:'30 sec', note:'', video:''},
-    {name:'Band row', sets:'12 reps', note:'', video:''},
-    {name:'Bird dog', sets:'6/πλευρά', note:'', video:''},
-    {name:'Marching', sets:'40 sec', note:'', video:''},
-  ]},
-  'm-day4': { title:'Ημέρα 4 — Glutes + core + cardio', circuit:false, extra:'🚶 Περπάτημα 10–20 λεπτά ήπιο προς μέτριο', exercises:[
-    {name:'Glute bridge', sets:'4 × 12', note:'Παύση 1–2 sec πάνω', video:''},
-    {name:'Clamshell με λάστιχο ή χωρίς', sets:'3 × 12/πλευρά', note:'Αργά, χωρίς στρίψιμο λεκάνης', video:''},
-    {name:'Supported Romanian deadlift', sets:'3 × 10', note:'Ελαφρύ βάρος ή χέρια σε μηρούς', video:''},
-    {name:'Lateral walk με λάστιχο', sets:'2–3 × 8–10/πλ.', note:'Μικρά βήματα', video:''},
-    {name:'Dead bug', sets:'3 × 6–8/πλευρά', note:'Μέση σταθερή', video:''},
-    {name:'Wall sit', sets:'2–3 × 15–25 sec', note:'Όχι μέχρι εξάντληση', video:''},
+  'm-day3': {
+    title:'Ημέρα 3 — Low-impact full body',
+    circuit:true,
+    circuitNote:'3 γύροι · RPE 5-6/10 · Χαλαρό προς μέτριο — χωρίς λαχάνιασμα που τη ζορίζει.',
+    ozempicNote:'Λόγω Ozempic: αν έχει ναυτία, ζάλη ή πολύ χαμηλή ενέργεια → 2 γύροι αντί για 3 και 10-15 λεπτά χαλαρό περπάτημα αντί για step jacks.',
+    backNote:'Για τη μέση: αν εμφανιστεί ενόχληση → μικρότερο εύρος, εκπνοή και ενεργοποίηση κορμού. Αν το bird dog ενοχλεί → dead bug heel taps 2-3 x 6/πλευρά.',
+    exercises:[
+      {name:'Sit-to-stand', sets:'10 reps', note:'Αργό κατέβασμα, ανέβασμα με πίεση από φτέρνες. Τα χέρια βοηθούν ελαφρά μόνο αν χρειάζεται, χωρίς να φορτίζεται ο ώμος.', video:''},
+      {name:'Glute bridge', sets:'12 reps', note:'Παύση 1 sec πάνω. Να νιώθει γλουτούς, όχι μέση. Αν νιώθει μέση, μειώνει εύρος και κάνει καλύτερο brace.', video:''},
+      {name:'Step jacks χωρίς έντονα χέρια', sets:'30 sec', note:'Τα χέρια μένουν χαμηλά ή στη μέση. Δεν ανεβαίνουν πάνω από 90 μοίρες. Ρυθμός άνετος, χωρίς αναπηδήσεις.', video:''},
+      {name:'Band row', sets:'12 reps', note:'Αγκώνες κοντά στο σώμα, ώμοι μακριά από αυτιά. Αν νιώσει ώμο, μικραίνει εύρος και μειώνει αντίσταση.', video:''},
+      {name:'Bird dog', sets:'6/πλευρά', note:'Αργή εκτέλεση. Η λεκάνη δεν ανοίγει στο πλάι. Αν ενοχλεί ο ώμος, κάνει μόνο πόδια χωρίς έκταση χεριού.', video:''},
+      {name:'Marching', sets:'40 sec', note:'Ήπια προς μέτρια ένταση. Στόχος να κινηθεί χωρίς κραδασμούς και χωρίς να φορτώσει τον ώμο.', video:''},
+    ]
+  },
+  'm-day4': { title:'Ημέρα 4 — Glutes + core + cardio', circuit:false, extra:'Περπάτημα 10-20 λεπτά ήπιο προς μέτριο', exercises:[
+    {name:'Glute bridge', sets:'4 x 12', note:'Παύση 1-2 sec πάνω', video:''},
+    {name:'Clamshell με λάστιχο ή χωρίς', sets:'3 x 12/πλευρά', note:'Αργά, χωρίς στρίψιμο λεκάνης', video:''},
+    {name:'Supported Romanian deadlift', sets:'3 x 10', note:'Ελαφρύ βάρος ή χέρια σε μηρούς', video:''},
+    {name:'Lateral walk με λάστιχο', sets:'2-3 x 8-10/πλ.', note:'Μικρά βήματα', video:''},
+    {name:'Dead bug', sets:'3 x 6-8/πλευρά', note:'Μέση σταθερή', video:''},
+    {name:'Wall sit', sets:'2-3 x 15-25 sec', note:'Όχι μέχρι εξάντληση', video:''},
   ]}
 };
 
@@ -319,12 +385,14 @@ function showWorkout(key, clientId, card) {
   card.classList.add('active-day');
   const rows = w.exercises.map(ex => {
     const videoHtml = ex.video
-      ? `<a href="${ex.video}" target="_blank" class="video-btn has-video">▶ βίντεο</a>`
-      : `<span class="video-btn">+ βίντεο</span>`;
+      ? `<a href="${ex.video}" target="_blank" class="video-btn has-video">Video</a>`
+      : `<span class="video-btn">+ video</span>`;
     return `<tr><td>${ex.name}</td><td style="white-space:nowrap">${ex.sets}</td><td class="note-cell">${ex.note}</td><td>${videoHtml}</td></tr>`;
   }).join('');
-  const circuitHtml = w.circuit ? `<div style="padding:10px 16px 4px"><span class="circuit-note">🔄 ${w.circuitNote}</span></div>` : '';
+  const circuitHtml = w.circuit ? `<div style="padding:10px 16px 4px"><span class="circuit-note">${w.circuitNote}</span></div>` : '';
   const extraHtml = w.extra ? `<div class="extra-note">${w.extra}</div>` : '';
+  const ozempicHtml = w.ozempicNote ? `<div class="alert-note orange">⚠️ ${w.ozempicNote}</div>` : '';
+  const backHtml = w.backNote ? `<div class="alert-note red">⚠️ ${w.backNote}</div>` : '';
   const area = document.getElementById(clientId+'-workout-area');
   area.innerHTML = `
     <div class="workout-panel">
@@ -335,11 +403,11 @@ function showWorkout(key, clientId, card) {
       ${circuitHtml}
       <div style="overflow-x:auto">
         <table class="exercise-table">
-          <thead><tr><th style="width:38%">Άσκηση</th><th style="width:20%">Σετ</th><th style="width:27%">Σημείωση</th><th style="width:15%">Τεχνική</th></tr></thead>
+          <thead><tr><th style="width:35%">Άσκηση</th><th style="width:18%">Σετ</th><th style="width:32%">Σημείωση</th><th style="width:15%">Video</th></tr></thead>
           <tbody>${rows}</tbody>
         </table>
       </div>
-      ${extraHtml}
+      ${extraHtml}${ozempicHtml}${backHtml}
     </div>`;
   area.scrollIntoView({behavior:'smooth', block:'nearest'});
 }
