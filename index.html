@@ -31,17 +31,11 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 .vessel-section{margin:20px 24px;background:#f9f8f4;border:1px solid #eae9e4;border-radius:18px;padding:24px;display:flex;flex-direction:column;align-items:center}
 .vessel-title{font-size:11px;font-weight:500;color:#999;text-transform:uppercase;letter-spacing:.08em;margin-bottom:18px;align-self:flex-start}
 .vessel-wrap{display:flex;gap:28px;align-items:center;width:100%}
-.vessel-svg-container{flex-shrink:0;cursor:pointer}
 .vessel-info{flex:1;display:flex;flex-direction:column;gap:10px}
 .vessel-stat-big{font-size:28px;font-weight:500;letter-spacing:-.5px;line-height:1}
 .vessel-stat-sub{font-size:13px;color:#888;margin-top:2px}
 .vessel-pct{font-size:13px;color:#aaa;margin-top:4px}
 .vessel-msg{font-size:13px;color:#666;line-height:1.55;background:#fff;border-radius:10px;padding:10px 12px;border:1px solid #e8e8e6;font-style:italic}
-.checkin-btn-wrap{margin:16px 24px 0}
-.checkin-btn-big{width:100%;padding:16px;background:#1a1a1a;color:#fff;border:none;border-radius:14px;font-size:15px;font-weight:500;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px;transition:background .15s,transform .1s}
-.checkin-btn-big:hover{background:#333;transform:translateY(-1px)}
-.checkin-btn-big:disabled{background:#ccc;cursor:default;transform:none}
-.checkin-btn-big .btn-icon{font-size:20px}
 .vessels-link{font-size:12px;color:#aaa;cursor:pointer;margin-top:12px;align-self:flex-end;transition:color .15s}
 .vessels-link:hover{color:#555}
 .safety-banner{margin:16px 24px;background:#fffbeb;border:1px solid #fcd34d;border-radius:12px;padding:14px 16px}
@@ -58,7 +52,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 .forbidden-box h3{font-size:13px;font-weight:500;color:#be123c;margin-bottom:8px}
 .forbidden-list{list-style:none;display:flex;flex-direction:column;gap:5px}
 .forbidden-list li{font-size:13px;color:#be123c;display:flex;align-items:flex-start;gap:6px}
-.forbidden-list li::before{content:"×";font-weight:600;flex-shrink:0;margin-top:1px}
+.forbidden-list li::before{content:"x";font-weight:600;flex-shrink:0;margin-top:1px}
 .section{margin:0 24px 16px}
 .section-title{font-size:11px;font-weight:500;color:#999;text-transform:uppercase;letter-spacing:.07em;margin-bottom:10px}
 .warmup-box{background:#f9f8f4;border-radius:12px;padding:14px 16px}
@@ -78,7 +72,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 .day-badge.pink{background:#fce7f3;color:#9d174d}
 .day-badge.amber{background:#fef3c7;color:#92400e}
 .daily-note{margin-top:8px;padding:10px 14px;background:#f9f8f4;border-radius:8px;font-size:13px;color:#777}
-.workout-area{padding:0 24px 24px}
+.workout-area{padding:0 24px 8px}
 .workout-panel{background:#fff;border:1px solid #e8e8e6;border-radius:14px;overflow:hidden;margin-top:12px}
 .workout-panel-header{padding:14px 16px;border-bottom:1px solid #e8e8e6;display:flex;justify-content:space-between;align-items:center}
 .workout-panel-header h3{font-size:14px;font-weight:500}
@@ -104,6 +98,10 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 .nutrition-personal{margin-top:10px;background:#f9f8f4;border-radius:10px;padding:12px 14px}
 .nutrition-personal p{font-size:13px;line-height:1.6;color:#555;margin-bottom:6px}
 .nutrition-personal li{font-size:13px;line-height:1.7;color:#555;margin-left:16px}
+.checkin-btn-wrap{margin:20px 24px 28px}
+.checkin-btn-big{width:100%;padding:18px;background:#1a1a1a;color:#fff;border:none;border-radius:14px;font-size:15px;font-weight:500;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px;transition:background .15s,transform .1s;letter-spacing:-.1px}
+.checkin-btn-big:hover{background:#333;transform:translateY(-1px)}
+.checkin-btn-big:disabled{background:#ccc;cursor:default;transform:none}
 .modal-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.45);display:flex;align-items:center;justify-content:center;z-index:100;padding:20px}
 .modal{background:#fff;border-radius:20px;padding:28px 24px;max-width:400px;width:100%;max-height:90vh;overflow-y:auto}
 .modal h3{font-size:17px;font-weight:500;margin-bottom:4px}
@@ -188,41 +186,17 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 
 <div id="home-page" class="page active">
   <div class="nav"><span class="nav-brand">Fitness Portal</span></div>
-  <div class="home-header">
-    <h1>Προγράμματα προπόνησης</h1>
-    <p>Επίλεξε τον λογαριασμό σου για να δεις το πρόγραμμά σου.</p>
-  </div>
+  <div class="home-header"><h1>Προγράμματα προπόνησης</h1><p>Επίλεξε τον λογαριασμό σου για να δεις το πρόγραμμά σου.</p></div>
   <div class="client-grid">
-    <div class="client-card" onclick="showClient('petros')">
-      <div class="client-avatar avatar-p">ΠΚ</div>
-      <div class="client-name">Πέτρος</div>
-      <div class="client-sub">4 ημέρες · Rehab ώμου</div>
-    </div>
-    <div class="client-card" onclick="showClient('mirela')">
-      <div class="client-avatar avatar-m">ΜΡ</div>
-      <div class="client-name">Μιρέλα</div>
-      <div class="client-sub">4 ημέρες · Low-impact</div>
-    </div>
+    <div class="client-card" onclick="showClient('petros')"><div class="client-avatar avatar-p">ΠΚ</div><div class="client-name">Πέτρος</div><div class="client-sub">4 ημέρες · Rehab ώμου</div></div>
+    <div class="client-card" onclick="showClient('mirela')"><div class="client-avatar avatar-m">ΜΡ</div><div class="client-name">Μιρέλα</div><div class="client-sub">4 ημέρες · Low-impact</div></div>
   </div>
 </div>
 
-<!-- PETROS -->
 <div id="petros-page" class="page">
-  <div class="nav">
-    <span class="nav-back" onclick="showHome()">← Πίσω</span>
-    <span class="nav-brand">Πέτρος</span>
-  </div>
-  <div class="client-header">
-    <div class="client-header-avatar avatar-p">ΠΚ</div>
-    <div><h2>Πέτρος</h2><p>Εβδομάδες 1-2 · Τεχνική &amp; ανοχή ώμου</p></div>
-  </div>
+  <div class="nav"><span class="nav-back" onclick="showHome()">← Πίσω</span><span class="nav-brand">Πέτρος</span></div>
+  <div class="client-header"><div class="client-header-avatar avatar-p">ΠΚ</div><div><h2>Πέτρος</h2><p>Εβδομάδες 1-2 · Τεχνική &amp; ανοχή ώμου</p></div></div>
   <div id="petros-vessel" class="vessel-section"><div style="font-size:13px;color:#aaa;padding:8px">Φόρτωση...</div></div>
-  <div class="checkin-btn-wrap">
-    <button class="checkin-btn-big" id="petros-checkin-btn" onclick="openCheckin('petros')" disabled>
-      <span class="btn-icon">✓</span> Ολοκλήρωσα την προπόνηση
-    </button>
-  </div>
-  <div style="height:20px"></div>
   <div class="safety-banner">
     <h3>Κανόνας πόνου — διάβασέ το πριν ξεκινήσεις</h3>
     <table class="pain-table">
@@ -238,8 +212,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
     <h3>Απαγορευμένες ασκήσεις αυτή την περίοδο</h3>
     <ul class="forbidden-list">
       <li>Κανονικά push-ups (και βαθιά / μέχρι αποτυχία)</li>
-      <li>Plank αν υπάρχει πόνος στον ώμο</li>
-      <li>Burpees</li>
+      <li>Plank αν υπάρχει πόνος στον ώμο</li><li>Burpees</li>
       <li>Overhead pressing</li>
       <li>Γρήγορα mountain climbers αν ενοχλεί ο ώμος</li>
     </ul>
@@ -248,18 +221,13 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
     <div class="section-title">Ζέσταμα — πριν από κάθε προπόνηση (8-10 λεπτά)</div>
     <div class="warmup-box">
       <ol class="warmup-list">
-        <li>Marching in place — 2 λεπτά</li>
-        <li>Cat-cow — 8-10 reps</li>
-        <li>Thoracic rotations — 8/πλευρά</li>
-        <li>Hip hinge drill — 10 reps</li>
-        <li>Bodyweight squat — 10 reps</li>
-        <li>Scapular retractions με λάστιχο ή χωρίς — 12 reps</li>
+        <li>Marching in place — 2 λεπτά</li><li>Cat-cow — 8-10 reps</li>
+        <li>Thoracic rotations — 8/πλευρά</li><li>Hip hinge drill — 10 reps</li>
+        <li>Bodyweight squat — 10 reps</li><li>Scapular retractions με λάστιχο ή χωρίς — 12 reps</li>
         <li>Wall slides μέχρι ανώδυνο εύρος — 8 reps</li>
         <li>External rotation isometric με πετσέτα — 2x15 sec/πλευρά</li>
       </ol>
-      <a class="warmup-video-link" href="https://www.youtube.com/results?search_query=shoulder+rehab+warmup+routine" target="_blank">
-        ▶ Βίντεο ζεστάματος (γενικό)
-      </a>
+      <a class="warmup-video-link" href="https://www.youtube.com/results?search_query=shoulder+rehab+warmup+routine" target="_blank">&#9654; Βίντεο ζεστάματος (γενικό)</a>
     </div>
   </div>
   <div class="section">
@@ -283,35 +251,24 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
       <tr><td>Περιορισμός υγρών θερμίδων</td><td>Καφές με ζάχαρη, αναψυκτικά, αλκοόλ</td></tr>
       <tr><td>Σταθερά γεύματα</td><td>Λιγότερο τσιμπολόγημα</td></tr>
     </table>
-    <div class="nutrition-personal">
-      <p>Για τον Πέτρο:</p>
-      <ul>
-        <li>Πρωτεΐνη σε 2-3 γεύματα/ημέρα</li>
-        <li>Μείωση delivery/fast food κατά 30-50%</li>
-        <li>10 λεπτά περπάτημα μετά από ένα βασικό γεύμα</li>
-      </ul>
-    </div>
+    <div class="nutrition-personal"><p>Για τον Πέτρο:</p><ul>
+      <li>Πρωτεΐνη σε 2-3 γεύματα/ημέρα</li>
+      <li>Μείωση delivery/fast food κατά 30-50%</li>
+      <li>10 λεπτά περπάτημα μετά από ένα βασικό γεύμα</li>
+    </ul></div>
   </div>
   <div id="petros-workout-area" class="workout-area"></div>
-</div>
-
-<!-- MIRELA -->
-<div id="mirela-page" class="page">
-  <div class="nav">
-    <span class="nav-back" onclick="showHome()">← Πίσω</span>
-    <span class="nav-brand">Μιρέλα</span>
-  </div>
-  <div class="client-header">
-    <div class="client-header-avatar avatar-m">ΜΡ</div>
-    <div><h2>Μιρέλα</h2><p>Εβδομάδες 1-2 · Βάση, ασφάλεια, έλεγχος</p></div>
-  </div>
-  <div id="mirela-vessel" class="vessel-section"><div style="font-size:13px;color:#aaa;padding:8px">Φόρτωση...</div></div>
   <div class="checkin-btn-wrap">
-    <button class="checkin-btn-big" id="mirela-checkin-btn" onclick="openCheckin('mirela')" disabled>
-      <span class="btn-icon">✓</span> Ολοκλήρωσα την προπόνηση
+    <button class="checkin-btn-big" id="petros-checkin-btn" onclick="openCheckin('petros')" disabled>
+      <span style="font-size:20px">&#10003;</span> Ολοκλήρωσα την προπόνηση
     </button>
   </div>
-  <div style="height:20px"></div>
+</div>
+
+<div id="mirela-page" class="page">
+  <div class="nav"><span class="nav-back" onclick="showHome()">← Πίσω</span><span class="nav-brand">Μιρέλα</span></div>
+  <div class="client-header"><div class="client-header-avatar avatar-m">ΜΡ</div><div><h2>Μιρέλα</h2><p>Εβδομάδες 1-2 · Βάση, ασφάλεια, έλεγχος</p></div></div>
+  <div id="mirela-vessel" class="vessel-section"><div style="font-size:13px;color:#aaa;padding:8px">Φόρτωση...</div></div>
   <div class="safety-banner">
     <h3>Κανόνας πόνου — διάβασέ το πριν ξεκινήσεις</h3>
     <table class="pain-table">
@@ -326,10 +283,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
   <div class="forbidden-box">
     <h3>Απαγορευμένες ασκήσεις αυτή την περίοδο</h3>
     <ul class="forbidden-list">
-      <li>Overhead πιέσεις</li>
-      <li>Πλάγιες / μπροστινές άρσεις πάνω από 70-80 μοίρες</li>
-      <li>Burpees &amp; Dips</li>
-      <li>Κανονικά push-ups στο πάτωμα</li>
+      <li>Overhead πιέσεις</li><li>Πλάγιες / μπροστινές άρσεις πάνω από 70-80 μοίρες</li>
+      <li>Burpees &amp; Dips</li><li>Κανονικά push-ups στο πάτωμα</li>
       <li>Απότομες κινήσεις / άλματα με συμμετοχή χεριών</li>
       <li>Ασκήσεις κλειστής αλυσίδας αν υπάρχει φόβος ή πόνος</li>
     </ul>
@@ -338,19 +293,14 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
     <div class="section-title">Ζέσταμα — πριν από κάθε προπόνηση (8-12 λεπτά)</div>
     <div class="warmup-box">
       <ol class="warmup-list">
-        <li>Ήπιο περπάτημα ή marching — 2 λεπτά</li>
-        <li>Pelvic tilts — 10 reps</li>
-        <li>Cat-cow — 8 reps</li>
-        <li>Thoracic rotation πλάγια — 8/πλευρά</li>
-        <li>Glute bridge — 10 reps</li>
-        <li>Sit-to-stand — 8 reps</li>
+        <li>Ήπιο περπάτημα ή marching — 2 λεπτά</li><li>Pelvic tilts — 10 reps</li>
+        <li>Cat-cow — 8 reps</li><li>Thoracic rotation πλάγια — 8/πλευρά</li>
+        <li>Glute bridge — 10 reps</li><li>Sit-to-stand — 8 reps</li>
         <li>Scapular setting — 2x8</li>
         <li>External rotation isometric με πετσέτα — 2x15 sec/πλευρά</li>
         <li>Wall slide μέχρι 70-80 μοίρες μόνο — 6-8 reps, χωρίς πόνο</li>
       </ol>
-      <a class="warmup-video-link" href="https://www.youtube.com/results?search_query=low+impact+warmup+routine+mobility" target="_blank">
-        ▶ Βίντεο ζεστάματος (γενικό)
-      </a>
+      <a class="warmup-video-link" href="https://www.youtube.com/results?search_query=low+impact+warmup+routine+mobility" target="_blank">&#9654; Βίντεο ζεστάματος (γενικό)</a>
     </div>
   </div>
   <div class="section">
@@ -374,18 +324,20 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
       <tr><td>Περιορισμός υγρών θερμίδων</td><td>Καφές με ζάχαρη, αναψυκτικά, αλκοόλ</td></tr>
       <tr><td>Σταθερά γεύματα</td><td>Λιγότερο τσιμπολόγημα</td></tr>
     </table>
-    <div class="nutrition-personal">
-      <p>Για τη Μιρέλα:</p>
-      <ul>
-        <li>Να δίνει προτεραιότητα στην πρωτεΐνη</li>
-        <li>Να πίνει αρκετό νερό</li>
-        <li>Να προσέχει ναυτία / ζάλη / υπερβολική κόπωση</li>
-        <li>Να αποφεύγει πολύ βαριά/λιπαρά γεύματα κοντά στην προπόνηση</li>
-        <li>Αν έχει έντονη αδυναμία ή παρενέργειες, να ενημερώσει τον γιατρό της</li>
-      </ul>
-    </div>
+    <div class="nutrition-personal"><p>Για τη Μιρέλα:</p><ul>
+      <li>Να δίνει προτεραιότητα στην πρωτεΐνη</li>
+      <li>Να πίνει αρκετό νερό</li>
+      <li>Να προσέχει ναυτία / ζάλη / υπερβολική κόπωση</li>
+      <li>Να αποφεύγει πολύ βαριά/λιπαρά γεύματα κοντά στην προπόνηση</li>
+      <li>Αν έχει έντονη αδυναμία ή παρενέργειες, να ενημερώσει τον γιατρό της</li>
+    </ul></div>
   </div>
   <div id="mirela-workout-area" class="workout-area"></div>
+  <div class="checkin-btn-wrap">
+    <button class="checkin-btn-big" id="mirela-checkin-btn" onclick="openCheckin('mirela')" disabled>
+      <span style="font-size:20px">&#10003;</span> Ολοκλήρωσα την προπόνηση
+    </button>
+  </div>
 </div>
 
 <div id="petros-vessels-page" class="page">
@@ -398,318 +350,447 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
   <div class="vessels-page-header"><h2>Τα Δοχεία Μου</h2><p>Μιρέλα · 8 εβδομάδες προγράμματος</p></div>
   <div id="mirela-vessels-grid" class="vessels-grid"></div>
 </div>
-
 <div id="modal-root"></div>
 
 <script>
-var SUPA_URL='https://xffwsmvhjuzwnhliuvse.supabase.co';
-var SUPA_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhmZndzbXZoanV6d25obGl1dnNlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzk5MTMzODYsImV4cCI6MjA5NTQ4OTM4Nn0.xhvTbHb8VbZjaG5L9IKfKYEL8RLceLACIr-H0D2s9Ho';
-var SH={'Content-Type':'application/json','apikey':SUPA_KEY,'Authorization':'Bearer '+SUPA_KEY};
-var TOTAL_WEEKS=8,SPW=4;
+var SURL='https://xffwsmvhjuzwnhliuvse.supabase.co';
+var SKEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhmZndzbXZoanV6d25obGl1dnNlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzk5MTMzODYsImV4cCI6MjA5NTQ4OTM4Nn0.xhvTbHb8VbZjaG5L9IKfKYEL8RLceLACIr-H0D2s9Ho';
+var SH={'Content-Type':'application/json','apikey':SKEY,'Authorization':'Bearer '+SKEY};
+var TW=8,SPW=4;
 
-async function sbSelect(t,f){var r=await fetch(SUPA_URL+'/rest/v1/'+t+'?'+f+'&order=created_at.asc',{headers:SH});return r.ok?r.json():[];}
-async function sbInsert(t,b){var r=await fetch(SUPA_URL+'/rest/v1/'+t,{method:'POST',headers:{...SH,'Prefer':'return=representation'},body:JSON.stringify(b)});return r.ok?r.json():null;}
-async function sbUpload(path,file){var r=await fetch(SUPA_URL+'/storage/v1/object/photos/'+path,{method:'POST',headers:{'apikey':SUPA_KEY,'Authorization':'Bearer '+SUPA_KEY,'Content-Type':file.type,'x-upsert':'true'},body:file});return r.ok?SUPA_URL+'/storage/v1/object/public/photos/'+path:null;}
+async function sbSel(t,f){var r=await fetch(SURL+'/rest/v1/'+t+'?'+f+'&order=created_at.asc',{headers:SH});return r.ok?r.json():[];}
+async function sbIns(t,b){var r=await fetch(SURL+'/rest/v1/'+t,{method:'POST',headers:Object.assign({},SH,{'Prefer':'return=representation'}),body:JSON.stringify(b)});return r.ok?r.json():null;}
+async function sbUp(path,file){var r=await fetch(SURL+'/storage/v1/object/photos/'+path,{method:'POST',headers:{'apikey':SKEY,'Authorization':'Bearer '+SKEY,'Content-Type':file.type,'x-upsert':'true'},body:file});return r.ok?SURL+'/storage/v1/object/public/photos/'+path:null;}
 
 var workouts={
-  'p-day1':{title:'Ημέρα 1 — Lower body + core',circuit:false,exercises:[
-    {name:'Box squat / chair squat',sets:'3 x 10-12',note:'Κατεβαίνεις αργά μέχρι να αγγίξεις την καρέκλα, γόνατα στην κατεύθυνση των δακτύλων, φτέρνες στο έδαφος. Ανέβασμα με πίεση από τις φτέρνες.'},
-    {name:'Glute bridge',sets:'3 x 12-15',note:'Παύση 1-2 δευτερόλεπτα στην κορυφή. Να νιώθεις τους γλουτούς, όχι τη μέση. Πηγούνι ελαφρώς μέσα, μη βάζεις υπερέκταση.'},
-    {name:'Reverse lunge / split squat',sets:'2-3 x 8/πόδι',note:'Βήμα πίσω ελεγχόμενα, γόνατο μπροστινού ποδιού δεν ξεπερνά τα δάχτυλα. Κορμός όρθιος καθ όλη τη διάρκεια.'},
-    {name:'Romanian deadlift με σακίδιο',sets:'3 x 10',note:'Στρίβεις από τους γοφούς, όχι από τη μέση. Σακίδιο κοντά στο σώμα, πλάτη ουδέτερη. Σταματάς όταν νιώσεις τέντωμα στους δικέφαλους μηριαίους.'},
-    {name:'Dead bug',sets:'3 x 8/πλευρά',note:'Μέση κολλημένη στο πάτωμα όλη την ώρα. Εκπνοή καθώς τεντώνεις χέρι και πόδι. Αργή εκτέλεση, χωρίς βιασύνη.'},
-    {name:'Side plank από γόνατα',sets:'2 x 20-30 sec',note:'Σώμα σε ευθεία από γόνατο ως κεφάλι. Μη βυθίζεις τους γοφούς. Κοίτα μπροστά ή ελαφρώς πάνω.'},
-    {name:'Walking cooldown',sets:'5-8 λεπτά',note:'Χαλαρό βάδισμα, αναπνοή φυσιολογική. Μπορείς να κάνεις απαλές διατάσεις ισχίων και τετρακεφάλων.'}
-  ]},
-  'p-day2':{title:'Ημέρα 2 — Upper rehab + posture + zone 2',circuit:false,exercises:[
-    {name:'Band row',sets:'3 x 12-15',note:'Τράβηγμα με αγκώνες κοντά στο σώμα. Στο τέλος κάθε επανάληψης ενώνουν ελαφρώς οι ωμοπλάτες. Μη σηκώνεις τους ώμους προς τα αυτιά.'},
-    {name:'Band pull-apart χαμηλά',sets:'2 x 12',note:'Χέρια στο ύψος της κοιλιάς, όχι ψηλότερα. Ανοίγεις τα χέρια αργά και επιστρέφεις ελεγχόμενα. Χωρίς πόνο στον ώμο.'},
-    {name:'Wall push-up σε ψηλό τοίχο',sets:'3 x 6-8',note:'Τοποθεσία χεριών ψηλά στον τοίχο. Κατεβαίνεις αργά και πιέζεις πίσω. Μόνο αν ο πόνος είναι 0-2/10 — αλλιώς παραλείπεις.'},
-    {name:'External rotation με λάστιχο',sets:'2-3 x 12/πλ.',note:'Αγκώνας κολλημένος στο πλευρό, μόνο ο πήχης κινείται. Αργή κίνηση, ιδιαίτερα στην επιστροφή. Αίσθηση δουλειάς στον οπίσθιο ώμο.'},
-    {name:'Scapular setting',sets:'2 x 10',note:'Κινείς τις ωμοπλάτες «κάτω και πίσω» χωρίς να σηκώνεις τους ώμους. Κράτα 2-3 δευτερόλεπτα σε κάθε επανάληψη. Απαλά, χωρίς ένταση στον αυχένα.'},
-    {name:'Bird dog',sets:'3 x 8/πλευρά',note:'Λεκάνη σταθερή καθ όλη τη διάρκεια — δεν ανοίγει στο πλάι. Τεντώνεις αργά και επιστρέφεις πριν αλλάξεις πλευρά. Εκπνοή στην έκταση.'},
-    {name:'Zone 2 περπάτημα',sets:'15-20 λεπτά',note:'Ρυθμός που σου επιτρέπει να μιλάς με πλήρεις προτάσεις. Αν λαχανιάζεις, επιβραδύνεις. Είναι ανάκτηση, όχι cardio ένταση.'}
-  ]},
-  'p-day3':{title:'Ημέρα 3 — Full body conditioning',circuit:true,circuitNote:'3 γύροι · Διάλειμμα 60-90 sec ανά γύρο · RPE 6/10 — να τελειώνεις με 2-4 επαναλήψεις «στον κουβά».',exercises:[
-    {name:'Squat to chair',sets:'12 reps',note:'Κατεβαίνεις αργά ώσπου να αγγίξεις την καρέκλα χωρίς να «πέσεις». Γόνατα στην κατεύθυνση των δακτύλων, ανέβασμα με πίεση από τις φτέρνες.'},
+  'p-day1':{title:'Ημέρα 1 - Lower body + core',circuit:false,exercises:[
+    {name:'Box squat / chair squat',sets:'3 x 10-12',note:'Κατεβαίνεις αργά μέχρι να αγγίξεις την καρέκλα, γόνατα στην κατεύθυνση των δακτύλων. Ανέβασμα με πίεση από τις φτέρνες.'},
+    {name:'Glute bridge',sets:'3 x 12-15',note:'Παύση 1-2 sec στην κορυφή. Να νιώθεις τους γλουτούς, όχι τη μέση. Μη βάζεις υπερέκταση.'},
+    {name:'Reverse lunge / split squat',sets:'2-3 x 8/πόδι',note:'Βήμα πίσω ελεγχόμενα, γόνατο μπροστινού ποδιού δεν ξεπερνά τα δάχτυλα. Κορμός όρθιος καθ\u2019 όλη τη διάρκεια.'},
+    {name:'Romanian deadlift με σακίδιο',sets:'3 x 10',note:'Στρίβεις από τους γοφούς, όχι από τη μέση. Σακίδιο κοντά στο σώμα, πλάτη ουδέτερη.'},
+    {name:'Dead bug',sets:'3 x 8/πλευρά',note:'Μέση κολλημένη στο πάτωμα όλη την ώρα. Εκπνοή καθώς τεντώνεις χέρι και πόδι. Αργή εκτέλεση.'},
+    {name:'Side plank από γόνατα',sets:'2 x 20-30 sec',note:'Σώμα σε ευθεία από γόνατο ως κεφάλι. Μη βυθίζεις τους γοφούς. Κοίτα μπροστά.'},
+    {name:'Walking cooldown',sets:'5-8 λεπτά',note:'Χαλαρό βάδισμα. Μπορείς να κάνεις απαλές διατάσεις ισχίων και τετρακεφάλων.'}]},
+  'p-day2':{title:'Ημέρα 2 - Upper rehab + posture + zone 2',circuit:false,exercises:[
+    {name:'Band row',sets:'3 x 12-15',note:'Τράβηγμα με αγκώνες κοντά στο σώμα. Στο τέλος ενώνουν ελαφρώς οι ωμοπλάτες. Μη σηκώνεις τους ώμους.'},
+    {name:'Band pull-apart χαμηλά',sets:'2 x 12',note:'Χέρια στο ύψος της κοιλιάς, όχι ψηλότερα. Ανοίγεις αργά και επιστρέφεις ελεγχόμενα. Χωρίς πόνο στον ώμο.'},
+    {name:'Wall push-up σε ψηλό τοίχο',sets:'3 x 6-8',note:'Τοποθεσία χεριών ψηλά στον τοίχο. Κατεβαίνεις αργά και πιέζεις πίσω. Μόνο αν ο πόνος είναι 0-2/10.'},
+    {name:'External rotation με λάστιχο',sets:'2-3 x 12/πλ.',note:'Αγκώνας κολλημένος στο πλευρό, μόνο ο πήχης κινείται. Αργή κίνηση, ιδιαίτερα στην επιστροφή.'},
+    {name:'Scapular setting',sets:'2 x 10',note:'Κινείς τις ωμοπλάτες "κάτω και πίσω" χωρίς να σηκώνεις τους ώμους. Κράτα 2-3 sec. Απαλά.'},
+    {name:'Bird dog',sets:'3 x 8/πλευρά',note:'Λεκάνη σταθερή καθ\u2019 όλη τη διάρκεια. Τεντώνεις αργά και επιστρέφεις πριν αλλάξεις πλευρά. Εκπνοή στην έκταση.'},
+    {name:'Zone 2 περπάτημα',sets:'15-20 λεπτά',note:'Ρυθμός που σου επιτρέπει να μιλάς με πλήρεις προτάσεις. Αν λαχανιάζεις, επιβραδύνεις.'}]},
+  'p-day3':{title:'Ημέρα 3 - Full body conditioning',circuit:true,circuitNote:'3 γύροι - Διάλειμμα 60-90 sec ανά γύρο - RPE 6/10',exercises:[
+    {name:'Squat to chair',sets:'12 reps',note:'Κατεβαίνεις αργά ώσπου να αγγίξεις χωρίς να πέσεις. Γόνατα στην κατεύθυνση δακτύλων, ανέβασμα με φτέρνες.'},
     {name:'Step-ups σε χαμηλό σκαλί',sets:'10/πόδι',note:'Πίεση αποκλειστικά από τη φτέρνα του ποδιού που ανεβαίνει. Κορμός όρθιος, μη σπρώχνεις από το πίσω πόδι.'},
-    {name:'Band row',sets:'12 reps',note:'Αγκώνες κοντά στο σώμα, ώμοι μακριά από τα αυτιά. Τράβηγμα ελεγχόμενο — μη χρησιμοποιείς τη μέση για ορμή.'},
-    {name:'Glute bridge march',sets:'8/πόδι',note:'Η λεκάνη μένει σταθερή και οριζόντια. Δεν αφήνεις τη μέση να κάνει υπερέκταση. Αν χαλά η τεχνική, κάνεις απλό glute bridge.'},
-    {name:'Marching high knees',sets:'40 sec',note:'Ρυθμός μέτριος, όχι sprint. Στόχος να ανεβάσεις παλμούς χωρίς να χάνεις την αναπνοή τελείως.'},
-    {name:'Dead bug',sets:'8/πλευρά',note:'Μέση κολλημένη στο πάτωμα. Αργή εκτέλεση, εκπνοή όταν τεντώνεις πόδι και χέρι. Δεν βιάζεσαι.'}
-  ]},
-  'p-day4':{title:'Ημέρα 4 — Lower/glutes + intervals',circuit:false,extra:'Intervals μετά: 6 γύροι × 30 sec γρήγορο περπάτημα / 60 sec χαλαρό. Στόχος της ημέρας: πόδια, γλουτοί, κορμός και καρδιοαναπνευστική βάση.',exercises:[
-    {name:'Tempo squat 3 sec κάτω',sets:'3 x 8-10',note:'Κατεβαίνεις αργά μετρώντας 3 δευτερόλεπτα, μικρή παύση στο κάτω, ανέβασμα ελεγχόμενο. Δεν χρειάζεται μεγάλο βάθος αν χαλά η τεχνική.'},
-    {name:'Hip thrust σε καναπέ',sets:'3 x 10-12',note:'Ανεβάζεις τους γοφούς ώσπου το σώμα να είναι οριζόντιο. Πίεση από τις φτέρνες, να νιώθεις τους γλουτούς όχι τη μέση. Παύση 1 sec πάνω.'},
-    {name:'Lateral walk με λάστιχο',sets:'3 x 10/πλευρά',note:'Μικρά βήματα, γόνατα ελαφρώς λυγισμένα, λεκάνη σταθερή. Δεν γέρνεις δεξιά-αριστερά με κάθε βήμα.'},
-    {name:'Calf raises',sets:'3 x 15-20',note:'Πλήρης έλεγχος πάνω-κάτω. Μικρή παύση στην κορυφή, αργό κατέβασμα. Μπορείς να κρατιέσαι για ισορροπία αλλά όχι για βοήθεια.'},
-    {name:'Pallof press με λάστιχο',sets:'3 x 10/πλευρά',note:'Ο κορμός δεν στρίβει προς τη μεριά του λάστιχου. Πιέζεις μπροστά αργά και επιστρέφεις ελεγχόμενα. Στάση σταθερή καθ όλη τη διάρκεια.'},
-    {name:'Wall sit',sets:'3 x 20-30 sec',note:'Πλάτη στον τοίχο, γόνατα περίπου 90 μοίρες ή λίγο ψηλότερα αν ζορίζεσαι. Βάρος στις φτέρνες, ανάσα ομαλή. Μη χαμηλώνεις κάτω από τις 90 μοίρες αν πονά το γόνατο.'}
-  ]},
-  'm-day1':{title:'Ημέρα 1 — Lower body + core',circuit:false,exercises:[
-    {name:'Sit-to-stand από καρέκλα',sets:'3 x 8-10',note:'Αργό κατέβασμα ελεγχόμενα — μη «πέφτεις» στην καρέκλα. Ανέβασμα με πίεση από τις φτέρνες. Τα χέρια μπορούν να βοηθούν ελαφρά αρχικά.'},
-    {name:'Glute bridge',sets:'3 x 12',note:'Παύση 1-2 sec στην κορυφή. Να νιώθεις τους γλουτούς, αν νιώθεις τη μέση μειώνεις το εύρος και κάνεις καλύτερο brace κοιλιάς.'},
-    {name:'Step-up χαμηλό',sets:'2 x 8/πόδι',note:'Χαμηλό ύψος σκαλιού — ασφάλεια πρώτα. Πίεση από τη φτέρνα του ποδιού που ανεβαίνει. Κορμός όρθιος, μπορεί να κρατιέται για ισορροπία.'},
-    {name:'Supported split squat',sets:'2 x 6-8/πόδι',note:'Κρατιέται σε σταθερό σημείο για ισορροπία. Μικρό εύρος αρχικά, γόνατο μπροστινού ποδιού δεν ξεπερνά τα δάχτυλα. Αργά και ελεγχόμενα.'},
-    {name:'Dead bug heel taps',sets:'3 x 6/πλευρά',note:'Μέση σταθερή και κολλημένη στο πάτωμα. Κατεβάζεις τη φτέρνα αργά μέχρι να αγγίξει, χωρίς να αφήσεις τη μέση να ανασηκωθεί.'},
-    {name:'Side plank από γόνατα',sets:'2 x 10-20 sec',note:'Σώμα σε ευθεία από γόνατο ως κεφάλι. Μη βυθίζεις τους γοφούς. Ανώδυνο — αν πονά ο ώμος σταματάς.'},
-    {name:'Breathing reset',sets:'2 λεπτά',note:'Ξαπλωτή ή καθιστή, εισπνοή από τη μύτη μετρώντας 4, εκπνοή από το στόμα μετρώντας 6. Ηρεμεί το νευρικό σύστημα μετά την προπόνηση.'}
-  ]},
-  'm-day2':{title:'Ημέρα 2 — Shoulder-safe upper + posture',circuit:false,exercises:[
-    {name:'Band row με στήριξη πλάτης',sets:'3 x 12',note:'Η πλάτη είναι ακουμπισμένη σε καρέκλα ή τοίχο για στήριξη. Τράβηγμα με αγκώνες κοντά στο σώμα, χωρίς πόνο στη μέση ή στον ώμο.'},
-    {name:'Wall push-up',sets:'2-3 x 8-12',note:'Χέρια στον τοίχο στο ύψος των ώμων. Μόνο ανετό εύρος — αν πονά ο ώμος, μικραίνεις το εύρος ή παραλείπεις την άσκηση.'},
-    {name:'External rotation με λάστιχο',sets:'2 x 10-12',note:'Πολύ ήπια αντίσταση. Αγκώνας κοντά στο σώμα, μόνο ο πήχης κινείται. Αργή και ελεγχόμενη επιστροφή.'},
-    {name:'Isometric shoulder flexion στον τοίχο',sets:'2 x 10 sec',note:'Πιέζεις τον καρπό στον τοίχο από μπρος, κάτω από 90 μοίρες. Ισομετρική σύσπαση χωρίς κίνηση. Σταματάς αμέσως αν υπάρξει πόνος.'},
-    {name:'Isometric abduction στον τοίχο',sets:'2 x 10 sec',note:'Πιέζεις τον καρπό στον τοίχο πλάγια, κάτω από 60-70 μοίρες. Ισομετρική σύσπαση. Χωρίς πόνο — αν πονά, αλλάζεις γωνία ή παραλείπεις.'},
-    {name:'Pallof press',sets:'2-3 x 8/πλ.',note:'Κορμός σταθερός, δεν στρίβει προς τη μεριά του λάστιχου. Πίεση μπροστά αργά, επιστροφή ελεγχόμενα. Γόνατα ελαφρώς λυγισμένα.'},
-    {name:'Περπάτημα',sets:'10-15 λεπτά',note:'Ήπιος ρυθμός, φυσιολογική αναπνοή. Καλή ευκαιρία για βήματα της ημέρας. Αν νιώσεις ζάλη ή ναυτία, σταματάς και ξεκουράζεσαι.'}
-  ]},
-  'm-day3':{title:'Ημέρα 3 — Low-impact full body',circuit:true,circuitNote:'3 γύροι · RPE 5-6/10 · Χαλαρό προς μέτριο — χωρίς λαχάνιασμα που τη ζορίζει.',
-    ozempicNote:'Λόγω Ozempic: αν έχει ναυτία, ζάλη ή πολύ χαμηλή ενέργεια — 2 γύροι αντί για 3 και 10-15 λεπτά χαλαρό περπάτημα αντί για step-ups.',
-    backNote:'Για τη μέση: αν εμφανιστεί ενόχληση — μικρότερο εύρος, εκπνοή και ενεργοποίηση κορμού. Αν το bird dog ενοχλεί — dead bug heel taps 2-3 x 6/πλευρά.',
+    {name:'Band row',sets:'12 reps',note:'Αγκώνες κοντά στο σώμα, ώμοι μακριά από τα αυτιά. Μη χρησιμοποιείς τη μέση για ορμή.'},
+    {name:'Glute bridge march',sets:'8/πόδι',note:'Η λεκάνη μένει σταθερή και οριζόντια. Δεν αφήνεις τη μέση να κάνει υπερέκταση.'},
+    {name:'Marching high knees',sets:'40 sec',note:'Ρυθμός μέτριος, όχι sprint. Στόχος να ανεβάσεις παλμούς χωρίς να χάνεις την αναπνοή.'},
+    {name:'Dead bug',sets:'8/πλευρά',note:'Μέση κολλημένη στο πάτωμα. Αργή εκτέλεση, εκπνοή όταν τεντώνεις πόδι και χέρι.'}]},
+  'p-day4':{title:'Ημέρα 4 - Lower/glutes + intervals',circuit:false,extra:'Intervals μετά: 6 x 30 sec γρήγορο περπάτημα / 60 sec χαλαρό.',exercises:[
+    {name:'Tempo squat 3 sec κάτω',sets:'3 x 8-10',note:'Κατεβαίνεις αργά μετρώντας 3 sec, μικρή παύση στο κάτω, ανέβασμα ελεγχόμενο.'},
+    {name:'Hip thrust σε καναπέ',sets:'3 x 10-12',note:'Ανεβάζεις τους γοφούς ώσπου το σώμα να είναι οριζόντιο. Πίεση από τις φτέρνες, παύση 1 sec πάνω.'},
+    {name:'Lateral walk με λάστιχο',sets:'3 x 10/πλευρά',note:'Μικρά βήματα, γόνατα ελαφρώς λυγισμένα, λεκάνη σταθερή. Δεν γέρνεις πλάγια.'},
+    {name:'Calf raises',sets:'3 x 15-20',note:'Πλήρης έλεγχος πάνω-κάτω. Μικρή παύση στην κορυφή, αργό κατέβασμα.'},
+    {name:'Pallof press με λάστιχο',sets:'3 x 10/πλευρά',note:'Ο κορμός δεν στρίβει προς τη μεριά του λάστιχου. Πιέζεις μπροστά αργά και επιστρέφεις ελεγχόμενα.'},
+    {name:'Wall sit',sets:'3 x 20-30 sec',note:'Πλάτη στον τοίχο, γόνατα περίπου 90 μοίρες. Βάρος στις φτέρνες, ανάσα ομαλή.'}]},
+  'm-day1':{title:'Ημέρα 1 - Lower body + core',circuit:false,exercises:[
+    {name:'Sit-to-stand από καρέκλα',sets:'3 x 8-10',note:'Αργό κατέβασμα ελεγχόμενα. Ανέβασμα με πίεση από τις φτέρνες. Τα χέρια βοηθούν ελαφρά αρχικά.'},
+    {name:'Glute bridge',sets:'3 x 12',note:'Παύση 1-2 sec στην κορυφή. Να νιώθεις τους γλουτούς. Αν νιώθεις μέση, μειώνεις εύρος.'},
+    {name:'Step-up χαμηλό',sets:'2 x 8/πόδι',note:'Χαμηλό ύψος σκαλιού. Πίεση από τη φτέρνα του ποδιού που ανεβαίνει. Μπορεί να κρατιέται για ισορροπία.'},
+    {name:'Supported split squat',sets:'2 x 6-8/πόδι',note:'Κρατιέται σε σταθερό σημείο. Μικρό εύρος αρχικά, γόνατο μπροστινού ποδιού δεν ξεπερνά τα δάχτυλα.'},
+    {name:'Dead bug heel taps',sets:'3 x 6/πλευρά',note:'Μέση σταθερή και κολλημένη στο πάτωμα. Κατεβάζεις τη φτέρνα αργά χωρίς να ανασηκωθεί η μέση.'},
+    {name:'Side plank από γόνατα',sets:'2 x 10-20 sec',note:'Σώμα σε ευθεία από γόνατο ως κεφάλι. Ανώδυνο — αν πονά ο ώμος, σταματάς.'},
+    {name:'Breathing reset',sets:'2 λεπτά',note:'Εισπνοή από τη μύτη 4 sec, εκπνοή από το στόμα 6 sec. Ηρεμεί το νευρικό σύστημα μετά την προπόνηση.'}]},
+  'm-day2':{title:'Ημέρα 2 - Shoulder-safe upper + posture',circuit:false,exercises:[
+    {name:'Band row με στήριξη πλάτης',sets:'3 x 12',note:'Η πλάτη ακουμπισμένη σε καρέκλα ή τοίχο. Τράβηγμα με αγκώνες κοντά στο σώμα, χωρίς πόνο.'},
+    {name:'Wall push-up',sets:'2-3 x 8-12',note:'Χέρια στον τοίχο στο ύψος των ώμων. Μόνο ανετό εύρος — αν πονά ο ώμος, μικραίνεις εύρος.'},
+    {name:'External rotation με λάστιχο',sets:'2 x 10-12',note:'Πολύ ήπια αντίσταση. Αγκώνας κοντά στο σώμα, μόνο ο πήχης κινείται. Αργή επιστροφή.'},
+    {name:'Isometric shoulder flexion στον τοίχο',sets:'2 x 10 sec',note:'Πιέζεις τον καρπό στον τοίχο από μπρος, κάτω από 90 μοίρες. Σταματάς αν υπάρξει πόνος.'},
+    {name:'Isometric abduction στον τοίχο',sets:'2 x 10 sec',note:'Πιέζεις τον καρπό πλάγια, κάτω από 60-70 μοίρες. Χωρίς πόνο.'},
+    {name:'Pallof press',sets:'2-3 x 8/πλ.',note:'Κορμός σταθερός, δεν στρίβει. Πίεση μπροστά αργά, επιστροφή ελεγχόμενα. Γόνατα ελαφρώς λυγισμένα.'},
+    {name:'Περπάτημα',sets:'10-15 λεπτά',note:'Ήπιος ρυθμός. Αν νιώσεις ζάλη ή ναυτία, σταματάς και ξεκουράζεσαι.'}]},
+  'm-day3':{title:'Ημέρα 3 - Low-impact full body',circuit:true,circuitNote:'3 γύροι - RPE 5-6/10 - Χαλαρό προς μέτριο',
+    ozempicNote:'Λόγω Ozempic: αν έχει ναυτία, 2 γύροι μόνο και 10-15 λεπτά χαλαρό περπάτημα.',
+    backNote:'Για τη μέση: αν εμφανιστεί ενόχληση, μικρότερο εύρος και ενεργοποίηση κορμού.',
     exercises:[
-    {name:'Sit-to-stand',sets:'10 reps',note:'Αργό κατέβασμα, ανέβασμα με πίεση από τις φτέρνες. Τα χέρια βοηθούν ελαφρά μόνο αν χρειάζεται, χωρίς να φορτίζεται ο ώμος.'},
-    {name:'Glute bridge',sets:'12 reps',note:'Παύση 1 sec πάνω. Να νιώθει γλουτούς, όχι μέση. Αν νιώθει μέση, μειώνει εύρος και κάνει καλύτερο brace κοιλιάς.'},
-    {name:'Step-up χαμηλό',sets:'10/πόδι',note:'Χαμηλό σκαλί ή βήμα. Πίεση από τη φτέρνα του ποδιού που ανεβαίνει, κορμός όρθιος. Μπορεί να κρατιέται για ισορροπία. Ρυθμός ήπιος και ελεγχόμενος.'},
-    {name:'Band row',sets:'12 reps',note:'Αγκώνες κοντά στο σώμα, ώμοι μακριά από τα αυτιά. Αν νιώσει τον ώμο, μικραίνει εύρος και μειώνει αντίσταση.'},
-    {name:'Bird dog',sets:'6/πλευρά',note:'Αργή εκτέλεση. Η λεκάνη δεν ανοίγει στο πλάι. Αν ενοχλεί ο ώμος, κάνει μόνο πόδια χωρίς έκταση χεριού.'},
-    {name:'Marching',sets:'40 sec',note:'Ήπια προς μέτρια ένταση. Χέρια χαλαρά στο πλάι, χωρίς έντονη κίνηση προς τα πάνω. Στόχος να κινηθεί χωρίς κραδασμούς.'}
-  ]},
-  'm-day4':{title:'Ημέρα 4 — Glutes + core + cardio',circuit:false,extra:'Περπάτημα 10-20 λεπτά ήπιο προς μέτριο μετά τις ασκήσεις.',exercises:[
-    {name:'Glute bridge',sets:'4 x 12',note:'Παύση 1-2 sec στην κορυφή. Πίεση από τις φτέρνες, γλουτοί σφιγμένοι. Αν νιώθεις τη μέση, μειώνεις το εύρος.'},
-    {name:'Clamshell με λάστιχο ή χωρίς',sets:'3 x 12/πλευρά',note:'Αργό άνοιγμα του γονάτου χωρίς να στρίβει η λεκάνη. Να νιώθεις τον έξω γλουτό. Μη βιάζεσαι — η ποιότητα μετράει περισσότερο.'},
-    {name:'Supported Romanian deadlift',sets:'3 x 10',note:'Ελαφρύ βάρος ή χέρια στους μηρούς. Στρίβεις από τους γοφούς, πλάτη ουδέτερη. Σταματάς όταν νιώσεις τέντωμα στους δικέφαλους μηριαίους.'},
-    {name:'Lateral walk με λάστιχο',sets:'2-3 x 8-10/πλ.',note:'Μικρά βήματα, γόνατα ελαφρώς λυγισμένα. Δεν γέρνεις στο πλάι με κάθε βήμα. Αργός και σταθερός ρυθμός.'},
-    {name:'Dead bug',sets:'3 x 6-8/πλευρά',note:'Μέση σταθερή στο πάτωμα καθ όλη τη διάρκεια. Εκπνοή καθώς τεντώνεις πόδι και χέρι. Αν η μέση σηκώνεται, μικραίνεις το εύρος.'},
-    {name:'Wall sit',sets:'2-3 x 15-25 sec',note:'Πλάτη στον τοίχο, γόνατα σε γωνία άνεσης. Βάρος στις φτέρνες, ανάσα ομαλή. Όχι μέχρι πλήρη εξάντληση — σταματάς με 2-3 δευτερόλεπτα αποθέματος.'}
-  ]}
+    {name:'Sit-to-stand',sets:'10 reps',note:'Αργό κατέβασμα, ανέβασμα με πίεση από τις φτέρνες. Τα χέρια βοηθούν ελαφρά μόνο αν χρειάζεται.'},
+    {name:'Glute bridge',sets:'12 reps',note:'Παύση 1 sec πάνω. Να νιώθει γλουτούς, όχι μέση. Αν νιώθει μέση, μειώνει εύρος.'},
+    {name:'Step-up χαμηλό',sets:'10/πόδι',note:'Χαμηλό σκαλί. Πίεση από τη φτέρνα, κορμός όρθιος. Μπορεί να κρατιέται για ισορροπία. Ρυθμός ήπιος.'},
+    {name:'Band row',sets:'12 reps',note:'Αγκώνες κοντά στο σώμα, ώμοι μακριά από τα αυτιά. Αν νιώσει τον ώμο, μικραίνει εύρος.'},
+    {name:'Bird dog',sets:'6/πλευρά',note:'Αργή εκτέλεση. Η λεκάνη δεν ανοίγει στο πλάι. Αν ενοχλεί ο ώμος, κάνει μόνο πόδια.'},
+    {name:'Marching',sets:'40 sec',note:'Ήπια ένταση. Χέρια χαλαρά στο πλάι. Στόχος να κινηθεί χωρίς κραδασμούς.'}]},
+  'm-day4':{title:'Ημέρα 4 - Glutes + core + cardio',circuit:false,extra:'Περπάτημα 10-20 λεπτά ήπιο προς μέτριο μετά τις ασκήσεις.',exercises:[
+    {name:'Glute bridge',sets:'4 x 12',note:'Παύση 1-2 sec στην κορυφή. Πίεση από τις φτέρνες, γλουτοί σφιγμένοι. Αν νιώθεις μέση, μειώνεις εύρος.'},
+    {name:'Clamshell με λάστιχο ή χωρίς',sets:'3 x 12/πλευρά',note:'Αργό άνοιγμα γονάτου χωρίς να στρίβει η λεκάνη. Να νιώθεις τον έξω γλουτό.'},
+    {name:'Supported Romanian deadlift',sets:'3 x 10',note:'Ελαφρύ βάρος. Στρίβεις από τους γοφούς, πλάτη ουδέτερη. Σταματάς στο τέντωμα.'},
+    {name:'Lateral walk με λάστιχο',sets:'2-3 x 8-10/πλ.',note:'Μικρά βήματα, γόνατα ελαφρώς λυγισμένα. Δεν γέρνεις πλάγια με κάθε βήμα.'},
+    {name:'Dead bug',sets:'3 x 6-8/πλευρά',note:'Μέση σταθερή στο πάτωμα. Εκπνοή καθώς τεντώνεις. Αν η μέση σηκώνεται, μικραίνεις εύρος.'},
+    {name:'Wall sit',sets:'2-3 x 15-25 sec',note:'Πλάτη στον τοίχο, γόνατα σε γωνία άνεσης. Βάρος στις φτέρνες. Όχι μέχρι εξάντληση.'}]}
 };
 
-var NEXT_WEEK_MSGS=[
+var NWMSGS=[
   'Η πρώτη εβδομάδα είναι πίσω σου. Η συνέπεια ξεκίνησε — πάμε στην επόμενη.',
   'Δύο εβδομάδες κλειδωμένες. Το σώμα σου αρχίζει να θυμάται. Συνέχισε.',
   'Τρεις εβδομάδες. Αυτό δεν είναι τύχη, είναι δουλειά. Πάμε.',
   'Μισός δρόμος! Τέσσερις εβδομάδες πίσω σου. Άλλες τέσσερις μπροστά.',
-  'Πέντε εβδομάδες. Κάθε προπόνηση χτίζει πάνω στην προηγούμενη. Συνέχισε.',
+  'Πέντε εβδομάδες. Κάθε προπόνηση χτίζει πάνω στην προηγούμενη.',
   'Έξι εβδομάδες συνέπειας. Έχεις μπει σε ρυθμό. Μία ανάσα ακόμα.',
-  'Εφτά εβδομάδες. Τελευταία εβδομάδα του προγράμματος — δώσε τα πάντα.'
+  'Εφτά εβδομάδες. Τελευταία εβδομάδα — δώσε τα πάντα.'
 ];
 
-function vesselSVG(pct,size,animated){
-  var W=size,H=size*1.3,bx=W*.15,by=H*.1,bw=W*.7,bh=H*.82;
-  var fillH=bh*pct,fy=by+bh-fillH;
-  var wA=animated?'<animateTransform attributeName="transform" type="translate" values="0,0;-'+Math.round(bw*.5)+',0;0,0" dur="3s" repeatCount="indefinite"/>':'';
-  var b1A=animated&&fillH>12?'<animate attributeName="cy" values="'+(fy+fillH*.7)+';'+(fy+fillH*.2)+';'+(fy+fillH*.7)+'" dur="2.5s" repeatCount="indefinite"/>':'';
-  var b2A=animated&&fillH>20?'<animate attributeName="cy" values="'+(fy+fillH*.5)+';'+(fy+fillH*.15)+';'+(fy+fillH*.5)+'" dur="3.5s" begin="1s" repeatCount="indefinite"/>':'';
-  var fill='';
+/* ---- VESSEL SVG (liquid fill, no animation — static display) ---- */
+function vesselSVG(pct, size, uid) {
+  var W=size, H=Math.round(size*1.3);
+  var bx=Math.round(W*.15), by=Math.round(H*.1);
+  var bw=Math.round(W*.7), bh=Math.round(H*.82);
+  var fillH=Math.round(bh*pct);
+  var fy=by+bh-fillH;
+  var waveAnim='';
+  if(pct>0 && pct<1){
+    waveAnim='<animateTransform attributeName="transform" type="translate" values="0,0;-'+Math.round(bw*.5)+',0;0,0" dur="3s" repeatCount="indefinite"/>';
+  }
+  var liquidHTML='';
   if(pct>0){
-    fill='<g clip-path="url(#vc'+size+')">'
+    liquidHTML='<g clip-path="url(#vc'+uid+')">'
       +'<rect x="'+bx+'" y="'+fy+'" width="'+bw+'" height="'+fillH+'" fill="#5DCAA5" opacity=".85"/>'
-      +'<g transform="translate('+bx+','+fy+')"><path d="M0,6 Q'+(bw*.125)+',0 '+(bw*.25)+',6 T'+(bw*.5)+',6 T'+(bw*.75)+',6 T'+bw+',6 T'+(bw*1.25)+',6 T'+(bw*1.5)+',6 V0 H0 Z" fill="#5DCAA5" opacity=".9">'+wA+'</path></g>'
-      +(fillH>12?'<circle cx="'+(bx+bw*.3)+'" cy="'+(fy+fillH*.6)+'" r="2.5" fill="#fff" opacity=".35">'+b1A+'</circle>':'')
-      +(fillH>20?'<circle cx="'+(bx+bw*.65)+'" cy="'+(fy+fillH*.4)+'" r="1.8" fill="#fff" opacity=".25">'+b2A+'</circle>':'')
+      +'<g transform="translate('+bx+','+fy+')">'
+      +'<path d="M0,6 Q'+(bw*.125)+',0 '+(bw*.25)+',6 T'+(bw*.5)+',6 T'+(bw*.75)+',6 T'+bw+',6 T'+(bw*1.25)+',6 T'+(bw*1.5)+',6 V0 H0 Z" fill="#5DCAA5" opacity=".9">'
+      +waveAnim+'</path></g>'
+      +(fillH>12?'<circle cx="'+(bx+bw*.3)+'" cy="'+(fy+fillH*.6)+'" r="2.5" fill="#fff" opacity=".3"><animate attributeName="cy" values="'+(fy+fillH*.7)+';'+(fy+fillH*.2)+';'+(fy+fillH*.7)+'" dur="2.5s" repeatCount="indefinite"/></circle>':'')
+      +(fillH>22?'<circle cx="'+(bx+bw*.65)+'" cy="'+(fy+fillH*.4)+'" r="1.8" fill="#fff" opacity=".22"><animate attributeName="cy" values="'+(fy+fillH*.5)+';'+(fy+fillH*.15)+';'+(fy+fillH*.5)+'" dur="3.5s" begin="1s" repeatCount="indefinite"/></circle>':'')
       +'</g>';
   }
-  var ticks=[.25,.5,.75].map(function(t){return '<line x1="'+(bx+4)+'" y1="'+(by+bh*(1-t))+'" x2="'+(bx+10)+'" y2="'+(by+bh*(1-t))+'" stroke="#2c3e35" stroke-width=".8" opacity=".3"/>';}).join('');
-  return '<svg width="'+W+'" height="'+H+'" viewBox="0 0 '+W+' '+H+'" fill="none" xmlns="http://www.w3.org/2000/svg">'
-    +'<defs><clipPath id="vc'+size+'"><rect x="'+bx+'" y="'+by+'" width="'+bw+'" height="'+bh+'" rx="12"/></clipPath></defs>'
+  var ticks=[.25,.5,.75].map(function(t){
+    return '<line x1="'+(bx+4)+'" y1="'+(by+bh*(1-t))+'" x2="'+(bx+10)+'" y2="'+(by+bh*(1-t))+'" stroke="#2c3e35" stroke-width=".8" opacity=".3"/>';
+  }).join('');
+  return '<svg id="vsvg-'+uid+'" width="'+W+'" height="'+H+'" viewBox="0 0 '+W+' '+H+'" fill="none" xmlns="http://www.w3.org/2000/svg">'
+    +'<defs><clipPath id="vc'+uid+'"><rect x="'+bx+'" y="'+by+'" width="'+bw+'" height="'+bh+'" rx="12"/></clipPath></defs>'
     +'<rect x="'+bx+'" y="'+by+'" width="'+bw+'" height="'+bh+'" rx="12" fill="#f0f5f3" stroke="#2c3e35" stroke-width="1.5"/>'
-    +fill+'<rect x="'+bx+'" y="'+by+'" width="'+bw+'" height="'+bh+'" rx="12" fill="none" stroke="#2c3e35" stroke-width="1.5"/>'+ticks+'</svg>';
+    +liquidHTML
+    +'<rect x="'+bx+'" y="'+by+'" width="'+bw+'" height="'+bh+'" rx="12" fill="none" stroke="#2c3e35" stroke-width="1.5"/>'
+    +ticks
+    /* drop element for animation — hidden initially */
+    +'<g id="vdrop-'+uid+'" opacity="0">'
+    +'<ellipse id="vdrop-body-'+uid+'" cx="'+(bx+bw/2)+'" cy="'+by+'" rx="9" ry="11" fill="#5DCAA5"/>'
+    +'<ellipse id="vdrop-tip-'+uid+'" cx="'+(bx+bw/2)+'" cy="'+(by-8)+'" rx="5" ry="4" fill="#5DCAA5"/>'
+    +'</g>'
+    +'</svg>';
 }
 
-function getActiveWeek(allRows){
-  for(var w=0;w<TOTAL_WEEKS;w++){
-    if(allRows.filter(function(r){return r.week_index===w;}).length<SPW)return w;
+/* ---- DROP ANIMATION then show feedback/victory ---- */
+function runDropAnimation(client, oldPct, newPct, afterCb) {
+  var el = document.getElementById(client+'-vessel');
+  /* scroll vessel into view */
+  if(el) el.scrollIntoView({behavior:'smooth', block:'center'});
+
+  setTimeout(function(){
+    var uid = client+'0';
+    var svg = document.getElementById('vsvg-'+uid);
+    var drop = document.getElementById('vdrop-'+uid);
+    var dropBody = document.getElementById('vdrop-body-'+uid);
+    var dropTip  = document.getElementById('vdrop-tip-'+uid);
+    if(!svg || !drop){ afterCb(); return; }
+
+    var W=110, H=Math.round(110*1.3);
+    var bx=Math.round(W*.15), by=Math.round(H*.1);
+    var bw=Math.round(W*.7), bh=Math.round(H*.82);
+    var startCY = by - 30;
+    var waterTopOld = by + bh - Math.round(bh*oldPct);
+    var landCY = waterTopOld > by ? waterTopOld : by+4;
+
+    /* show drop at top */
+    dropBody.setAttribute('cy', String(startCY));
+    dropTip.setAttribute('cy',  String(startCY-8));
+    drop.setAttribute('opacity','1');
+
+    var t0=null, dur=500;
+    function fallStep(ts){
+      if(!t0) t0=ts;
+      var p=Math.min((ts-t0)/dur,1);
+      var ease=p*p;
+      var cy=startCY+ease*(landCY-startCY);
+      dropBody.setAttribute('cy',String(Math.round(cy)));
+      dropTip.setAttribute('cy', String(Math.round(cy-8)));
+      if(p<1){ requestAnimationFrame(fallStep); }
+      else { splashAndRise(client, uid, oldPct, newPct, drop, afterCb); }
+    }
+    requestAnimationFrame(fallStep);
+  }, 400);
+}
+
+function splashAndRise(client, uid, oldPct, newPct, drop, afterCb){
+  /* fade out drop */
+  var op=1.0;
+  function fadeDrop(){
+    op-=0.12;
+    if(op>0){ drop.setAttribute('opacity',String(op.toFixed(2))); requestAnimationFrame(fadeDrop); }
+    else { drop.setAttribute('opacity','0'); }
   }
-  return TOTAL_WEEKS;
+  requestAnimationFrame(fadeDrop);
+
+  /* animate liquid rising */
+  var W=110, H=Math.round(110*1.3);
+  var bx=Math.round(W*.15), by=Math.round(H*.1);
+  var bw=Math.round(W*.7), bh=Math.round(H*.82);
+
+  var svg=document.getElementById('vsvg-'+uid);
+  /* remove old liquid rect if any and rebuild with animation */
+  /* simplest: just re-render vessel with new pct after short delay */
+  setTimeout(function(){
+    renderVessel(client);
+    /* after render, call callback */
+    setTimeout(afterCb, 300);
+  }, 350);
+}
+
+/* ---- RENDER VESSEL (static, no scroll/focus) ---- */
+function getActiveWeek(all){
+  for(var w=0;w<TW;w++){ if(all.filter(function(r){return r.week_index===w;}).length<SPW) return w; }
+  return TW;
 }
 
 async function renderVessel(client){
   var el=document.getElementById(client+'-vessel');
   var btn=document.getElementById(client+'-checkin-btn');
-  if(!el)return;
-  var allRows=await sbSelect('checkins','client=eq.'+client);
-  var activeWeek=getActiveWeek(allRows);
-  var programDone=activeWeek>=TOTAL_WEEKS;
-  if(programDone){
+  if(!el) return;
+  var all=await sbSel('checkins','client=eq.'+client);
+  var aw=getActiveWeek(all);
+  var done=all.filter(function(r){return r.week_index===aw;}).length;
+  var pct=Math.min(done/SPW,1);
+  var uid=client+'0';
+
+  if(aw>=TW){
     el.innerHTML='<div class="vessel-title">Πρόγραμμα 8 εβδομάδων</div>'
       +'<div style="text-align:center;padding:16px 0">'
-      +'<div style="font-size:48px;margin-bottom:12px">🏆</div>'
+      +'<div style="font-size:48px;margin-bottom:12px">&#127942;</div>'
       +'<div style="font-size:17px;font-weight:500;margin-bottom:6px">Στόχος επιτεύχθηκε!</div>'
-      +'<div style="font-size:13px;color:#888;line-height:1.6">Ολοκλήρωσες και τις 8 εβδομάδες.<br>Αυτό είναι αποτέλεσμα πραγματικής αφοσίωσης.</div>'
+      +'<div style="font-size:13px;color:#888;line-height:1.6">Ολοκλήρωσες και τις 8 εβδομάδες.</div>'
       +'</div>'
-      +'<span class="vessels-link" onclick="showVesselsPage(\''+client+'\')">Δες όλα τα δοχεία →</span>';
-    if(btn){btn.disabled=true;btn.innerHTML='<span class="btn-icon">🏆</span> Πρόγραμμα ολοκληρωμένο';}
+      +'<span class="vessels-link" onclick="showVesselsPage(\''+client+'\')">Δες όλα τα δοχεία &#8594;</span>';
+    if(btn){btn.disabled=true; btn.innerHTML='<span>&#127942;</span> Πρόγραμμα ολοκληρωμένο';}
     return;
   }
-  var weekRows=allRows.filter(function(r){return r.week_index===activeWeek;});
-  var done=weekRows.length,pct=done/SPW;
-  el.innerHTML='<div class="vessel-title">Δοχείο Εβδομάδας '+(activeWeek+1)+'</div>'
+
+  var midMsg=done>0&&done<SPW?getMidMsg(done):'';
+  el.innerHTML='<div class="vessel-title">&#916;&#959;&#967;&#949;&#943;&#959; &#917;&#946;&#948;&#959;&#956;&#940;&#948;&#945;&#962; '+(aw+1)+'</div>'
     +'<div class="vessel-wrap">'
-    +'<div class="vessel-svg-container" onclick="showVesselsPage(\''+client+'\')" title="Δες όλα τα δοχεία">'+vesselSVG(pct,110,true)+'</div>'
+    +'<div style="flex-shrink:0;cursor:pointer" onclick="showVesselsPage(\''+client+'\')" title="Δες όλα τα δοχεία">'+vesselSVG(pct,110,uid)+'</div>'
     +'<div class="vessel-info">'
     +'<div><div class="vessel-stat-big">'+done+'/'+SPW+'</div>'
-    +'<div class="vessel-stat-sub">προπονήσεις εβδ. '+(activeWeek+1)+'</div>'
-    +'<div class="vessel-pct">'+Math.round(pct*100)+'% γεμάτο</div></div>'
-    +(done>0&&done<SPW?'<div class="vessel-msg">'+getMidMsg(done)+'</div>':'')
+    +'<div class="vessel-stat-sub">&#960;&#961;&#959;&#960;&#959;&#957;&#942;&#963;&#949;&#953;&#962; &#949;&#946;&#948;. '+(aw+1)+'</div>'
+    +'<div class="vessel-pct">'+Math.round(pct*100)+'% &#947;&#949;&#956;&#940;&#964;&#959;</div></div>'
+    +(midMsg?'<div class="vessel-msg">'+midMsg+'</div>':'')
     +'</div></div>'
-    +'<span class="vessels-link" onclick="showVesselsPage(\''+client+'\')">Τα Δοχεία Μου →</span>';
-  if(btn){btn.disabled=false;btn.innerHTML='<span class="btn-icon">✓</span> Ολοκλήρωσα την προπόνηση';}
+    +'<span class="vessels-link" onclick="showVesselsPage(\''+client+'\')">&#932;&#945; &#916;&#959;&#967;&#949;&#943;&#945; &#924;&#959;&#965; &#8594;</span>';
+
+  if(btn){
+    btn.disabled=false;
+    btn.innerHTML='<span style="font-size:20px">&#10003;</span> &#927;&#955;&#959;&#954;&#955;&#942;&#961;&#969;&#963;&#945; &#964;&#951;&#957; &#960;&#961;&#959;&#960;&#972;&#957;&#951;&#963;&#951;';
+  }
 }
 
 function getMidMsg(d){
-  return ['Ξεκίνησες. Το δοχείο γέμισε λίγο. Συνέχισε.','Μισός δρόμος. Η συνέπεια χτίζεται προπόνηση με προπόνηση.','Τρεις στις τέσσερις. Μία ακόμα!'][Math.min(d-1,2)];
+  return ['&#917;&#954;&#954;&#943;&#957;&#951;&#963;&#949;&#962;. &#932;&#959; &#948;&#959;&#967;&#949;&#943;&#959; &#947;&#941;&#956;&#953;&#963;&#949; &#955;&#943;&#947;&#959;. &#931;&#965;&#957;&#941;&#967;&#953;&#963;&#949;.',
+    '&#924;&#953;&#963;&#972;&#962; &#948;&#961;&#972;&#956;&#959;&#962;. &#919; &#963;&#965;&#957;&#941;&#960;&#949;&#953;&#945; &#967;&#964;&#943;&#950;&#949;&#964;&#945;&#953; &#946;&#942;&#956;&#945;-&#946;&#942;&#956;&#945;.',
+    '&#932;&#961;&#949;&#953;&#962; &#963;&#964;&#953;&#962; &#964;&#941;&#963;&#963;&#949;&#961;&#953;&#962;. &#924;&#943;&#945; &#945;&#954;&#972;&#956;&#945;!'][Math.min(d-1,2)];
 }
 function getFeedback(d,c,e){
-  if(d>=8&&c==='all')return'Σκληρή προπόνηση, αλλά την ολοκλήρωσες. Αυτή είναι πραγματική συνέπεια.';
-  if(e<=3)return'Ακόμα και με χαμηλή ενέργεια, εμφανίστηκες. Αυτό είναι μεγάλο win.';
-  if(c==='part')return'Έκανες ένα μέρος — κι αυτό μετράει. Η συνέπεια δεν είναι τελειότητα.';
-  return'Κλείδωσες άλλη μία προπόνηση. Η πρόοδος χτίζεται βήμα-βήμα.';
+  if(d>=8&&c==='all') return 'Σκληρή προπόνηση, αλλά την ολοκλήρωσες. Αυτή είναι πραγματική συνέπεια.';
+  if(e<=3) return 'Ακόμα και με χαμηλή ενέργεια, εμφανίστηκες. Αυτό είναι μεγάλο win.';
+  if(c==='part') return 'Έκανες ένα μέρος — κι αυτό μετράει. Η συνέπεια δεν είναι τελειότητα.';
+  return 'Κλείδωσες άλλη μία προπόνηση. Η πρόοδος χτίζεται βήμα-βήμα.';
 }
 
+/* ---- CHECK-IN ---- */
 var ci={client:'',step:1,difficulty:null,completion:null,energy:null,photo:null,photoURL:null};
-function openCheckin(client){ci={client:client,step:1,difficulty:null,completion:null,energy:null,photo:null,photoURL:null};renderModal();}
+function openCheckin(c){ ci={client:c,step:1,difficulty:null,completion:null,energy:null,photo:null,photoURL:null}; renderModal(); }
+
 function renderModal(){
   var s=ci;
-  var dots=[1,2,3,4].map(function(i){return '<div class="step-dot'+(i===s.step?' active':i<s.step?' done':'')+'"></div>';}).join('');
-  var content='';
+  var dots=[1,2,3,4].map(function(i){ return '<div class="step-dot'+(i===s.step?' active':i<s.step?' done':'')+'"></div>'; }).join('');
+  var html='';
   if(s.step===1){
-    var b=Array.from({length:10},function(_,i){return '<button class="scale-btn'+(s.difficulty===i+1?' selected':'')+'" onclick="ciSet(\'difficulty\','+(i+1)+')">'+(i+1)+'</button>';}).join('');
-    content='<div class="modal"><h3>Πόσο δύσκολη ήταν;</h3><div class="modal-sub">1 = εύκολη &nbsp;·&nbsp; 10 = πολύ δύσκολη</div><div class="step-indicator">'+dots+'</div><div class="scale-btns">'+b+'</div><div class="modal-actions"><button class="modal-cancel" onclick="closeModal()">Ακύρωση</button><button class="modal-next" onclick="ciNext()" '+(s.difficulty?'':'disabled')+'>Επόμενο →</button></div></div>';
-  }else if(s.step===2){
-    var o=[['all','Ολοκλήρωσα όλο το πρόγραμμα ✓'],['most','Έκανα το μεγαλύτερο μέρος'],['part','Έκανα ένα μέρος μόνο']];
-    var b2=o.map(function(x){return '<button class="comp-btn'+(s.completion===x[0]?' selected':'')+'" onclick="ciSet(\'completion\',\''+x[0]+'\')">'+x[1]+'</button>';}).join('');
-    content='<div class="modal"><h3>Πόσο ολοκλήρωσες;</h3><div class="modal-sub">Επίλεξε αυτό που σε περιγράφει</div><div class="step-indicator">'+dots+'</div><div class="completion-btns">'+b2+'</div><div class="modal-actions"><button class="modal-back" onclick="ciBack()">← Πίσω</button><button class="modal-next" onclick="ciNext()" '+(s.completion?'':'disabled')+'>Επόμενο →</button></div></div>';
-  }else if(s.step===3){
-    var b3=Array.from({length:10},function(_,i){return '<button class="scale-btn'+(s.energy===i+1?' selected':'')+'" onclick="ciSet(\'energy\','+(i+1)+')">'+(i+1)+'</button>';}).join('');
-    content='<div class="modal"><h3>Πόση ενέργεια έβαλες;</h3><div class="modal-sub">1 = πολύ χαμηλή &nbsp;·&nbsp; 10 = μέγιστη</div><div class="step-indicator">'+dots+'</div><div class="scale-btns">'+b3+'</div><div class="modal-actions"><button class="modal-back" onclick="ciBack()">← Πίσω</button><button class="modal-next" onclick="ciNext()" '+(s.energy?'':'disabled')+'>Επόμενο →</button></div></div>';
-  }else if(s.step===4){
+    var btns=Array.from({length:10},function(_,i){ return '<button class="scale-btn'+(s.difficulty===i+1?' selected':'')+'" onclick="ciSet(\'difficulty\','+(i+1)+')">'+(i+1)+'</button>'; }).join('');
+    html='<div class="modal"><h3>Πόσο δύσκολη ήταν;</h3><div class="modal-sub">1 = εύκολη &nbsp;·&nbsp; 10 = πολύ δύσκολη</div>'
+      +'<div class="step-indicator">'+dots+'</div><div class="scale-btns">'+btns+'</div>'
+      +'<div class="modal-actions"><button class="modal-cancel" onclick="closeModal()">Ακύρωση</button>'
+      +'<button class="modal-next" onclick="ciNext()" '+(s.difficulty?'':'disabled')+'>Επόμενο &#8594;</button></div></div>';
+  } else if(s.step===2){
+    var o=[['all','Ολοκλήρωσα όλο το πρόγραμμα &#10003;'],['most','Έκανα το μεγαλύτερο μέρος'],['part','Έκανα ένα μέρος μόνο']];
+    var b2=o.map(function(x){ return '<button class="comp-btn'+(s.completion===x[0]?' selected':'')+'" onclick="ciSet(\'completion\',\''+x[0]+'\')">'+x[1]+'</button>'; }).join('');
+    html='<div class="modal"><h3>Πόσο ολοκλήρωσες;</h3><div class="modal-sub">Επίλεξε αυτό που σε περιγράφει</div>'
+      +'<div class="step-indicator">'+dots+'</div><div class="completion-btns">'+b2+'</div>'
+      +'<div class="modal-actions"><button class="modal-back" onclick="ciBack()">&#8592; Πίσω</button>'
+      +'<button class="modal-next" onclick="ciNext()" '+(s.completion?'':'disabled')+'>Επόμενο &#8594;</button></div></div>';
+  } else if(s.step===3){
+    var b3=Array.from({length:10},function(_,i){ return '<button class="scale-btn'+(s.energy===i+1?' selected':'')+'" onclick="ciSet(\'energy\','+(i+1)+')">'+(i+1)+'</button>'; }).join('');
+    html='<div class="modal"><h3>Πόση ενέργεια έβαλες;</h3><div class="modal-sub">1 = πολύ χαμηλή &nbsp;·&nbsp; 10 = μέγιστη</div>'
+      +'<div class="step-indicator">'+dots+'</div><div class="scale-btns">'+b3+'</div>'
+      +'<div class="modal-actions"><button class="modal-back" onclick="ciBack()">&#8592; Πίσω</button>'
+      +'<button class="modal-next" onclick="ciNext()" '+(s.energy?'':'disabled')+'>Επόμενο &#8594;</button></div></div>';
+  } else if(s.step===4){
     var has=!!s.photoURL;
-    content='<div class="modal"><h3>Post-workout φωτογραφία 📷</h3><div class="modal-sub">Selfie, καθρέφτης, αστεία πόζα — ό,τι θες!</div><div class="step-indicator">'+dots+'</div>'
+    html='<div class="modal"><h3>Post-workout φωτογραφία &#128247;</h3>'
+      +'<div class="modal-sub">Selfie, καθρέφτης, αστεία πόζα — ό,τι θες!</div>'
+      +'<div class="step-indicator">'+dots+'</div>'
       +'<div class="photo-area'+(has?' has-photo':'')+'" onclick="document.getElementById(\'ph-inp\').click()">'
       +'<input type="file" accept="image/*" capture="environment" id="ph-inp" style="display:none" onchange="handlePhoto(event)"/>'
       +(has?'<img src="'+s.photoURL+'" style="width:100%;max-height:160px;object-fit:cover;border-radius:10px"/>'
-        :'<div class="photo-icon">📷</div><div class="photo-placeholder">Πάτησε για φωτογραφία ή upload</div>')
+        :'<div class="photo-icon">&#128247;</div><div class="photo-placeholder">Πάτησε για φωτογραφία ή upload</div>')
       +'</div>'
       +(!has?'<div style="font-size:12px;color:#aaa;text-align:center;margin-bottom:8px">Χρειάζεται φωτογραφία για να κλειδώσει η προπόνηση.</div>':'')
-      +'<div class="modal-actions"><button class="modal-back" onclick="ciBack()">← Πίσω</button><button class="modal-next" onclick="ciFinish()" '+(has?'':'disabled')+'>Κλείδωμα 🔒</button></div></div>';
+      +'<div class="modal-actions"><button class="modal-back" onclick="ciBack()">&#8592; Πίσω</button>'
+      +'<button class="modal-next" onclick="ciFinish()" '+(has?'':'disabled')+'>Κλείδωμα &#128274;</button></div></div>';
   }
-  document.getElementById('modal-root').innerHTML='<div class="modal-backdrop" onclick="closeModal(event)">'+content+'</div>';
+  document.getElementById('modal-root').innerHTML='<div class="modal-backdrop" onclick="closeModal(event)">'+html+'</div>';
 }
-function handlePhoto(e){var f=e.target.files[0];if(!f)return;ci.photo=f;ci.photoURL=URL.createObjectURL(f);renderModal();}
-function ciSet(f,v){ci[f]=v;renderModal();}
-function ciBack(){if(ci.step>1){ci.step--;renderModal();}}
-function ciNext(){ci.step++;renderModal();}
+
+function handlePhoto(e){ var f=e.target.files[0]; if(!f)return; ci.photo=f; ci.photoURL=URL.createObjectURL(f); renderModal(); }
+function ciSet(f,v){ ci[f]=v; renderModal(); }
+function ciBack(){ if(ci.step>1){ci.step--;renderModal();} }
+function ciNext(){ ci.step++; renderModal(); }
 
 async function ciFinish(){
   showLoading('Αποθήκευση...');
   var photoURL=null;
   if(ci.photo){
     var ext=ci.photo.name.split('.').pop();
-    photoURL=await sbUpload(ci.client+'/w'+Date.now()+'.'+ext,ci.photo);
+    photoURL=await sbUp(ci.client+'/w'+Date.now()+'.'+ext, ci.photo);
   }
-  var allRows=await sbSelect('checkins','client=eq.'+ci.client);
-  var activeWeek=getActiveWeek(allRows);
-  await sbInsert('checkins',{client:ci.client,week_index:activeWeek,difficulty:ci.difficulty,completion:ci.completion,energy:ci.energy,photo_url:photoURL});
-  allRows=await sbSelect('checkins','client=eq.'+ci.client);
-  var weekRows=allRows.filter(function(r){return r.week_index===activeWeek;});
+  var all=await sbSel('checkins','client=eq.'+ci.client);
+  var aw=getActiveWeek(all);
+  var oldDone=all.filter(function(r){return r.week_index===aw;}).length;
+  var oldPct=oldDone/SPW;
+  await sbIns('checkins',{client:ci.client,week_index:aw,difficulty:ci.difficulty,completion:ci.completion,energy:ci.energy,photo_url:photoURL});
+  var all2=await sbSel('checkins','client=eq.'+ci.client);
+  var newDone=all2.filter(function(r){return r.week_index===aw;}).length;
+  var newPct=newDone/SPW;
   hideLoading();
-  renderVessel(ci.client);
-  if(weekRows.length>=SPW){
-    if(activeWeek>=TOTAL_WEEKS-1){showProgramComplete(ci.client,allRows);}
-    else{showVictory(ci.client,weekRows,activeWeek);}
-  }else{showFeedback(getFeedback(ci.difficulty,ci.completion,ci.energy));}
+  /* close modal first, then animate, then show feedback */
+  document.getElementById('modal-root').innerHTML='';
+  runDropAnimation(ci.client, oldPct, newPct, function(){
+    var weekRows=all2.filter(function(r){return r.week_index===aw;});
+    if(newDone>=SPW){
+      if(aw>=TW-1){ showProgramComplete(ci.client,all2); }
+      else{ showVictory(ci.client,weekRows,aw); }
+    } else {
+      showFeedback(getFeedback(ci.difficulty,ci.completion,ci.energy));
+    }
+  });
 }
 
 function showFeedback(msg){
   document.getElementById('modal-root').innerHTML='<div class="modal-backdrop"><div class="modal"><div class="feedback-screen">'
-    +'<div class="feedback-icon">💧</div><div class="feedback-msg">'+msg+'</div>'
+    +'<div class="feedback-icon">&#128167;</div>'
+    +'<div class="feedback-msg">'+msg+'</div>'
     +'<div class="feedback-sub">Το δοχείο σου μόλις γέμισε λίγο ακόμα.</div>'
-    +'<button class="feedback-close" onclick="closeModal()">Τέλεια ✓</button>'
+    +'<button class="feedback-close" onclick="closeModal()">Τέλεια &#10003;</button>'
     +'</div></div></div>';
 }
-function showVictory(client,rows,weekIndex){
+
+function showVictory(client,rows,wi){
   var avgD=Math.round(rows.reduce(function(a,c){return a+c.difficulty;},0)/rows.length);
   var avgE=Math.round(rows.reduce(function(a,c){return a+c.energy;},0)/rows.length);
-  var photos=rows.map(function(c,i){return c.photo_url?'<div class="recap-photo"><img src="'+c.photo_url+'"/><div class="recap-label">Προπόνηση '+(i+1)+' · '+Math.round((i+1)/SPW*100)+'%</div></div>':'<div class="recap-photo"><div class="recap-photo-placeholder">Προπόνηση '+(i+1)+'</div><div class="recap-label">'+Math.round((i+1)/SPW*100)+'%</div></div>';}).join('');
-  var nextMsg=NEXT_WEEK_MSGS[weekIndex]||'Συνέχισε να χτίζεις. Πάμε!';
+  var photos=rows.map(function(c,i){
+    return c.photo_url
+      ?'<div class="recap-photo"><img src="'+c.photo_url+'"/><div class="recap-label">Προπόνηση '+(i+1)+' · '+Math.round((i+1)/SPW*100)+'%</div></div>'
+      :'<div class="recap-photo"><div class="recap-photo-placeholder">Προπόνηση '+(i+1)+'</div><div class="recap-label">'+Math.round((i+1)/SPW*100)+'%</div></div>';
+  }).join('');
+  var nm=NWMSGS[wi]||'Συνέχισε να χτίζεις. Πάμε!';
   document.getElementById('modal-root').innerHTML='<div class="modal-backdrop"><div class="modal"><div class="victory-screen">'
-    +'<div class="sparkles">✦ ✦ ✦</div>'
-    +'<div class="victory-title">Εβδομάδα '+(weekIndex+1)+' ολοκληρώθηκε!</div>'
+    +'<div class="sparkles">&#10022; &#10022; &#10022;</div>'
+    +'<div class="victory-title">Εβδομάδα '+(wi+1)+' ολοκληρώθηκε!</div>'
     +'<div class="victory-sub">Το δοχείο γέμισε. Αυτή η εβδομάδα κερδήθηκε.</div>'
-    +'<div class="victory-next-msg">'+nextMsg+'</div>'
+    +'<div class="victory-next-msg">'+nm+'</div>'
     +'<div class="recap-grid">'+photos+'</div>'
     +'<div class="recap-stats">'
     +'<div class="recap-stat"><div class="recap-stat-val">'+rows.length+'</div><div class="recap-stat-label">Προπονήσεις</div></div>'
     +'<div class="recap-stat"><div class="recap-stat-val">'+avgD+'/10</div><div class="recap-stat-label">Μέση δυσκολία</div></div>'
     +'<div class="recap-stat"><div class="recap-stat-val">'+avgE+'/10</div><div class="recap-stat-label">Μέση ενέργεια</div></div>'
     +'</div>'
-    +'<button class="victory-close" onclick="closeModal()">Πάμε στην εβδομάδα '+(weekIndex+2)+' →</button>'
+    +'<button class="victory-close" onclick="closeModal()">Πάμε στην εβδομάδα '+(wi+2)+' &#8594;</button>'
     +'</div></div></div>';
 }
-function showProgramComplete(client,allRows){
-  var total=allRows.length;
-  var avgD=Math.round(allRows.reduce(function(a,c){return a+c.difficulty;},0)/total);
-  var avgE=Math.round(allRows.reduce(function(a,c){return a+c.energy;},0)/total);
+
+function showProgramComplete(client,all){
+  var tot=all.length;
+  var avgD=Math.round(all.reduce(function(a,c){return a+c.difficulty;},0)/tot);
+  var avgE=Math.round(all.reduce(function(a,c){return a+c.energy;},0)/tot);
   document.getElementById('modal-root').innerHTML='<div class="modal-backdrop"><div class="modal"><div class="complete-screen">'
-    +'<div class="complete-trophy">🏆</div>'
+    +'<div class="complete-trophy">&#127942;</div>'
     +'<div class="complete-title">Στόχος 8 εβδομάδων επιτεύχθηκε!</div>'
-    +'<div class="complete-sub">Ολοκλήρωσες το πρόγραμμα των 2 μηνών.<br>Κάθε προπόνηση, κάθε φωτογραφία, κάθε δοχείο που γέμισε<br>— αυτό είναι <strong>πραγματική συνέπεια</strong>.</div>'
+    +'<div class="complete-sub">Ολοκλήρωσες το πρόγραμμα των 2 μηνών.<br>Κάθε προπόνηση, κάθε δοχείο που γέμισε — αυτό είναι <strong>πραγματική συνέπεια</strong>.</div>'
     +'<div class="complete-stats">'
-    +'<div class="complete-stat"><div class="complete-stat-val">'+total+'</div><div class="complete-stat-label">Συνολικές προπονήσεις</div></div>'
-    +'<div class="complete-stat"><div class="complete-stat-val">'+TOTAL_WEEKS+'</div><div class="complete-stat-label">Εβδομάδες</div></div>'
+    +'<div class="complete-stat"><div class="complete-stat-val">'+tot+'</div><div class="complete-stat-label">Συνολικές προπονήσεις</div></div>'
+    +'<div class="complete-stat"><div class="complete-stat-val">'+TW+'</div><div class="complete-stat-label">Εβδομάδες</div></div>'
     +'<div class="complete-stat"><div class="complete-stat-val">'+avgD+'/10</div><div class="complete-stat-label">Μέση δυσκολία</div></div>'
     +'<div class="complete-stat"><div class="complete-stat-val">'+avgE+'/10</div><div class="complete-stat-label">Μέση ενέργεια</div></div>'
     +'</div>'
-    +'<button class="complete-close" onclick="closeModal();showVesselsPage(\''+client+'\')">Δες όλα τα δοχεία σου →</button>'
+    +'<button class="complete-close" onclick="closeModal();showVesselsPage(\''+client+'\')">Δες όλα τα δοχεία σου &#8594;</button>'
     +'</div></div></div>';
 }
-function closeModal(e){if(e&&e.target!==e.currentTarget)return;document.getElementById('modal-root').innerHTML='';}
+
+function closeModal(e){ if(e&&e.target!==e.currentTarget)return; document.getElementById('modal-root').innerHTML=''; }
 
 async function showVesselsPage(client){
   document.querySelectorAll('.page').forEach(function(p){p.classList.remove('active');});
   document.getElementById(client+'-vessels-page').classList.add('active');
   window.scrollTo(0,0);
-  var allRows=await sbSelect('checkins','client=eq.'+client);
-  var activeWeek=getActiveWeek(allRows);
+  var all=await sbSel('checkins','client=eq.'+client);
+  var aw=getActiveWeek(all);
   var grid=document.getElementById(client+'-vessels-grid');
   var html='';
-  for(var w=0;w<TOTAL_WEEKS;w++){
-    var wRows=allRows.filter(function(r){return r.week_index===w;});
-    var done=wRows.length,pct=done/SPW;
-    var isCurrent=w===activeWeek&&activeWeek<TOTAL_WEEKS;
-    var isLocked=w>activeWeek;
-    var isClickable=!isLocked&&done>0&&!isCurrent;
-    var cls='vessel-archive-card'+(isLocked?' locked':isCurrent?' current-week':'');
-    var wData=JSON.stringify(wRows).replace(/"/g,'&quot;');
-    html+='<div class="'+cls+'" '+(isClickable?'onclick="showWeekReview(\''+client+'\','+w+',this)" data-rows="'+wData+'"':'')+'>'+
+  for(var w=0;w<TW;w++){
+    var wr=all.filter(function(r){return r.week_index===w;});
+    var done=wr.length, pct=done/SPW;
+    var isCur=w===aw&&aw<TW;
+    var isLock=w>aw;
+    var canClick=!isLock&&done>0&&!isCur;
+    var cls='vessel-archive-card'+(isLock?' locked':isCur?' current-week':'');
+    var wd=JSON.stringify(wr).replace(/"/g,'&quot;');
+    html+='<div class="'+cls+'" '+(canClick?'onclick="showWeekReview(\''+client+'\','+w+',this)" data-rows="'+wd+'"':'')+'>'+
       '<div class="archive-week">Εβδομάδα '+(w+1)+'</div>'+
-      vesselSVG(pct,80,isCurrent&&done>0&&done<SPW)+
-      '<div class="archive-name">'+(isLocked?'🔒 Κλειδωμένο':isCurrent?'● Τρέχουσα':done===0?'Δεν ξεκίνησε':done>=SPW?'✓ Ολοκληρώθηκε':'Μερική')+'</div>'+
+      vesselSVG(pct,80,client+'arc'+w)+
+      '<div class="archive-name">'+(isLock?'&#128274; Κλειδωμένο':isCur?'&#9679; Τρέχουσα':done===0?'Δεν ξεκίνησε':done>=SPW?'&#10003; Ολοκληρώθηκε':'Μερική')+'</div>'+
       '<div class="archive-pct">'+Math.round(pct*100)+'%</div>'+
       '</div>';
   }
   grid.innerHTML=html;
 }
+
 function showWeekReview(client,w,el){
   var rows=JSON.parse(el.getAttribute('data-rows').replace(/&quot;/g,'"'));
   if(!rows||!rows.length)return;
-  var done=rows.length,pct=Math.round(done/SPW*100);
+  var done=rows.length, pct=Math.round(done/SPW*100);
   var avgD=Math.round(rows.reduce(function(a,c){return a+c.difficulty;},0)/done);
   var avgE=Math.round(rows.reduce(function(a,c){return a+c.energy;},0)/done);
-  var photos=rows.map(function(c,i){return c.photo_url?'<div class="recap-photo"><img src="'+c.photo_url+'"/><div class="recap-label">Προπόνηση '+(i+1)+'</div></div>':'<div class="recap-photo"><div class="recap-photo-placeholder">Προπόνηση '+(i+1)+'</div><div class="recap-label">—</div></div>';}).join('');
+  var photos=rows.map(function(c,i){
+    return c.photo_url
+      ?'<div class="recap-photo"><img src="'+c.photo_url+'"/><div class="recap-label">Προπόνηση '+(i+1)+'</div></div>'
+      :'<div class="recap-photo"><div class="recap-photo-placeholder">Προπόνηση '+(i+1)+'</div><div class="recap-label">&#8212;</div></div>';
+  }).join('');
   var msg=pct>=100?'Εβδομάδα ολοκληρώθηκε πλήρως. Σπουδαία δουλειά.':'Η προσπάθεια καταγράφηκε. Κάθε εβδομάδα μετράει.';
   document.getElementById('modal-root').innerHTML='<div class="modal-backdrop" onclick="closeModal(event)"><div class="modal">'
     +'<div class="review-header"><h3>Εβδομάδα '+(w+1)+' — Ανασκόπηση</h3><p>'+pct+'% · '+done+'/'+SPW+' προπονήσεις</p></div>'
     +'<div class="recap-grid">'+photos+'</div>'
-    +'<div class="recap-stats"><div class="recap-stat"><div class="recap-stat-val">'+done+'</div><div class="recap-stat-label">Προπονήσεις</div></div><div class="recap-stat"><div class="recap-stat-val">'+avgD+'/10</div><div class="recap-stat-label">Μέση δυσκολία</div></div><div class="recap-stat"><div class="recap-stat-val">'+avgE+'/10</div><div class="recap-stat-label">Μέση ενέργεια</div></div></div>'
+    +'<div class="recap-stats">'
+    +'<div class="recap-stat"><div class="recap-stat-val">'+done+'</div><div class="recap-stat-label">Προπονήσεις</div></div>'
+    +'<div class="recap-stat"><div class="recap-stat-val">'+avgD+'/10</div><div class="recap-stat-label">Μέση δυσκολία</div></div>'
+    +'<div class="recap-stat"><div class="recap-stat-val">'+avgE+'/10</div><div class="recap-stat-label">Μέση ενέργεια</div></div>'
+    +'</div>'
     +'<div style="font-size:13px;color:#666;text-align:center;margin:12px 0 16px;font-style:italic">'+msg+'</div>'
     +'<div style="text-align:center"><button class="feedback-close" onclick="closeModal()">Κλείσιμο</button></div>'
     +'</div></div>';
 }
-function showLoading(msg){document.getElementById('modal-root').innerHTML='<div class="loading-overlay"><div class="loading-spinner"></div><div class="loading-text">'+msg+'</div></div>';}
-function hideLoading(){document.getElementById('modal-root').innerHTML='';}
-function showHome(){document.querySelectorAll('.page').forEach(function(p){p.classList.remove('active');});document.getElementById('home-page').classList.add('active');window.scrollTo(0,0);}
+
+function showLoading(m){ document.getElementById('modal-root').innerHTML='<div class="loading-overlay"><div class="loading-spinner"></div><div class="loading-text">'+m+'</div></div>'; }
+function hideLoading(){ document.getElementById('modal-root').innerHTML=''; }
+
+function showHome(){
+  document.querySelectorAll('.page').forEach(function(p){p.classList.remove('active');});
+  document.getElementById('home-page').classList.add('active');
+  window.scrollTo(0,0);
+}
 function showClient(name){
   document.querySelectorAll('.page').forEach(function(p){p.classList.remove('active');});
   document.getElementById(name+'-page').classList.add('active');
@@ -717,21 +798,29 @@ function showClient(name){
   renderVessel(name);
   window.scrollTo(0,0);
 }
-function showWorkout(key,clientId,card){
-  var w=workouts[key];if(!w)return;
-  document.getElementById(clientId+'-page').querySelectorAll('.day-card').forEach(function(c){c.classList.remove('active-day');});
-  var rows=w.exercises.map(function(ex){return '<tr><td>'+ex.name+'</td><td style="white-space:nowrap">'+ex.sets+'</td><td class="note-cell">'+ex.note+'</td><td><span class="video-btn">+ video</span></td></tr>';}).join('');
+function showWorkout(key,cId,card){
+  var w=workouts[key]; if(!w)return;
+  document.getElementById(cId+'-page').querySelectorAll('.day-card').forEach(function(c){c.classList.remove('active-day');});
+  card.classList.add('active-day');
+  var rows=w.exercises.map(function(ex){
+    return '<tr><td>'+ex.name+'</td><td style="white-space:nowrap">'+ex.sets+'</td><td class="note-cell">'+ex.note+'</td><td><span class="video-btn">+ video</span></td></tr>';
+  }).join('');
   var cH=w.circuit?'<div style="padding:10px 16px 4px"><span class="circuit-note">'+w.circuitNote+'</span></div>':'';
   var eH=w.extra?'<div class="extra-note">'+w.extra+'</div>':'';
   var oH=w.ozempicNote?'<div class="alert-note orange">'+w.ozempicNote+'</div>':'';
   var bH=w.backNote?'<div class="alert-note red">'+w.backNote+'</div>':'';
-  var area=document.getElementById(clientId+'-workout-area');
-  area.innerHTML='<div class="workout-panel"><div class="workout-panel-header"><h3>'+w.title+'</h3><button class="close-btn" onclick="closeWorkout(\''+clientId+'\')">Κλείσιμο</button></div>'+cH+'<div style="overflow-x:auto"><table class="exercise-table"><thead><tr><th style="width:30%">Άσκηση</th><th style="width:15%">Σετ</th><th style="width:40%">Σημείωση</th><th style="width:15%">Video</th></tr></thead><tbody>'+rows+'</tbody></table></div>'+eH+oH+bH+'</div>';
+  var area=document.getElementById(cId+'-workout-area');
+  area.innerHTML='<div class="workout-panel">'
+    +'<div class="workout-panel-header"><h3>'+w.title+'</h3>'
+    +'<button class="close-btn" onclick="closeWorkout(\''+cId+'\')">Κλείσιμο</button></div>'
+    +cH+'<div style="overflow-x:auto"><table class="exercise-table">'
+    +'<thead><tr><th style="width:30%">Άσκηση</th><th style="width:15%">Σετ</th><th style="width:40%">Σημείωση</th><th style="width:15%">Video</th></tr></thead>'
+    +'<tbody>'+rows+'</tbody></table></div>'+eH+oH+bH+'</div>';
   area.scrollIntoView({behavior:'smooth',block:'nearest'});
 }
-function closeWorkout(clientId){
-  document.getElementById(clientId+'-workout-area').innerHTML='';
-  document.getElementById(clientId+'-page').querySelectorAll('.day-card').forEach(function(c){c.classList.remove('active-day');});
+function closeWorkout(cId){
+  document.getElementById(cId+'-workout-area').innerHTML='';
+  document.getElementById(cId+'-page').querySelectorAll('.day-card').forEach(function(c){c.classList.remove('active-day');});
 }
 </script>
 </body>
