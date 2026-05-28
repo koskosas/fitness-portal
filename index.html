@@ -1,101 +1,205 @@
 <!DOCTYPE html>
 <html lang="el">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Fitness Portal</title>
-  <style>
-* { box-sizing: border-box; margin: 0; padding: 0; }
-body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #f5f5f3; color: #1a1a1a; min-height: 100vh; }
-.page { display: none; }
-.page.active { display: block; max-width: 700px; margin: 0 auto; background: #fff; min-height: 100vh; }
-.nav { display: flex; align-items: center; gap: 16px; padding: 14px 20px; border-bottom: 1px solid #e8e8e6; background: #fff; position: sticky; top: 0; z-index: 10; }
-.nav-brand { font-size: 15px; font-weight: 500; }
-.nav-back { font-size: 13px; color: #666; cursor: pointer; }
-.nav-back:hover { color: #1a1a1a; }
-.home-header { padding: 2rem 20px 1.25rem; }
-.home-header h1 { font-size: 22px; font-weight: 500; margin-bottom: 6px; }
-.home-header p { font-size: 14px; color: #666; }
-.client-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; padding: 0 20px 20px; }
-.client-card { background: #fff; border: 1px solid #e8e8e6; border-radius: 12px; padding: 20px; cursor: pointer; transition: border-color 0.15s, box-shadow 0.15s; }
-.client-card:hover { border-color: #bbb; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
-.client-avatar, .client-header-avatar { width: 48px; height: 48px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 500; margin-bottom: 12px; }
-.client-header-avatar { width: 52px; height: 52px; margin-bottom: 0; font-size: 15px; }
-.avatar-p { background: #dbeafe; color: #1e40af; }
-.avatar-m { background: #fce7f3; color: #9d174d; }
-.client-name { font-size: 16px; font-weight: 500; margin-bottom: 4px; }
-.client-sub { font-size: 13px; color: #666; }
-.client-header { padding: 20px; display: flex; align-items: center; gap: 14px; border-bottom: 1px solid #e8e8e6; }
-.client-header h2 { font-size: 20px; font-weight: 500; margin-bottom: 3px; }
-.client-header p { font-size: 13px; color: #666; }
-.safety-banner { margin: 16px 20px; background: #fffbeb; border: 1px solid #fcd34d; border-radius: 10px; padding: 14px 16px; }
-.safety-banner h3 { font-size: 13px; font-weight: 500; color: #92400e; margin-bottom: 10px; }
-.pain-table { width: 100%; font-size: 13px; border-collapse: collapse; }
-.pain-table th { text-align: left; color: #78350f; font-weight: 500; padding: 4px 0; border-bottom: 1px solid #fcd34d; font-size: 12px; }
-.pain-table td { padding: 5px 0; color: #78350f; vertical-align: top; }
-.pain-table td:first-child { width: 50%; padding-right: 8px; }
-.badge { font-size: 11px; padding: 2px 7px; border-radius: 4px; font-weight: 500; }
-.badge.go { background: #dcfce7; color: #15803d; }
-.badge.warn { background: #fef3c7; color: #92400e; }
-.badge.stop { background: #fee2e2; color: #b91c1c; }
-.forbidden-box { margin: 0 20px 16px; background: #fff1f2; border: 1px solid #fecdd3; border-radius: 10px; padding: 14px 16px; }
-.forbidden-box h3 { font-size: 13px; font-weight: 500; color: #be123c; margin-bottom: 8px; }
-.forbidden-list { list-style: none; display: flex; flex-direction: column; gap: 5px; }
-.forbidden-list li { font-size: 13px; color: #be123c; display: flex; align-items: flex-start; gap: 6px; }
-.forbidden-list li::before { content: "x"; font-weight: 600; flex-shrink: 0; margin-top: 1px; }
-.section { margin: 0 20px 16px; }
-.section-title { font-size: 11px; font-weight: 500; color: #888; text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 10px; }
-.warmup-box { background: #f9f9f7; border-radius: 10px; padding: 14px 16px; }
-.warmup-list { padding-left: 18px; display: flex; flex-direction: column; gap: 6px; }
-.warmup-list li { font-size: 13px; line-height: 1.5; }
-.week-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
-.day-card { background: #fff; border: 1px solid #e8e8e6; border-radius: 10px; padding: 14px; cursor: pointer; transition: border-color 0.15s; }
-.day-card:hover { border-color: #bbb; }
-.day-card.active-day { border-color: #1a1a1a; }
-.day-label { font-size: 11px; color: #888; margin-bottom: 4px; }
-.day-title { font-size: 13px; font-weight: 500; line-height: 1.4; margin-bottom: 6px; }
-.day-badge { display: inline-block; font-size: 11px; padding: 2px 7px; border-radius: 4px; font-weight: 500; }
-.day-badge.green { background: #dcfce7; color: #15803d; }
-.day-badge.blue { background: #dbeafe; color: #1d4ed8; }
-.day-badge.pink { background: #fce7f3; color: #9d174d; }
-.day-badge.amber { background: #fef3c7; color: #92400e; }
-.daily-note { margin-top: 8px; padding: 10px 14px; background: #f9f9f7; border-radius: 8px; font-size: 13px; color: #555; }
-.workout-area { padding: 0 20px 24px; }
-.workout-panel { background: #fff; border: 1px solid #e8e8e6; border-radius: 12px; overflow: hidden; margin-top: 12px; }
-.workout-panel-header { padding: 14px 16px; border-bottom: 1px solid #e8e8e6; display: flex; justify-content: space-between; align-items: center; }
-.workout-panel-header h3 { font-size: 14px; font-weight: 500; }
-.close-btn { font-size: 12px; color: #666; cursor: pointer; padding: 4px 10px; border-radius: 6px; border: 1px solid #e8e8e6; background: none; }
-.close-btn:hover { background: #f9f9f7; }
-.circuit-note { font-size: 12px; color: #1d4ed8; background: #eff6ff; display: inline-block; margin: 8px 16px 0; padding: 4px 10px; border-radius: 5px; }
-.exercise-table { width: 100%; border-collapse: collapse; font-size: 13px; }
-.exercise-table th { text-align: left; padding: 8px 14px; font-size: 11px; font-weight: 500; color: #888; border-bottom: 1px solid #e8e8e6; background: #f9f9f7; }
-.exercise-table td { padding: 10px 14px; border-bottom: 1px solid #f0f0ee; vertical-align: top; line-height: 1.5; }
-.exercise-table tr:last-child td { border-bottom: none; }
-.exercise-table tbody tr:hover td { background: #fafaf8; }
-.note-cell { color: #777; font-size: 12px; }
-.video-btn { display: inline-flex; align-items: center; gap: 4px; font-size: 12px; color: #aaa; text-decoration: none; padding: 3px 8px; border-radius: 5px; border: 1px dashed #ddd; background: #fff; white-space: nowrap; }
-.video-btn:hover { background: #f9f9f7; }
-.video-btn.has-video { color: #dc2626; border-color: #dc2626; border-style: solid; background: #fff1f2; }
-.extra-note { padding: 10px 16px; background: #f9f9f7; border-top: 1px solid #e8e8e6; font-size: 12px; color: #555; }
-.alert-note { padding: 10px 16px; font-size: 12px; border-top: 1px solid #e8e8e6; }
-.alert-note.orange { background: #fff7ed; color: #92400e; }
-.alert-note.red { background: #fff1f2; color: #be123c; }
-.nutrition-section { margin: 0 20px 16px; }
-.nutrition-table { width: 100%; border-collapse: collapse; font-size: 13px; }
-.nutrition-table th { text-align: left; padding: 7px 10px; font-size: 11px; font-weight: 500; color: #888; border-bottom: 1px solid #e8e8e6; background: #f9f9f7; }
-.nutrition-table td { padding: 8px 10px; border-bottom: 1px solid #f0f0ee; vertical-align: top; line-height: 1.5; font-size: 13px; }
-.nutrition-table tr:last-child td { border-bottom: none; }
-.nutrition-personal { margin-top: 10px; background: #f9f9f7; border-radius: 8px; padding: 12px 14px; }
-.nutrition-personal p { font-size: 13px; line-height: 1.6; color: #444; margin-bottom: 6px; }
-.nutrition-personal li { font-size: 13px; line-height: 1.7; color: #444; margin-left: 16px; }
-@media (max-width: 480px) {
-  .exercise-table th:nth-child(3), .exercise-table td:nth-child(3) { display: none; }
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Fitness Portal</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#f7f6f2;color:#1a1a1a;min-height:100vh}
+.page{display:none}
+.page.active{display:block;max-width:700px;margin:0 auto;background:#fff;min-height:100vh}
+.nav{display:flex;align-items:center;gap:16px;padding:14px 20px;border-bottom:1px solid #e8e8e6;background:#fff;position:sticky;top:0;z-index:10}
+.nav-brand{font-size:15px;font-weight:500;letter-spacing:-.2px}
+.nav-back{font-size:13px;color:#888;cursor:pointer;transition:color .15s}
+.nav-back:hover{color:#1a1a1a}
+.home-header{padding:2.5rem 24px 1.5rem}
+.home-header h1{font-size:24px;font-weight:500;margin-bottom:6px;letter-spacing:-.3px}
+.home-header p{font-size:14px;color:#888}
+.client-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;padding:0 24px 28px}
+.client-card{background:#fff;border:1px solid #e8e8e6;border-radius:16px;padding:22px;cursor:pointer;transition:border-color .15s,box-shadow .15s,transform .1s}
+.client-card:hover{border-color:#bbb;box-shadow:0 4px 16px rgba(0,0,0,.07);transform:translateY(-1px)}
+.client-avatar{width:48px;height:48px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:500;margin-bottom:14px}
+.avatar-p{background:#dbeafe;color:#1e40af}
+.avatar-m{background:#fce7f3;color:#9d174d}
+.client-name{font-size:16px;font-weight:500;margin-bottom:4px}
+.client-sub{font-size:13px;color:#888}
+.client-header{padding:20px 24px;display:flex;align-items:center;gap:14px;border-bottom:1px solid #e8e8e6}
+.client-header-avatar{width:52px;height:52px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:500}
+.client-header h2{font-size:20px;font-weight:500;margin-bottom:3px}
+.client-header p{font-size:13px;color:#888}
+
+/* VESSEL */
+.vessel-section{margin:20px 24px;background:#f9f8f4;border:1px solid #eae9e4;border-radius:18px;padding:24px;display:flex;flex-direction:column;align-items:center}
+.vessel-title{font-size:11px;font-weight:500;color:#999;text-transform:uppercase;letter-spacing:.08em;margin-bottom:18px;align-self:flex-start}
+.vessel-wrap{display:flex;gap:28px;align-items:center;width:100%}
+.vessel-svg-container{flex-shrink:0;cursor:pointer}
+.vessel-info{flex:1;display:flex;flex-direction:column;gap:10px}
+.vessel-stat-big{font-size:28px;font-weight:500;letter-spacing:-.5px;line-height:1}
+.vessel-stat-sub{font-size:13px;color:#888;margin-top:2px}
+.vessel-pct{font-size:13px;color:#aaa;margin-top:4px}
+.vessel-msg{font-size:13px;color:#666;line-height:1.55;background:#fff;border-radius:10px;padding:10px 12px;border:1px solid #e8e8e6;font-style:italic}
+
+/* BIG CHECK-IN BUTTON */
+.checkin-btn-wrap{margin:16px 24px 0}
+.checkin-btn-big{width:100%;padding:16px;background:#1a1a1a;color:#fff;border:none;border-radius:14px;font-size:15px;font-weight:500;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px;transition:background .15s,transform .1s;letter-spacing:-.1px}
+.checkin-btn-big:hover{background:#333;transform:translateY(-1px)}
+.checkin-btn-big:disabled{background:#ccc;cursor:default;transform:none}
+.checkin-btn-big .btn-icon{font-size:20px}
+.vessels-link{font-size:12px;color:#aaa;cursor:pointer;margin-top:12px;align-self:flex-end;transition:color .15s}
+.vessels-link:hover{color:#555}
+
+.safety-banner{margin:16px 24px;background:#fffbeb;border:1px solid #fcd34d;border-radius:12px;padding:14px 16px}
+.safety-banner h3{font-size:13px;font-weight:500;color:#92400e;margin-bottom:10px}
+.pain-table{width:100%;font-size:13px;border-collapse:collapse}
+.pain-table th{text-align:left;color:#78350f;font-weight:500;padding:4px 0;border-bottom:1px solid #fcd34d;font-size:12px}
+.pain-table td{padding:5px 0;color:#78350f;vertical-align:top}
+.pain-table td:first-child{width:50%;padding-right:8px}
+.badge{font-size:11px;padding:2px 7px;border-radius:4px;font-weight:500}
+.badge.go{background:#dcfce7;color:#15803d}
+.badge.warn{background:#fef3c7;color:#92400e}
+.badge.stop{background:#fee2e2;color:#b91c1c}
+.forbidden-box{margin:0 24px 16px;background:#fff1f2;border:1px solid #fecdd3;border-radius:12px;padding:14px 16px}
+.forbidden-box h3{font-size:13px;font-weight:500;color:#be123c;margin-bottom:8px}
+.forbidden-list{list-style:none;display:flex;flex-direction:column;gap:5px}
+.forbidden-list li{font-size:13px;color:#be123c;display:flex;align-items:flex-start;gap:6px}
+.forbidden-list li::before{content:"x";font-weight:600;flex-shrink:0;margin-top:1px}
+.section{margin:0 24px 16px}
+.section-title{font-size:11px;font-weight:500;color:#999;text-transform:uppercase;letter-spacing:.07em;margin-bottom:10px}
+.warmup-box{background:#f9f8f4;border-radius:12px;padding:14px 16px}
+.warmup-list{padding-left:18px;display:flex;flex-direction:column;gap:6px}
+.warmup-list li{font-size:13px;line-height:1.5}
+.week-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.day-card{background:#fff;border:1px solid #e8e8e6;border-radius:12px;padding:14px;cursor:pointer;transition:border-color .15s,transform .1s}
+.day-card:hover{border-color:#bbb;transform:translateY(-1px)}
+.day-card.active-day{border-color:#1a1a1a}
+.day-label{font-size:11px;color:#aaa;margin-bottom:4px}
+.day-title{font-size:13px;font-weight:500;line-height:1.4;margin-bottom:6px}
+.day-badge{display:inline-block;font-size:11px;padding:2px 7px;border-radius:4px;font-weight:500}
+.day-badge.green{background:#dcfce7;color:#15803d}
+.day-badge.blue{background:#dbeafe;color:#1d4ed8}
+.day-badge.pink{background:#fce7f3;color:#9d174d}
+.day-badge.amber{background:#fef3c7;color:#92400e}
+.daily-note{margin-top:8px;padding:10px 14px;background:#f9f8f4;border-radius:8px;font-size:13px;color:#777}
+.workout-area{padding:0 24px 24px}
+.workout-panel{background:#fff;border:1px solid #e8e8e6;border-radius:14px;overflow:hidden;margin-top:12px}
+.workout-panel-header{padding:14px 16px;border-bottom:1px solid #e8e8e6;display:flex;justify-content:space-between;align-items:center}
+.workout-panel-header h3{font-size:14px;font-weight:500}
+.close-btn{font-size:12px;color:#888;cursor:pointer;padding:4px 10px;border-radius:6px;border:1px solid #e8e8e6;background:none;transition:background .15s}
+.close-btn:hover{background:#f9f8f4}
+.circuit-note{font-size:12px;color:#1d4ed8;background:#eff6ff;display:inline-block;margin:8px 16px 0;padding:4px 10px;border-radius:5px}
+.exercise-table{width:100%;border-collapse:collapse;font-size:13px}
+.exercise-table th{text-align:left;padding:8px 14px;font-size:11px;font-weight:500;color:#aaa;border-bottom:1px solid #e8e8e6;background:#f9f8f4}
+.exercise-table td{padding:10px 14px;border-bottom:1px solid #f0f0ee;vertical-align:top;line-height:1.5}
+.exercise-table tr:last-child td{border-bottom:none}
+.exercise-table tbody tr:hover td{background:#fafaf8}
+.note-cell{color:#888;font-size:12px}
+.video-btn{display:inline-flex;align-items:center;gap:4px;font-size:12px;color:#ccc;padding:3px 8px;border-radius:5px;border:1px dashed #ddd;background:#fff;white-space:nowrap;cursor:pointer}
+.extra-note{padding:10px 16px;background:#f9f8f4;border-top:1px solid #e8e8e6;font-size:12px;color:#777}
+.alert-note{padding:10px 16px;font-size:12px;border-top:1px solid #e8e8e6}
+.alert-note.orange{background:#fff7ed;color:#92400e}
+.alert-note.red{background:#fff1f2;color:#be123c}
+.nutrition-section{margin:0 24px 16px}
+.nutrition-table{width:100%;border-collapse:collapse;font-size:13px}
+.nutrition-table th{text-align:left;padding:7px 10px;font-size:11px;font-weight:500;color:#aaa;border-bottom:1px solid #e8e8e6;background:#f9f8f4}
+.nutrition-table td{padding:8px 10px;border-bottom:1px solid #f0f0ee;vertical-align:top;line-height:1.5;font-size:13px}
+.nutrition-table tr:last-child td{border-bottom:none}
+.nutrition-personal{margin-top:10px;background:#f9f8f4;border-radius:10px;padding:12px 14px}
+.nutrition-personal p{font-size:13px;line-height:1.6;color:#555;margin-bottom:6px}
+.nutrition-personal li{font-size:13px;line-height:1.7;color:#555;margin-left:16px}
+
+/* MODALS */
+.modal-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.45);display:flex;align-items:center;justify-content:center;z-index:100;padding:20px}
+.modal{background:#fff;border-radius:20px;padding:28px 24px;max-width:400px;width:100%;max-height:90vh;overflow-y:auto}
+.modal h3{font-size:17px;font-weight:500;margin-bottom:4px}
+.modal-sub{font-size:13px;color:#aaa;margin-bottom:24px}
+.step-indicator{display:flex;gap:6px;margin-bottom:20px}
+.step-dot{width:6px;height:6px;border-radius:50%;background:#e0e0de;transition:background .3s}
+.step-dot.active{background:#1a1a1a}
+.step-dot.done{background:#5DCAA5}
+.scale-btns{display:flex;gap:6px;flex-wrap:wrap;margin:12px 0 20px}
+.scale-btn{width:42px;height:42px;border-radius:10px;border:1.5px solid #e8e8e6;background:#fff;font-size:14px;font-weight:500;cursor:pointer;transition:border-color .15s,background .15s}
+.scale-btn:hover{border-color:#aaa;background:#f9f8f4}
+.scale-btn.selected{border-color:#1a1a1a;background:#1a1a1a;color:#fff}
+.completion-btns{display:flex;flex-direction:column;gap:8px;margin:12px 0 20px}
+.comp-btn{padding:12px 16px;border-radius:12px;border:1.5px solid #e8e8e6;background:#fff;font-size:13px;cursor:pointer;text-align:left;transition:border-color .15s,background .15s}
+.comp-btn:hover{border-color:#aaa;background:#f9f8f4}
+.comp-btn.selected{border-color:#1a1a1a;background:#f9f8f4}
+.photo-area{border:2px dashed #e0e0de;border-radius:14px;padding:28px 20px;text-align:center;cursor:pointer;margin:12px 0 20px;transition:border-color .2s,background .2s}
+.photo-area:hover{border-color:#aaa;background:#f9f8f4}
+.photo-area.has-photo{border-color:#5DCAA5;background:#f0fdf9}
+.photo-placeholder{font-size:13px;color:#aaa;margin-top:8px}
+.photo-icon{font-size:32px;color:#ccc}
+.modal-actions{display:flex;justify-content:space-between;align-items:center;margin-top:8px}
+.modal-next{padding:10px 20px;background:#1a1a1a;color:#fff;border:none;border-radius:10px;font-size:13px;font-weight:500;cursor:pointer;transition:background .15s}
+.modal-next:hover{background:#333}
+.modal-next:disabled{background:#ddd;cursor:default}
+.modal-back{font-size:12px;color:#888;cursor:pointer;background:none;border:none}
+.modal-cancel{font-size:12px;color:#ccc;cursor:pointer;background:none;border:none}
+
+/* FEEDBACK */
+.feedback-screen{text-align:center;padding:12px 0}
+.feedback-icon{font-size:48px;margin-bottom:12px}
+.feedback-msg{font-size:15px;font-weight:500;margin-bottom:8px;line-height:1.5}
+.feedback-sub{font-size:13px;color:#888;margin-bottom:20px;line-height:1.6}
+.feedback-close{padding:10px 24px;background:#1a1a1a;color:#fff;border:none;border-radius:10px;font-size:13px;font-weight:500;cursor:pointer}
+
+/* WEEKLY VICTORY */
+.victory-screen{text-align:center;padding:8px 0 16px}
+.victory-title{font-size:20px;font-weight:500;margin-bottom:6px;letter-spacing:-.3px}
+.victory-sub{font-size:13px;color:#888;margin-bottom:16px;line-height:1.6}
+.victory-next-msg{font-size:14px;font-weight:500;color:#0f6e56;background:#f0fdf9;border:1px solid #5DCAA5;border-radius:12px;padding:12px 16px;margin-bottom:16px;line-height:1.6}
+.recap-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:16px}
+.recap-photo{border-radius:12px;overflow:hidden}
+.recap-photo img{width:100%;height:110px;object-fit:cover;display:block}
+.recap-photo-placeholder{width:100%;height:110px;background:#f0fdf9;display:flex;align-items:center;justify-content:center;font-size:11px;color:#aaa}
+.recap-label{font-size:11px;color:#888;padding:6px 8px;background:#f9f8f4;text-align:center}
+.recap-stats{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:20px}
+.recap-stat{background:#f9f8f4;border-radius:10px;padding:12px 10px;text-align:center}
+.recap-stat-val{font-size:20px;font-weight:500;margin-bottom:2px}
+.recap-stat-label{font-size:11px;color:#aaa}
+.sparkles{font-size:22px;letter-spacing:4px;margin:12px 0}
+.victory-close{padding:12px 28px;background:#1a1a1a;color:#fff;border:none;border-radius:12px;font-size:14px;font-weight:500;cursor:pointer;margin-top:4px}
+
+/* PROGRAM COMPLETE */
+.complete-screen{text-align:center;padding:8px 0 16px}
+.complete-trophy{font-size:64px;margin-bottom:16px}
+.complete-title{font-size:22px;font-weight:500;margin-bottom:8px;letter-spacing:-.3px}
+.complete-sub{font-size:14px;color:#666;margin-bottom:20px;line-height:1.7}
+.complete-stats{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:20px}
+.complete-stat{background:#f9f8f4;border-radius:12px;padding:14px 10px;text-align:center}
+.complete-stat-val{font-size:24px;font-weight:500;margin-bottom:2px}
+.complete-stat-label{font-size:11px;color:#aaa}
+.complete-close{padding:12px 28px;background:#1a1a1a;color:#fff;border:none;border-radius:12px;font-size:14px;font-weight:500;cursor:pointer}
+
+/* VESSELS ARCHIVE */
+.vessels-page-header{padding:24px 24px 16px;border-bottom:1px solid #e8e8e6}
+.vessels-page-header h2{font-size:20px;font-weight:500;margin-bottom:4px}
+.vessels-page-header p{font-size:13px;color:#888}
+.vessels-grid{padding:20px 24px;display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:14px}
+.vessel-archive-card{background:#f9f8f4;border:1px solid #eae9e4;border-radius:14px;padding:16px 12px;cursor:pointer;text-align:center;transition:border-color .15s,transform .1s}
+.vessel-archive-card:hover{border-color:#bbb;transform:translateY(-1px)}
+.vessel-archive-card.locked{opacity:.4;cursor:default;pointer-events:none}
+.vessel-archive-card.current-week{border-color:#1a1a1a;background:#fff}
+.archive-week{font-size:11px;color:#aaa;margin-bottom:8px}
+.archive-name{font-size:12px;font-weight:500;margin-top:8px;color:#555}
+.archive-pct{font-size:11px;color:#aaa;margin-top:2px}
+.review-header{margin-bottom:16px}
+.review-header h3{font-size:17px;font-weight:500;margin-bottom:4px}
+.review-header p{font-size:13px;color:#aaa}
+.loading-overlay{position:fixed;inset:0;background:rgba(255,255,255,.85);display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:200;gap:12px}
+.loading-spinner{width:28px;height:28px;border:2.5px solid #e0e0de;border-top-color:#1a1a1a;border-radius:50%;animation:spin .8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.loading-text{font-size:13px;color:#888}
+
+@media(max-width:480px){
+  .exercise-table th:nth-child(3),.exercise-table td:nth-child(3){display:none}
+  .vessel-wrap{flex-direction:column;align-items:flex-start}
 }
-  </style>
+</style>
 </head>
 <body>
 
-<!-- HOME -->
 <div id="home-page" class="page active">
   <div class="nav"><span class="nav-brand">Fitness Portal</span></div>
   <div class="home-header">
@@ -116,7 +220,6 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
   </div>
 </div>
 
-<!-- PETROS -->
 <div id="petros-page" class="page">
   <div class="nav">
     <span class="nav-back" onclick="showHome()">← Πίσω</span>
@@ -126,6 +229,13 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
     <div class="client-header-avatar avatar-p">ΠΚ</div>
     <div><h2>Πέτρος</h2><p>Εβδομάδες 1-2 · Τεχνική &amp; ανοχή ώμου</p></div>
   </div>
+  <div id="petros-vessel" class="vessel-section"><div style="font-size:13px;color:#aaa;padding:8px">Φόρτωση...</div></div>
+  <div class="checkin-btn-wrap">
+    <button class="checkin-btn-big" id="petros-checkin-btn" onclick="openCheckin('petros')" disabled>
+      <span class="btn-icon">✓</span> Ολοκλήρωσα την προπόνηση
+    </button>
+  </div>
+  <div style="height:20px"></div>
   <div class="safety-banner">
     <h3>Κανόνας πόνου — διάβασέ το πριν ξεκινήσεις</h3>
     <table class="pain-table">
@@ -151,14 +261,10 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
     <div class="section-title">Ζέσταμα — πριν από κάθε προπόνηση (8-10 λεπτά)</div>
     <div class="warmup-box">
       <ol class="warmup-list">
-        <li>Marching in place — 2 λεπτά</li>
-        <li>Cat-cow — 8-10 reps</li>
-        <li>Thoracic rotations — 8/πλευρά</li>
-        <li>Hip hinge drill — 10 reps</li>
-        <li>Bodyweight squat — 10 reps</li>
-        <li>Scapular retractions με λάστιχο ή χωρίς — 12 reps</li>
-        <li>Wall slides μέχρι ανώδυνο εύρος — 8 reps</li>
-        <li>External rotation isometric με πετσέτα — 2x15 sec/πλευρά</li>
+        <li>Marching in place — 2 λεπτά</li><li>Cat-cow — 8-10 reps</li>
+        <li>Thoracic rotations — 8/πλευρά</li><li>Hip hinge drill — 10 reps</li>
+        <li>Bodyweight squat — 10 reps</li><li>Scapular retractions με λάστιχο ή χωρίς — 12 reps</li>
+        <li>Wall slides μέχρι ανώδυνο εύρος — 8 reps</li><li>External rotation isometric με πετσέτα — 2x15 sec/πλευρά</li>
       </ol>
     </div>
   </div>
@@ -195,7 +301,6 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
   <div id="petros-workout-area" class="workout-area"></div>
 </div>
 
-<!-- MIRELA -->
 <div id="mirela-page" class="page">
   <div class="nav">
     <span class="nav-back" onclick="showHome()">← Πίσω</span>
@@ -205,6 +310,13 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
     <div class="client-header-avatar avatar-m">ΜΡ</div>
     <div><h2>Μιρέλα</h2><p>Εβδομάδες 1-2 · Βάση, ασφάλεια, έλεγχος</p></div>
   </div>
+  <div id="mirela-vessel" class="vessel-section"><div style="font-size:13px;color:#aaa;padding:8px">Φόρτωση...</div></div>
+  <div class="checkin-btn-wrap">
+    <button class="checkin-btn-big" id="mirela-checkin-btn" onclick="openCheckin('mirela')" disabled>
+      <span class="btn-icon">✓</span> Ολοκλήρωσα την προπόνηση
+    </button>
+  </div>
+  <div style="height:20px"></div>
   <div class="safety-banner">
     <h3>Κανόνας πόνου — διάβασέ το πριν ξεκινήσεις</h3>
     <table class="pain-table">
@@ -219,10 +331,8 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
   <div class="forbidden-box">
     <h3>Απαγορευμένες ασκήσεις αυτή την περίοδο</h3>
     <ul class="forbidden-list">
-      <li>Overhead πιέσεις</li>
-      <li>Πλάγιες / μπροστινές άρσεις πάνω από 70-80 μοίρες</li>
-      <li>Burpees &amp; Dips</li>
-      <li>Κανονικά push-ups στο πάτωμα</li>
+      <li>Overhead πιέσεις</li><li>Πλάγιες / μπροστινές άρσεις πάνω από 70-80 μοίρες</li>
+      <li>Burpees &amp; Dips</li><li>Κανονικά push-ups στο πάτωμα</li>
       <li>Απότομες κινήσεις / άλματα με συμμετοχή χεριών</li>
       <li>Ασκήσεις κλειστής αλυσίδας αν υπάρχει φόβος ή πόνος</li>
     </ul>
@@ -231,14 +341,10 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
     <div class="section-title">Ζέσταμα — πριν από κάθε προπόνηση (8-12 λεπτά)</div>
     <div class="warmup-box">
       <ol class="warmup-list">
-        <li>Ήπιο περπάτημα ή marching — 2 λεπτά</li>
-        <li>Pelvic tilts — 10 reps</li>
-        <li>Cat-cow — 8 reps</li>
-        <li>Thoracic rotation πλάγια — 8/πλευρά</li>
-        <li>Glute bridge — 10 reps</li>
-        <li>Sit-to-stand — 8 reps</li>
-        <li>Scapular setting — 2x8</li>
-        <li>External rotation isometric με πετσέτα — 2x15 sec/πλευρά</li>
+        <li>Ήπιο περπάτημα ή marching — 2 λεπτά</li><li>Pelvic tilts — 10 reps</li>
+        <li>Cat-cow — 8 reps</li><li>Thoracic rotation πλάγια — 8/πλευρά</li>
+        <li>Glute bridge — 10 reps</li><li>Sit-to-stand — 8 reps</li>
+        <li>Scapular setting — 2x8</li><li>External rotation isometric με πετσέτα — 2x15 sec/πλευρά</li>
         <li>Wall slide μέχρι 70-80 μοίρες μόνο — 6-8 reps, χωρίς πόνο</li>
       </ol>
     </div>
@@ -278,142 +384,371 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
   <div id="mirela-workout-area" class="workout-area"></div>
 </div>
 
+<div id="petros-vessels-page" class="page">
+  <div class="nav"><span class="nav-back" onclick="showClient('petros')">← Πίσω</span><span class="nav-brand">Τα Δοχεία Μου</span></div>
+  <div class="vessels-page-header"><h2>Τα Δοχεία Μου</h2><p>Πέτρος · 8 εβδομάδες προγράμματος</p></div>
+  <div id="petros-vessels-grid" class="vessels-grid"></div>
+</div>
+<div id="mirela-vessels-page" class="page">
+  <div class="nav"><span class="nav-back" onclick="showClient('mirela')">← Πίσω</span><span class="nav-brand">Τα Δοχεία Μου</span></div>
+  <div class="vessels-page-header"><h2>Τα Δοχεία Μου</h2><p>Μιρέλα · 8 εβδομάδες προγράμματος</p></div>
+  <div id="mirela-vessels-grid" class="vessels-grid"></div>
+</div>
+
+<div id="modal-root"></div>
+
 <script>
-const workouts = {
-  'p-day1': { title:'Ημέρα 1 — Lower body + core', circuit:false, exercises:[
-    {name:'Box squat ή chair squat', sets:'3 x 10-12', note:'RPE 6', video:''},
-    {name:'Glute bridge', sets:'3 x 12-15', note:'RPE 6', video:''},
-    {name:'Reverse lunge ή split squat μικρό εύρος', sets:'2-3 x 8/πόδι', note:'RPE 6', video:''},
-    {name:'Romanian deadlift με σακίδιο', sets:'3 x 10', note:'RPE 6', video:''},
-    {name:'Dead bug', sets:'3 x 8/πλευρά', note:'Αργά', video:''},
-    {name:'Side plank από γόνατα', sets:'2 x 20-30 sec', note:'Ελεγχόμενα', video:''},
-    {name:'Walking cooldown', sets:'5-8 λεπτά', note:'Ήπια', video:''},
-  ]},
-  'p-day2': { title:'Ημέρα 2 — Upper rehab + posture + zone 2', circuit:false, exercises:[
-    {name:'Band row', sets:'3 x 12-15', note:'Χωρίς πόνο', video:''},
-    {name:'Band pull-apart χαμηλά', sets:'2 x 12', note:'Όχι πάνω από ώμο', video:''},
-    {name:'Wall push-up σε ψηλό τοίχο', sets:'3 x 6-8', note:'Μόνο αν πόνος 0-2/10', video:''},
-    {name:'External rotation με λάστιχο', sets:'2-3 x 12/πλ.', note:'Αγκώνας κοντά στο σώμα', video:''},
-    {name:'Scapular setting', sets:'2 x 10', note:'"Κάτω και πίσω" απαλά', video:''},
-    {name:'Bird dog', sets:'3 x 8/πλευρά', note:'Σταθερή λεκάνη', video:''},
-    {name:'Zone 2 περπάτημα', sets:'15-20 λεπτά', note:'Να μπορεί να μιλάει', video:''},
-  ]},
-  'p-day3': {
-    title:'Ημέρα 3 — Full body conditioning',
-    circuit:true,
-    circuitNote:'3 γύροι · Διάλειμμα 60-90 sec ανά γύρο · RPE 6/10 — να τελειώνει με 2-4 επαναλήψεις "στον κουβά". Δεν κυνηγάμε εξάντληση.',
+var SUPA_URL='https://xffwsmvhjuzwnhliuvse.supabase.co';
+var SUPA_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhmZndzbXZoanV6d25obGl1dnNlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzk5MTMzODYsImV4cCI6MjA5NTQ4OTM4Nn0.xhvTbHb8VbZjaG5L9IKfKYEL8RLceLACIr-H0D2s9Ho';
+var SH={'Content-Type':'application/json','apikey':SUPA_KEY,'Authorization':'Bearer '+SUPA_KEY};
+var TOTAL_WEEKS=8, SPW=4;
+
+async function sbSelect(table,filters){
+  var r=await fetch(SUPA_URL+'/rest/v1/'+table+'?'+filters+'&order=created_at.asc',{headers:SH});
+  return r.ok?r.json():[];
+}
+async function sbInsert(table,body){
+  var r=await fetch(SUPA_URL+'/rest/v1/'+table,{method:'POST',headers:{...SH,'Prefer':'return=representation'},body:JSON.stringify(body)});
+  return r.ok?r.json():null;
+}
+async function sbUpload(path,file){
+  var r=await fetch(SUPA_URL+'/storage/v1/object/photos/'+path,{method:'POST',headers:{'apikey':SUPA_KEY,'Authorization':'Bearer '+SUPA_KEY,'Content-Type':file.type,'x-upsert':'true'},body:file});
+  return r.ok?SUPA_URL+'/storage/v1/object/public/photos/'+path:null;
+}
+
+var workouts={
+  'p-day1':{title:'Ημέρα 1 - Lower body + core',circuit:false,exercises:[
+    {name:'Box squat / chair squat',sets:'3x10-12',note:'RPE 6'},{name:'Glute bridge',sets:'3x12-15',note:'RPE 6'},
+    {name:'Reverse lunge / split squat',sets:'2-3x8/ποδι',note:'RPE 6'},{name:'Romanian deadlift με σακιδιο',sets:'3x10',note:'RPE 6'},
+    {name:'Dead bug',sets:'3x8/πλευρα',note:'Αργα'},{name:'Side plank απο γονατα',sets:'2x20-30sec',note:'Ελεγχομενα'},
+    {name:'Walking cooldown',sets:'5-8 λεπτα',note:'Ηπια'}]},
+  'p-day2':{title:'Ημέρα 2 - Upper rehab + posture + zone 2',circuit:false,exercises:[
+    {name:'Band row',sets:'3x12-15',note:'Χωρις πονο'},{name:'Band pull-apart χαμηλα',sets:'2x12',note:'Οχι πανω απο ωμο'},
+    {name:'Wall push-up σε ψηλο τοιχο',sets:'3x6-8',note:'Πονος 0-2/10 μονο'},{name:'External rotation με λαστιχο',sets:'2-3x12/πλ.',note:'Αγκωνας κοντα'},
+    {name:'Scapular setting',sets:'2x10',note:'Κατω και πισω απαλα'},{name:'Bird dog',sets:'3x8/πλευρα',note:'Σταθερη λεκανη'},
+    {name:'Zone 2 περπατημα',sets:'15-20 λεπτα',note:'Να μπορει να μιλαει'}]},
+  'p-day3':{title:'Ημέρα 3 - Full body conditioning',circuit:true,circuitNote:'3 γυροι - Διαλειμμα 60-90sec - RPE 6/10',exercises:[
+    {name:'Squat to chair',sets:'12reps',note:'Ελεγχος κατεβασματος'},{name:'Step-ups χαμηλο σκαλι',sets:'10/ποδι',note:'Πιεση απο φτερνα'},
+    {name:'Band row',sets:'12reps',note:'Αγκωνες κοντα'},{name:'Glute bridge march',sets:'8/ποδι',note:'Λεκανη σταθερη'},
+    {name:'Marching high knees',sets:'40sec',note:'Ρυθμος μετριος'},{name:'Dead bug',sets:'8/πλευρα',note:'Μεση κολλημενη'}]},
+  'p-day4':{title:'Ημέρα 4 - Lower/glutes + intervals',circuit:false,extra:'Intervals μετα: 6x 30sec γρηγορο / 60sec χαλαρο περπατημα.',exercises:[
+    {name:'Tempo squat 3sec κατω',sets:'3x8-10',note:'Αργο κατεβασμα'},{name:'Hip thrust σε καναπε',sets:'3x10-12',note:'Πιεση απο φτερνες'},
+    {name:'Lateral walk με λαστιχο',sets:'3x10/πλευρα',note:'Μικρα βηματα'},{name:'Calf raises',sets:'3x15-20',note:'Πληρης ελεγχος'},
+    {name:'Pallof press με λαστιχο',sets:'3x10/πλευρα',note:'Κορμος δεν στριβει'},{name:'Wall sit',sets:'3x20-30sec',note:'Γονατα ~90 μοιρες'}]},
+  'm-day1':{title:'Ημέρα 1 - Lower body + core',circuit:false,exercises:[
+    {name:'Sit-to-stand απο καρεκλα',sets:'3x8-10',note:'Αργο κατεβασμα'},{name:'Glute bridge',sets:'3x12',note:'Παυση 1sec πανω'},
+    {name:'Step-up χαμηλο',sets:'2x8/ποδι',note:'Χαμηλο υψος'},{name:'Supported split squat',sets:'2x6-8/ποδι',note:'Κρατιεται για ισορροπια'},
+    {name:'Dead bug heel taps',sets:'3x6/πλευρα',note:'Μεση σταθερη'},{name:'Side plank απο γονατα',sets:'2x10-20sec',note:'Ανωδυνο'},
+    {name:'Breathing reset',sets:'2 λεπτα',note:'Ρινικη αναπνοη'}]},
+  'm-day2':{title:'Ημέρα 2 - Shoulder-safe upper + posture',circuit:false,exercises:[
+    {name:'Band row (στηριξη πλατης)',sets:'3x12',note:'Χωρις πονο στη μεση'},{name:'Wall push-up',sets:'2-3x8-12',note:'Μονο ανετο ευρος'},
+    {name:'External rotation με λαστιχο',sets:'2x10-12',note:'Πολυ ηπια'},{name:'Isometric shoulder flexion',sets:'2x10sec',note:'Κατω απο 90 μοιρες'},
+    {name:'Isometric abduction',sets:'2x10sec',note:'Κατω απο 60-70 μοιρες'},{name:'Pallof press',sets:'2-3x8/πλ.',note:'Σταθερη λεκανη'},
+    {name:'Περπατημα',sets:'10-15 λεπτα',note:'Ηπια'}]},
+  'm-day3':{title:'Ημέρα 3 - Low-impact full body',circuit:true,circuitNote:'3 γυροι - RPE 5-6/10 - Χαλαρο προς μετριο',
+    ozempicNote:'Λογω Ozempic: αν εχει ναυτια, 2 γυροι μονο και 10-15 λεπτα χαλαρο περπατημα.',
+    backNote:'Για τη μεση: αν εμφανιστει ενοχληση, μικροτερο ευρος και ενεργοποιηση κορμου.',
     exercises:[
-      {name:'Squat to chair', sets:'12 reps', note:'Έλεγχος στο κατέβασμα, γόνατα στην ίδια κατεύθυνση με τα δάχτυλα. Να μη "πέφτει" στην καρέκλα.', video:''},
-      {name:'Step-ups σε χαμηλό σκαλί', sets:'10/πόδι', note:'Πίεση από τη φτέρνα του ποδιού που ανεβαίνει. Κορμός όρθιος, χωρίς σπρώξιμο από το πίσω πόδι.', video:''},
-      {name:'Band row', sets:'12 reps', note:'Τράβηγμα με αγκώνες κοντά στο σώμα. Στο τέλος ενώνουν απαλά οι ωμοπλάτες, χωρίς να σηκώνει ώμους.', video:''},
-      {name:'Glute bridge march', sets:'8/πόδι', note:'Η λεκάνη μένει σταθερή. Δεν αφήνει τη μέση να κάνει υπερέκταση. Αν χαλάει η τεχνική, κάνει απλό glute bridge.', video:''},
-      {name:'Marching high knees', sets:'40 sec', note:'Ρυθμός μέτριος, όχι sprint. Στόχος να ανεβάσει παλμούς χωρίς να χάνει αναπνοή τελείως.', video:''},
-      {name:'Dead bug', sets:'8/πλευρά', note:'Μέση κολλημένη στο πάτωμα. Αργή εκτέλεση, εκπνοή όταν τεντώνει πόδι/χέρι.', video:''},
-    ]
-  },
-  'p-day4': {
-    title:'Ημέρα 4 — Lower/glutes + intervals',
-    circuit:false,
-    extra:'Intervals μετά: 6 γύροι x 30 sec γρήγορο περπάτημα / 60 sec χαλαρό. Στόχος της ημέρας: πόδια, γλουτοί, κορμός και καρδιοαναπνευστική βάση — δεν θέλουμε να βγει καμένος.',
-    exercises:[
-      {name:'Tempo squat 3 sec κάτω', sets:'3 x 8-10', note:'Κατέβασμα αργό σε 3 δευτερόλεπτα, μικρή παύση κάτω, ανέβασμα ελεγχόμενο. Δεν χρειάζεται μεγάλο βάθος αν χαλάει η τεχνική.', video:''},
-      {name:'Hip thrust σε καναπέ', sets:'3 x 10-12', note:'Πηγούνι ελαφρώς μέσα, πλευρά "κάτω", πίεση από φτέρνες. Να νιώθει κυρίως γλουτούς, όχι μέση.', video:''},
-      {name:'Lateral walk με λάστιχο', sets:'3 x 10/πλευρά', note:'Μικρά βήματα, γόνατα ελαφρώς λυγισμένα, λεκάνη σταθερή. Να μη γέρνει δεξιά-αριστερά.', video:''},
-      {name:'Calf raises', sets:'3 x 15-20', note:'Πλήρης έλεγχος πάνω-κάτω. Μικρή παύση στην κορυφή, όχι αναπήδηση.', video:''},
-      {name:'Pallof press με λάστιχο', sets:'3 x 10/πλευρά', note:'Ο κορμός δεν στρίβει. Πιέζει το λάστιχο μπροστά αργά και επιστρέφει ελεγχόμενα.', video:''},
-      {name:'Wall sit', sets:'3 x 20-30 sec', note:'Πλάτη στον τοίχο, γόνατα περίπου 90 μοίρες ή λίγο πιο ψηλά αν ζορίζεται. Όχι μέχρι πλήρη κατάρρευση.', video:''},
-    ]
-  },
-  'm-day1': { title:'Ημέρα 1 — Lower body + core', circuit:false, exercises:[
-    {name:'Sit-to-stand από καρέκλα', sets:'3 x 8-10', note:'Αργό κατέβασμα', video:''},
-    {name:'Glute bridge', sets:'3 x 12', note:'Παύση 1 sec πάνω', video:''},
-    {name:'Step-up χαμηλό', sets:'2 x 8/πόδι', note:'Χαμηλό ύψος', video:''},
-    {name:'Supported split squat', sets:'2 x 6-8/πόδι', note:'Κρατιέται για ισορροπία', video:''},
-    {name:'Dead bug heel taps', sets:'3 x 6/πλευρά', note:'Μέση σταθερή', video:''},
-    {name:'Side plank από γόνατα', sets:'2 x 10-20 sec', note:'Ανώδυνο', video:''},
-    {name:'Breathing reset', sets:'2 λεπτά', note:'Ρινική αναπνοή', video:''},
-  ]},
-  'm-day2': { title:'Ημέρα 2 — Shoulder-safe upper + posture', circuit:false, exercises:[
-    {name:'Band row (με στήριξη πλάτης)', sets:'3 x 12', note:'Χωρίς πόνο στη μέση', video:''},
-    {name:'Wall push-up', sets:'2-3 x 8-12', note:'Μόνο άνετο εύρος', video:''},
-    {name:'External rotation με λάστιχο', sets:'2 x 10-12', note:'Πολύ ήπια', video:''},
-    {name:'Isometric shoulder flexion στον τοίχο', sets:'2 x 10 sec', note:'Κάτω από 90 μοίρες', video:''},
-    {name:'Isometric abduction στον τοίχο', sets:'2 x 10 sec', note:'Κάτω από 60-70 μοίρες', video:''},
-    {name:'Pallof press', sets:'2-3 x 8/πλ.', note:'Σταθερή λεκάνη', video:''},
-    {name:'Περπάτημα', sets:'10-15 λεπτά', note:'Ήπια', video:''},
-  ]},
-  'm-day3': {
-    title:'Ημέρα 3 — Low-impact full body',
-    circuit:true,
-    circuitNote:'3 γύροι · RPE 5-6/10 · Χαλαρό προς μέτριο — χωρίς λαχάνιασμα που τη ζορίζει.',
-    ozempicNote:'Λόγω Ozempic: αν έχει ναυτία, ζάλη ή πολύ χαμηλή ενέργεια → 2 γύροι αντί για 3 και 10-15 λεπτά χαλαρό περπάτημα αντί για step jacks.',
-    backNote:'Για τη μέση: αν εμφανιστεί ενόχληση → μικρότερο εύρος, εκπνοή και ενεργοποίηση κορμού. Αν το bird dog ενοχλεί → dead bug heel taps 2-3 x 6/πλευρά.',
-    exercises:[
-      {name:'Sit-to-stand', sets:'10 reps', note:'Αργό κατέβασμα, ανέβασμα με πίεση από φτέρνες. Τα χέρια βοηθούν ελαφρά μόνο αν χρειάζεται, χωρίς να φορτίζεται ο ώμος.', video:''},
-      {name:'Glute bridge', sets:'12 reps', note:'Παύση 1 sec πάνω. Να νιώθει γλουτούς, όχι μέση. Αν νιώθει μέση, μειώνει εύρος και κάνει καλύτερο brace.', video:''},
-      {name:'Step jacks χωρίς έντονα χέρια', sets:'30 sec', note:'Τα χέρια μένουν χαμηλά ή στη μέση. Δεν ανεβαίνουν πάνω από 90 μοίρες. Ρυθμός άνετος, χωρίς αναπηδήσεις.', video:''},
-      {name:'Band row', sets:'12 reps', note:'Αγκώνες κοντά στο σώμα, ώμοι μακριά από αυτιά. Αν νιώσει ώμο, μικραίνει εύρος και μειώνει αντίσταση.', video:''},
-      {name:'Bird dog', sets:'6/πλευρά', note:'Αργή εκτέλεση. Η λεκάνη δεν ανοίγει στο πλάι. Αν ενοχλεί ο ώμος, κάνει μόνο πόδια χωρίς έκταση χεριού.', video:''},
-      {name:'Marching', sets:'40 sec', note:'Ήπια προς μέτρια ένταση. Στόχος να κινηθεί χωρίς κραδασμούς και χωρίς να φορτώσει τον ώμο.', video:''},
-    ]
-  },
-  'm-day4': { title:'Ημέρα 4 — Glutes + core + cardio', circuit:false, extra:'Περπάτημα 10-20 λεπτά ήπιο προς μέτριο', exercises:[
-    {name:'Glute bridge', sets:'4 x 12', note:'Παύση 1-2 sec πάνω', video:''},
-    {name:'Clamshell με λάστιχο ή χωρίς', sets:'3 x 12/πλευρά', note:'Αργά, χωρίς στρίψιμο λεκάνης', video:''},
-    {name:'Supported Romanian deadlift', sets:'3 x 10', note:'Ελαφρύ βάρος ή χέρια σε μηρούς', video:''},
-    {name:'Lateral walk με λάστιχο', sets:'2-3 x 8-10/πλ.', note:'Μικρά βήματα', video:''},
-    {name:'Dead bug', sets:'3 x 6-8/πλευρά', note:'Μέση σταθερή', video:''},
-    {name:'Wall sit', sets:'2-3 x 15-25 sec', note:'Όχι μέχρι εξάντληση', video:''},
-  ]}
+    {name:'Sit-to-stand',sets:'10reps',note:'Αργο κατεβασμα'},{name:'Glute bridge',sets:'12reps',note:'Παυση 1sec πανω'},
+    {name:'Step jacks χωρις εντονα χερια',sets:'30sec',note:'Χερια κατω απο 90 μοιρες'},{name:'Band row',sets:'12reps',note:'Αγκωνες κοντα'},
+    {name:'Bird dog',sets:'6/πλευρα',note:'Αργη εκτελεση'},{name:'Marching',sets:'40sec',note:'Ηπια προς μετρια'}]},
+  'm-day4':{title:'Ημέρα 4 - Glutes + core + cardio',circuit:false,extra:'Περπατημα 10-20 λεπτα ηπιο προς μετριο',exercises:[
+    {name:'Glute bridge',sets:'4x12',note:'Παυση 1-2sec πανω'},{name:'Clamshell με λαστιχο',sets:'3x12/πλευρα',note:'Αργα, χωρις στριψιμο'},
+    {name:'Supported Romanian deadlift',sets:'3x10',note:'Ελαφρυ βαρος'},{name:'Lateral walk με λαστιχο',sets:'2-3x8-10/πλ.',note:'Μικρα βηματα'},
+    {name:'Dead bug',sets:'3x6-8/πλευρα',note:'Μεση σταθερη'},{name:'Wall sit',sets:'2-3x15-25sec',note:'Οχι μεχρι εξαντληση'}]}
 };
 
-function showHome() {
-  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+var NEXT_WEEK_MSGS=[
+  'Η πρώτη εβδομάδα είναι πίσω σου. Η συνέπεια ξεκίνησε — πάμε στην επόμενη.',
+  'Δύο εβδομάδες κλειδωμένες. Το σώμα σου αρχίζει να θυμάται. Συνέχισε.',
+  'Τρεις εβδομάδες. Αυτό δεν είναι τύχη, είναι δουλειά. Πάμε.',
+  'Μισός δρόμος! Τέσσερις εβδομάδες πίσω σου. Άλλες τέσσερις μπροστά σου.',
+  'Πέντε εβδομάδες. Βλέπεις τη διαφορά; Συνέχισε να χτίζεις.',
+  'Έξι εβδομάδες συνέπειας. Έχεις μπει σε ρυθμό. Μια ανάσα ακόμα.',
+  'Εφτά εβδομάδες. Η τελευταία εβδομάδα του προγράμματος. Δώσε τα πάντα.',
+];
+
+function vesselSVG(pct,size,animated){
+  var W=size,H=size*1.3,bx=W*.15,by=H*.1,bw=W*.7,bh=H*.82;
+  var fillH=bh*pct,fy=by+bh-fillH;
+  var wA=animated?'<animateTransform attributeName="transform" type="translate" values="0,0;-'+Math.round(bw*.5)+',0;0,0" dur="3s" repeatCount="indefinite"/>':'';
+  var b1A=animated&&fillH>12?'<animate attributeName="cy" values="'+(fy+fillH*.7)+';'+(fy+fillH*.2)+';'+(fy+fillH*.7)+'" dur="2.5s" repeatCount="indefinite"/>':'';
+  var b2A=animated&&fillH>20?'<animate attributeName="cy" values="'+(fy+fillH*.5)+';'+(fy+fillH*.15)+';'+(fy+fillH*.5)+'" dur="3.5s" begin="1s" repeatCount="indefinite"/>':'';
+  var fill='';
+  if(pct>0){
+    fill='<g clip-path="url(#vc'+size+')">'
+      +'<rect x="'+bx+'" y="'+fy+'" width="'+bw+'" height="'+fillH+'" fill="#5DCAA5" opacity=".85"/>'
+      +'<g transform="translate('+bx+','+fy+')"><path d="M0,6 Q'+(bw*.125)+',0 '+(bw*.25)+',6 T'+(bw*.5)+',6 T'+(bw*.75)+',6 T'+bw+',6 T'+(bw*1.25)+',6 T'+(bw*1.5)+',6 V0 H0 Z" fill="#5DCAA5" opacity=".9">'+wA+'</path></g>'
+      +(fillH>12?'<circle cx="'+(bx+bw*.3)+'" cy="'+(fy+fillH*.6)+'" r="2.5" fill="#fff" opacity=".35">'+b1A+'</circle>':'')
+      +(fillH>20?'<circle cx="'+(bx+bw*.65)+'" cy="'+(fy+fillH*.4)+'" r="1.8" fill="#fff" opacity=".25">'+b2A+'</circle>':'')
+      +'</g>';
+  }
+  var ticks=[.25,.5,.75].map(function(t){return '<line x1="'+(bx+4)+'" y1="'+(by+bh*(1-t))+'" x2="'+(bx+10)+'" y2="'+(by+bh*(1-t))+'" stroke="#2c3e35" stroke-width=".8" opacity=".3"/>';}).join('');
+  return '<svg width="'+W+'" height="'+H+'" viewBox="0 0 '+W+' '+H+'" fill="none" xmlns="http://www.w3.org/2000/svg">'
+    +'<defs><clipPath id="vc'+size+'"><rect x="'+bx+'" y="'+by+'" width="'+bw+'" height="'+bh+'" rx="12"/></clipPath></defs>'
+    +'<rect x="'+bx+'" y="'+by+'" width="'+bw+'" height="'+bh+'" rx="12" fill="#f0f5f3" stroke="#2c3e35" stroke-width="1.5"/>'
+    +fill
+    +'<rect x="'+bx+'" y="'+by+'" width="'+bw+'" height="'+bh+'" rx="12" fill="none" stroke="#2c3e35" stroke-width="1.5"/>'
+    +ticks+'</svg>';
+}
+
+// figure out which week is active (first week with <SPW checkins)
+function getActiveWeek(allRows){
+  for(var w=0;w<TOTAL_WEEKS;w++){
+    var cnt=allRows.filter(function(r){return r.week_index===w;}).length;
+    if(cnt<SPW)return w;
+  }
+  return TOTAL_WEEKS; // all complete
+}
+
+async function renderVessel(client){
+  var el=document.getElementById(client+'-vessel');
+  var btn=document.getElementById(client+'-checkin-btn');
+  if(!el)return;
+  var allRows=await sbSelect('checkins','client=eq.'+client);
+  var activeWeek=getActiveWeek(allRows);
+  var programDone=activeWeek>=TOTAL_WEEKS;
+
+  if(programDone){
+    el.innerHTML='<div class="vessel-title">Πρόγραμμα 8 εβδομάδων</div>'
+      +'<div style="text-align:center;padding:16px 0">'
+      +'<div style="font-size:48px;margin-bottom:12px">🏆</div>'
+      +'<div style="font-size:17px;font-weight:500;margin-bottom:6px">Στόχος επιτεύχθηκε!</div>'
+      +'<div style="font-size:13px;color:#888;line-height:1.6">Ολοκλήρωσες και τις 8 εβδομάδες.<br>Αυτό είναι αποτέλεσμα αφοσίωσης.</div>'
+      +'</div>'
+      +'<span class="vessels-link" onclick="showVesselsPage(\''+client+'\')">Δες όλα τα δοχεία →</span>';
+    if(btn){btn.disabled=true;btn.innerHTML='<span class="btn-icon">🏆</span> Πρόγραμμα ολοκληρωμένο';}
+    return;
+  }
+
+  var weekRows=allRows.filter(function(r){return r.week_index===activeWeek;});
+  var done=weekRows.length, pct=done/SPW;
+  el.innerHTML='<div class="vessel-title">Δοχείο Εβδομάδας '+(activeWeek+1)+'</div>'
+    +'<div class="vessel-wrap">'
+    +'<div class="vessel-svg-container" onclick="showVesselsPage(\''+client+'\')" title="Δες όλα τα δοχεία">'+vesselSVG(pct,110,true)+'</div>'
+    +'<div class="vessel-info">'
+    +'<div><div class="vessel-stat-big">'+done+'/'+SPW+'</div>'
+    +'<div class="vessel-stat-sub">προπονήσεις εβδ. '+(activeWeek+1)+'</div>'
+    +'<div class="vessel-pct">'+Math.round(pct*100)+'% γεμάτο</div></div>'
+    +(done>0&&done<SPW?'<div class="vessel-msg">'+getMidMsg(done)+'</div>':'')
+    +'</div></div>'
+    +'<span class="vessels-link" onclick="showVesselsPage(\''+client+'\')">Τα Δοχεία Μου →</span>';
+
+  if(btn){
+    btn.disabled=false;
+    btn.innerHTML='<span class="btn-icon">✓</span> Ολοκλήρωσα την προπόνηση';
+  }
+}
+
+function getMidMsg(d){
+  var m=['Ξεκίνησες. Το δοχείο γέμισε λίγο. Συνέχισε.','Μισός δρόμος. Η συνέπεια χτίζεται προπόνηση με προπόνηση.','Τρεις στις τέσσερις. Μία ακόμα!'];
+  return m[Math.min(d-1,2)];
+}
+function getFeedback(d,c,e){
+  if(d>=8&&c==='all')return'Σκληρή προπόνηση, αλλά την ολοκλήρωσες. Αυτή είναι πραγματική συνέπεια.';
+  if(e<=3)return'Ακόμα και με χαμηλή ενέργεια, εμφανίστηκες. Αυτό είναι μεγάλο win.';
+  if(c==='part')return'Έκανες ένα μέρος — κι αυτό μετράει. Η συνέπεια δεν είναι τελειότητα.';
+  return'Κλείδωσες άλλη μία προπόνηση. Η πρόοδος χτίζεται βήμα-βήμα.';
+}
+
+var ci={client:'',step:1,difficulty:null,completion:null,energy:null,photo:null,photoURL:null};
+function openCheckin(client){
+  ci={client:client,step:1,difficulty:null,completion:null,energy:null,photo:null,photoURL:null};
+  renderModal();
+}
+function renderModal(){
+  var s=ci;
+  var dots=[1,2,3,4].map(function(i){return '<div class="step-dot'+(i===s.step?' active':i<s.step?' done':'')+'"></div>';}).join('');
+  var content='';
+  if(s.step===1){
+    var btns=Array.from({length:10},function(_,i){return '<button class="scale-btn'+(s.difficulty===i+1?' selected':'')+'" onclick="ciSet(\'difficulty\','+(i+1)+')">'+(i+1)+'</button>';}).join('');
+    content='<div class="modal"><h3>Πόσο δύσκολη ήταν;</h3><div class="modal-sub">1 = εύκολη &nbsp;·&nbsp; 10 = πολύ δύσκολη</div><div class="step-indicator">'+dots+'</div><div class="scale-btns">'+btns+'</div><div class="modal-actions"><button class="modal-cancel" onclick="closeModal()">Ακύρωση</button><button class="modal-next" onclick="ciNext()" '+(s.difficulty?'':'disabled')+'>Επόμενο →</button></div></div>';
+  }else if(s.step===2){
+    var o2=[['all','Ολοκλήρωσα όλο το πρόγραμμα ✓'],['most','Έκανα το μεγαλύτερο μέρος'],['part','Έκανα ένα μέρος μόνο']];
+    var b2=o2.map(function(o){return '<button class="comp-btn'+(s.completion===o[0]?' selected':'')+'" onclick="ciSet(\'completion\',\''+o[0]+'\')">'+o[1]+'</button>';}).join('');
+    content='<div class="modal"><h3>Πόσο ολοκλήρωσες;</h3><div class="modal-sub">Επίλεξε αυτό που σε περιγράφει</div><div class="step-indicator">'+dots+'</div><div class="completion-btns">'+b2+'</div><div class="modal-actions"><button class="modal-back" onclick="ciBack()">← Πίσω</button><button class="modal-next" onclick="ciNext()" '+(s.completion?'':'disabled')+'>Επόμενο →</button></div></div>';
+  }else if(s.step===3){
+    var b3=Array.from({length:10},function(_,i){return '<button class="scale-btn'+(s.energy===i+1?' selected':'')+'" onclick="ciSet(\'energy\','+(i+1)+')">'+(i+1)+'</button>';}).join('');
+    content='<div class="modal"><h3>Πόση ενέργεια έβαλες;</h3><div class="modal-sub">1 = πολύ χαμηλή &nbsp;·&nbsp; 10 = μέγιστη</div><div class="step-indicator">'+dots+'</div><div class="scale-btns">'+b3+'</div><div class="modal-actions"><button class="modal-back" onclick="ciBack()">← Πίσω</button><button class="modal-next" onclick="ciNext()" '+(s.energy?'':'disabled')+'>Επόμενο →</button></div></div>';
+  }else if(s.step===4){
+    var has=!!s.photoURL;
+    content='<div class="modal"><h3>Post-workout φωτογραφία 📷</h3><div class="modal-sub">Selfie, καθρέφτης, αστεία πόζα — ό,τι θες!</div><div class="step-indicator">'+dots+'</div>'
+      +'<div class="photo-area'+(has?' has-photo':'')+'" onclick="document.getElementById(\'ph-inp\').click()">'
+      +'<input type="file" accept="image/*" capture="environment" id="ph-inp" style="display:none" onchange="handlePhoto(event)"/>'
+      +(has?'<img src="'+s.photoURL+'" style="width:100%;max-height:160px;object-fit:cover;border-radius:10px"/>'
+        :'<div class="photo-icon">📷</div><div class="photo-placeholder">Πάτησε για φωτογραφία ή upload</div>')
+      +'</div>'
+      +(!has?'<div style="font-size:12px;color:#aaa;text-align:center;margin-bottom:8px">Χρειάζεται φωτογραφία για να κλειδώσει η προπόνηση.</div>':'')
+      +'<div class="modal-actions"><button class="modal-back" onclick="ciBack()">← Πίσω</button><button class="modal-next" onclick="ciFinish()" '+(has?'':'disabled')+'>Κλείδωμα 🔒</button></div></div>';
+  }
+  document.getElementById('modal-root').innerHTML='<div class="modal-backdrop" onclick="closeModal(event)">'+content+'</div>';
+}
+function handlePhoto(e){var f=e.target.files[0];if(!f)return;ci.photo=f;ci.photoURL=URL.createObjectURL(f);renderModal();}
+function ciSet(f,v){ci[f]=v;renderModal();}
+function ciBack(){if(ci.step>1){ci.step--;renderModal();}}
+function ciNext(){ci.step++;renderModal();}
+
+async function ciFinish(){
+  showLoading('Αποθήκευση...');
+  var photoURL=null;
+  if(ci.photo){
+    var ext=ci.photo.name.split('.').pop();
+    photoURL=await sbUpload(ci.client+'/w'+(Date.now())+'.'+ext,ci.photo);
+  }
+  var allRows=await sbSelect('checkins','client=eq.'+ci.client);
+  var activeWeek=getActiveWeek(allRows);
+  await sbInsert('checkins',{client:ci.client,week_index:activeWeek,difficulty:ci.difficulty,completion:ci.completion,energy:ci.energy,photo_url:photoURL});
+  allRows=await sbSelect('checkins','client=eq.'+ci.client);
+  var weekRows=allRows.filter(function(r){return r.week_index===activeWeek;});
+  hideLoading();
+  renderVessel(ci.client);
+
+  if(weekRows.length>=SPW){
+    var programDone=activeWeek>=TOTAL_WEEKS-1;
+    if(programDone){showProgramComplete(ci.client,allRows);}
+    else{showVictory(ci.client,weekRows,activeWeek);}
+  }else{
+    showFeedback(getFeedback(ci.difficulty,ci.completion,ci.energy));
+  }
+}
+
+function showFeedback(msg){
+  document.getElementById('modal-root').innerHTML='<div class="modal-backdrop"><div class="modal"><div class="feedback-screen">'
+    +'<div class="feedback-icon">💧</div>'
+    +'<div class="feedback-msg">'+msg+'</div>'
+    +'<div class="feedback-sub">Το δοχείο σου μόλις γέμισε λίγο ακόμα.</div>'
+    +'<button class="feedback-close" onclick="closeModal()">Τέλεια ✓</button>'
+    +'</div></div></div>';
+}
+
+function showVictory(client,rows,weekIndex){
+  var avgD=Math.round(rows.reduce(function(a,c){return a+c.difficulty;},0)/rows.length);
+  var avgE=Math.round(rows.reduce(function(a,c){return a+c.energy;},0)/rows.length);
+  var photos=rows.map(function(c,i){
+    return c.photo_url
+      ?'<div class="recap-photo"><img src="'+c.photo_url+'"/><div class="recap-label">Προπόνηση '+(i+1)+' · '+Math.round((i+1)/SPW*100)+'%</div></div>'
+      :'<div class="recap-photo"><div class="recap-photo-placeholder">Προπόνηση '+(i+1)+'</div><div class="recap-label">'+Math.round((i+1)/SPW*100)+'%</div></div>';
+  }).join('');
+  var nextMsg=NEXT_WEEK_MSGS[weekIndex]||'Συνέχισε να χτίζεις. Πάμε!';
+  document.getElementById('modal-root').innerHTML='<div class="modal-backdrop"><div class="modal"><div class="victory-screen">'
+    +'<div class="sparkles">✦ ✦ ✦</div>'
+    +'<div class="victory-title">Εβδομάδα '+(weekIndex+1)+' ολοκληρώθηκε!</div>'
+    +'<div class="victory-sub">Το δοχείο γέμισε. Αυτή η εβδομάδα κερδήθηκε.</div>'
+    +'<div class="victory-next-msg">'+nextMsg+'</div>'
+    +'<div class="recap-grid">'+photos+'</div>'
+    +'<div class="recap-stats">'
+    +'<div class="recap-stat"><div class="recap-stat-val">'+rows.length+'</div><div class="recap-stat-label">Προπονήσεις</div></div>'
+    +'<div class="recap-stat"><div class="recap-stat-val">'+avgD+'/10</div><div class="recap-stat-label">Μέση δυσκολία</div></div>'
+    +'<div class="recap-stat"><div class="recap-stat-val">'+avgE+'/10</div><div class="recap-stat-label">Μέση ενέργεια</div></div>'
+    +'</div>'
+    +'<button class="victory-close" onclick="closeModal()">Πάμε στην εβδομάδα '+(weekIndex+2)+' →</button>'
+    +'</div></div></div>';
+}
+
+function showProgramComplete(client,allRows){
+  var totalSessions=allRows.length;
+  var avgD=Math.round(allRows.reduce(function(a,c){return a+c.difficulty;},0)/totalSessions);
+  var avgE=Math.round(allRows.reduce(function(a,c){return a+c.energy;},0)/totalSessions);
+  document.getElementById('modal-root').innerHTML='<div class="modal-backdrop"><div class="modal"><div class="complete-screen">'
+    +'<div class="complete-trophy">🏆</div>'
+    +'<div class="complete-title">Στόχος 8 εβδομάδων επιτεύχθηκε!</div>'
+    +'<div class="complete-sub">Ολοκλήρωσες το πρόγραμμα των 2 μηνών.<br>Κάθε προπόνηση, κάθε φωτογραφία, κάθε δοχείο που γέμισε<br>— αυτό είναι <strong>πραγματική συνέπεια</strong>.</div>'
+    +'<div class="complete-stats">'
+    +'<div class="complete-stat"><div class="complete-stat-val">'+totalSessions+'</div><div class="complete-stat-label">Συνολικές προπονήσεις</div></div>'
+    +'<div class="complete-stat"><div class="complete-stat-val">'+TOTAL_WEEKS+'</div><div class="complete-stat-label">Εβδομάδες</div></div>'
+    +'<div class="complete-stat"><div class="complete-stat-val">'+avgD+'/10</div><div class="complete-stat-label">Μέση δυσκολία</div></div>'
+    +'<div class="complete-stat"><div class="complete-stat-val">'+avgE+'/10</div><div class="complete-stat-label">Μέση ενέργεια</div></div>'
+    +'</div>'
+    +'<button class="complete-close" onclick="closeModal();showVesselsPage(\''+client+'\')">Δες όλα τα δοχεία σου →</button>'
+    +'</div></div></div>';
+}
+
+function closeModal(e){if(e&&e.target!==e.currentTarget)return;document.getElementById('modal-root').innerHTML='';}
+
+async function showVesselsPage(client){
+  document.querySelectorAll('.page').forEach(function(p){p.classList.remove('active');});
+  document.getElementById(client+'-vessels-page').classList.add('active');
+  window.scrollTo(0,0);
+  var allRows=await sbSelect('checkins','client=eq.'+client);
+  var activeWeek=getActiveWeek(allRows);
+  var grid=document.getElementById(client+'-vessels-grid');
+  var html='';
+  for(var w=0;w<TOTAL_WEEKS;w++){
+    var wRows=allRows.filter(function(r){return r.week_index===w;});
+    var done=wRows.length,pct=done/SPW;
+    var isCurrent=w===activeWeek&&activeWeek<TOTAL_WEEKS;
+    var isLocked=w>activeWeek;
+    var isClickable=!isLocked&&done>0&&!isCurrent;
+    var cls='vessel-archive-card'+(isLocked?' locked':isCurrent?' current-week':'');
+    var wData=JSON.stringify(wRows).replace(/"/g,'&quot;');
+    html+='<div class="'+cls+'" '+(isClickable?'onclick="showWeekReview(\''+client+'\','+w+',this)" data-rows="'+wData+'"':'')+'>'+
+      '<div class="archive-week">Εβδομάδα '+(w+1)+'</div>'+
+      vesselSVG(pct,80,isCurrent&&done>0&&done<SPW)+
+      '<div class="archive-name">'+(isLocked?'🔒 Κλειδωμένο':isCurrent?'● Τρέχουσα':done===0?'Δεν ξεκίνησε':done>=SPW?'✓ Ολοκληρώθηκε':'Μερική')+'</div>'+
+      '<div class="archive-pct">'+Math.round(pct*100)+'%</div>'+
+      '</div>';
+  }
+  grid.innerHTML=html;
+}
+
+function showWeekReview(client,w,el){
+  var rows=JSON.parse(el.getAttribute('data-rows').replace(/&quot;/g,'"'));
+  if(!rows||!rows.length)return;
+  var done=rows.length,pct=Math.round(done/SPW*100);
+  var avgD=Math.round(rows.reduce(function(a,c){return a+c.difficulty;},0)/done);
+  var avgE=Math.round(rows.reduce(function(a,c){return a+c.energy;},0)/done);
+  var photos=rows.map(function(c,i){
+    return c.photo_url
+      ?'<div class="recap-photo"><img src="'+c.photo_url+'"/><div class="recap-label">Προπόνηση '+(i+1)+'</div></div>'
+      :'<div class="recap-photo"><div class="recap-photo-placeholder">Προπόνηση '+(i+1)+'</div><div class="recap-label">—</div></div>';
+  }).join('');
+  var msg=pct>=100?'Εβδομάδα ολοκληρώθηκε πλήρως. Σπουδαία δουλειά.':'Η προσπάθεια καταγράφηκε. Κάθε εβδομάδα μετράει.';
+  document.getElementById('modal-root').innerHTML='<div class="modal-backdrop" onclick="closeModal(event)"><div class="modal">'
+    +'<div class="review-header"><h3>Εβδομάδα '+(w+1)+' — Ανασκόπηση</h3><p>'+pct+'% · '+done+'/'+SPW+' προπονήσεις</p></div>'
+    +'<div class="recap-grid">'+photos+'</div>'
+    +'<div class="recap-stats">'
+    +'<div class="recap-stat"><div class="recap-stat-val">'+done+'</div><div class="recap-stat-label">Προπονήσεις</div></div>'
+    +'<div class="recap-stat"><div class="recap-stat-val">'+avgD+'/10</div><div class="recap-stat-label">Μέση δυσκολία</div></div>'
+    +'<div class="recap-stat"><div class="recap-stat-val">'+avgE+'/10</div><div class="recap-stat-label">Μέση ενέργεια</div></div>'
+    +'</div>'
+    +'<div style="font-size:13px;color:#666;text-align:center;margin:12px 0 16px;font-style:italic">'+msg+'</div>'
+    +'<div style="text-align:center"><button class="feedback-close" onclick="closeModal()">Κλείσιμο</button></div>'
+    +'</div></div>';
+}
+
+function showLoading(msg){
+  document.getElementById('modal-root').innerHTML='<div class="loading-overlay"><div class="loading-spinner"></div><div class="loading-text">'+msg+'</div></div>';
+}
+function hideLoading(){document.getElementById('modal-root').innerHTML='';}
+
+function showHome(){
+  document.querySelectorAll('.page').forEach(function(p){p.classList.remove('active');});
   document.getElementById('home-page').classList.add('active');
   window.scrollTo(0,0);
 }
-function showClient(name) {
-  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+function showClient(name){
+  document.querySelectorAll('.page').forEach(function(p){p.classList.remove('active');});
   document.getElementById(name+'-page').classList.add('active');
-  document.getElementById(name+'-workout-area').innerHTML = '';
+  document.getElementById(name+'-workout-area').innerHTML='';
+  renderVessel(name);
   window.scrollTo(0,0);
 }
-function showWorkout(key, clientId, card) {
-  const w = workouts[key];
-  if (!w) return;
-  document.getElementById(clientId+'-page').querySelectorAll('.day-card').forEach(c => c.classList.remove('active-day'));
+function showWorkout(key,clientId,card){
+  var w=workouts[key];if(!w)return;
+  document.getElementById(clientId+'-page').querySelectorAll('.day-card').forEach(function(c){c.classList.remove('active-day');});
   card.classList.add('active-day');
-  const rows = w.exercises.map(ex => {
-    const videoHtml = ex.video
-      ? `<a href="${ex.video}" target="_blank" class="video-btn has-video">Video</a>`
-      : `<span class="video-btn">+ video</span>`;
-    return `<tr><td>${ex.name}</td><td style="white-space:nowrap">${ex.sets}</td><td class="note-cell">${ex.note}</td><td>${videoHtml}</td></tr>`;
-  }).join('');
-  const circuitHtml = w.circuit ? `<div style="padding:10px 16px 4px"><span class="circuit-note">${w.circuitNote}</span></div>` : '';
-  const extraHtml = w.extra ? `<div class="extra-note">${w.extra}</div>` : '';
-  const ozempicHtml = w.ozempicNote ? `<div class="alert-note orange">⚠️ ${w.ozempicNote}</div>` : '';
-  const backHtml = w.backNote ? `<div class="alert-note red">⚠️ ${w.backNote}</div>` : '';
-  const area = document.getElementById(clientId+'-workout-area');
-  area.innerHTML = `
-    <div class="workout-panel">
-      <div class="workout-panel-header">
-        <h3>${w.title}</h3>
-        <button class="close-btn" onclick="closeWorkout('${clientId}')">Κλείσιμο</button>
-      </div>
-      ${circuitHtml}
-      <div style="overflow-x:auto">
-        <table class="exercise-table">
-          <thead><tr><th style="width:35%">Άσκηση</th><th style="width:18%">Σετ</th><th style="width:32%">Σημείωση</th><th style="width:15%">Video</th></tr></thead>
-          <tbody>${rows}</tbody>
-        </table>
-      </div>
-      ${extraHtml}${ozempicHtml}${backHtml}
-    </div>`;
-  area.scrollIntoView({behavior:'smooth', block:'nearest'});
+  var rows=w.exercises.map(function(ex){return '<tr><td>'+ex.name+'</td><td style="white-space:nowrap">'+ex.sets+'</td><td class="note-cell">'+ex.note+'</td><td><span class="video-btn">+ video</span></td></tr>';}).join('');
+  var cH=w.circuit?'<div style="padding:10px 16px 4px"><span class="circuit-note">'+w.circuitNote+'</span></div>':'';
+  var eH=w.extra?'<div class="extra-note">'+w.extra+'</div>':'';
+  var oH=w.ozempicNote?'<div class="alert-note orange">'+w.ozempicNote+'</div>':'';
+  var bH=w.backNote?'<div class="alert-note red">'+w.backNote+'</div>':'';
+  var area=document.getElementById(clientId+'-workout-area');
+  area.innerHTML='<div class="workout-panel"><div class="workout-panel-header"><h3>'+w.title+'</h3><button class="close-btn" onclick="closeWorkout(\''+clientId+'\')">Κλείσιμο</button></div>'+cH+'<div style="overflow-x:auto"><table class="exercise-table"><thead><tr><th style="width:35%">Άσκηση</th><th style="width:18%">Σετ</th><th style="width:32%">Σημείωση</th><th style="width:15%">Video</th></tr></thead><tbody>'+rows+'</tbody></table></div>'+eH+oH+bH+'</div>';
+  area.scrollIntoView({behavior:'smooth',block:'nearest'});
 }
-function closeWorkout(clientId) {
-  document.getElementById(clientId+'-workout-area').innerHTML = '';
-  document.getElementById(clientId+'-page').querySelectorAll('.day-card').forEach(c => c.classList.remove('active-day'));
+function closeWorkout(clientId){
+  document.getElementById(clientId+'-workout-area').innerHTML='';
+  document.getElementById(clientId+'-page').querySelectorAll('.day-card').forEach(function(c){c.classList.remove('active-day');});
 }
 </script>
 </body>
