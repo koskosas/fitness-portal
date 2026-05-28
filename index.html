@@ -726,7 +726,7 @@ function showWorkout(key,clientId,card){
   var oH=w.ozempicNote?'<div class="alert-note orange">'+w.ozempicNote+'</div>':'';
   var bH=w.backNote?'<div class="alert-note red">'+w.backNote+'</div>':'';
   var area=document.getElementById(clientId+'-workout-area');
-  area.innerHTML='<div class="workout-panel"><div class="workout-panel-header"><h3>'+w.title+'</h3><button class="close-btn" onclick="closeWorkout(''+clientId+'')">Κλείσιμο</button></div>'+cH+'<div style="overflow-x:auto"><table class="exercise-table"><thead><tr><th style="width:30%">Άσκηση</th><th style="width:15%">Σετ</th><th style="width:40%">Σημείωση</th><th style="width:15%">Video</th></tr></thead><tbody>'+rows+'</tbody></table></div>'+eH+oH+bH+'</div>';
+  area.innerHTML='<div class="workout-panel"><div class="workout-panel-header"><h3>'+w.title+'</h3><button class="close-btn" onclick="closeWorkout(\''+clientId+'\')">Κλείσιμο</button></div>'+cH+'<div style="overflow-x:auto"><table class="exercise-table"><thead><tr><th style="width:30%">Άσκηση</th><th style="width:15%">Σετ</th><th style="width:40%">Σημείωση</th><th style="width:15%">Video</th></tr></thead><tbody>'+rows+'</tbody></table></div>'+eH+oH+bH+'</div>';
   area.scrollIntoView({behavior:'smooth',block:'nearest'});
 }
 function closeWorkout(clientId){
