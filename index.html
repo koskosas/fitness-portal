@@ -357,10 +357,29 @@ var SURL='https://xffwsmvhjuzwnhliuvse.supabase.co';
 var SKEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhmZndzbXZoanV6d25obGl1dnNlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzk5MTMzODYsImV4cCI6MjA5NTQ4OTM4Nn0.xhvTbHb8VbZjaG5L9IKfKYEL8RLceLACIr-H0D2s9Ho';
 var SH={'Content-Type':'application/json','apikey':SKEY,'Authorization':'Bearer '+SKEY};
 var TW=8,SPW=4;
+/* ---- PROGRAM START DATE — change this when starting a new client ---- */
+var PROGRAM_START=new Date('2026-06-01T00:00:00').getTime(); // Monday 1 June 2026
 
 async function sbSel(t,f){var r=await fetch(SURL+'/rest/v1/'+t+'?'+f+'&order=created_at.asc',{headers:SH});return r.ok?r.json():[];}
 async function sbIns(t,b){var r=await fetch(SURL+'/rest/v1/'+t,{method:'POST',headers:Object.assign({},SH,{'Prefer':'return=representation'}),body:JSON.stringify(b)});return r.ok?r.json():null;}
-async function sbUp(path,file){var r=await fetch(SURL+'/storage/v1/object/photos/'+path,{method:'POST',headers:{'apikey':SKEY,'Authorization':'Bearer '+SKEY,'Content-Type':file.type,'x-upsert':'true'},body:file});return r.ok?SURL+'/storage/v1/object/public/photos/'+path:null;}
+function compressPhoto(file,cb){
+  var MAX=800,Q=0.72;
+  var reader=new FileReader();
+  reader.onload=function(e){
+    var img=new Image();
+    img.onload=function(){
+      var w=img.width,h=img.height;
+      if(w>MAX){h=Math.round(h*MAX/w);w=MAX;}
+      if(h>MAX){w=Math.round(w*MAX/h);h=MAX;}
+      var c=document.createElement('canvas');
+      c.width=w;c.height=h;
+      c.getContext('2d').drawImage(img,0,0,w,h);
+      cb(c.toDataURL('image/jpeg',Q));
+    };
+    img.src=e.target.result;
+  };
+  reader.readAsDataURL(file);
+}
 
 var workouts={
   'p-day1':{title:'Ημέρα 1 - Lower body + core',circuit:false,exercises:[
@@ -544,9 +563,31 @@ function splashAndRise(client, uid, oldPct, newPct, drop, afterCb){
 }
 
 /* ---- RENDER VESSEL (static, no scroll/focus) ---- */
+/* Calendar week helpers — anchored to PROGRAM_START (1 June 2026) */
+var WEEK_MS=7*24*60*60*1000;
+var DAY_MS=24*60*60*1000;
+
 function getActiveWeek(all){
-  for(var w=0;w<TW;w++){ if(all.filter(function(r){return r.week_index===w;}).length<SPW) return w; }
-  return TW;
+  /* Current calendar week index (0-based) based on fixed program start */
+  var now=Date.now();
+  if(now<PROGRAM_START) return 0; // program hasn't started yet
+  var w=Math.floor((now-PROGRAM_START)/WEEK_MS);
+  return Math.min(w,TW-1);
+}
+function getWeekInfo(w){
+  /* Returns weekStart (Mon 00:00), weekEnd (Sun 23:59:59), daysLeft, expired */
+  var weekStart=PROGRAM_START+w*WEEK_MS;
+  var weekEnd=weekStart+WEEK_MS; // next Monday 00:00
+  var now=Date.now();
+  var daysLeft=Math.max(0,Math.ceil((weekEnd-now)/DAY_MS));
+  return {weekStart:weekStart,weekEnd:weekEnd,daysLeft:daysLeft,expired:now>=weekEnd};
+}
+function getWeekDayRange(w){
+  /* Human-readable range e.g. "2 Ιουν – 8 Ιουν" */
+  var MONTHS=['Ιαν','Φεβ','Μαρ','Απρ','Μαΐ','Ιουν','Ιουλ','Αυγ','Σεπ','Οκτ','Νοε','Δεκ'];
+  var ws=new Date(PROGRAM_START+w*WEEK_MS);
+  var we=new Date(PROGRAM_START+(w+1)*WEEK_MS-1);
+  return ws.getDate()+' '+MONTHS[ws.getMonth()]+' – '+we.getDate()+' '+MONTHS[we.getMonth()];
 }
 
 async function renderVessel(client){
@@ -571,21 +612,40 @@ async function renderVessel(client){
     return;
   }
 
-  var midMsg=done>0&&done<SPW?getMidMsg(done):'';
-  el.innerHTML='<div class="vessel-title">&#916;&#959;&#967;&#949;&#943;&#959; &#917;&#946;&#948;&#959;&#956;&#940;&#948;&#945;&#962; '+(aw+1)+'</div>'
+  var wi=getWeekInfo(aw);
+  var daysTag='';
+  if(done>0){
+    var dl=wi.daysLeft;
+    var dcolor=dl<=2?'#dc2626':'#888';
+    daysTag='<div style="font-size:12px;color:'+dcolor+';margin-top:4px">'
+      +(wi.expired?'&#128337; Η εβδομάδα έληξε'
+       :dl===0?'&#9201; Τελευταία μέρα!'
+       :dl===1?'&#9201; Απομένει 1 μέρα'
+       :'&#128197; Απομένουν '+dl+' μέρες')
+      +'</div>';
+  }
+  var midMsg=done>0&&done<SPW&&!wi.expired?getMidMsg(done):'';
+  el.innerHTML='<div class="vessel-title">&#916;&#959;&#967;&#949;&#943;&#959; &#917;&#946;&#948;&#959;&#956;&#940;&#948;&#945;&#962; '+(aw+1)+' &nbsp;&#183;&nbsp; '+getWeekDayRange(aw)+'</div>'
     +'<div class="vessel-wrap">'
-    +'<div style="flex-shrink:0;cursor:pointer" onclick="showVesselsPage(\''+client+'\')" title="Δες όλα τα δοχεία">'+vesselSVG(pct,110,uid)+'</div>'
+    +'<div style="flex-shrink:0;cursor:pointer" onclick="showVesselsPage(\''+client+'\'" title="Δες όλα τα δοχεία">'+vesselSVG(pct,110,uid)+'</div>'
     +'<div class="vessel-info">'
     +'<div><div class="vessel-stat-big">'+done+'/'+SPW+'</div>'
     +'<div class="vessel-stat-sub">&#960;&#961;&#959;&#960;&#959;&#957;&#942;&#963;&#949;&#953;&#962; &#949;&#946;&#948;. '+(aw+1)+'</div>'
-    +'<div class="vessel-pct">'+Math.round(pct*100)+'% &#947;&#949;&#956;&#940;&#964;&#959;</div></div>'
+    +'<div class="vessel-pct">'+Math.round(pct*100)+'% &#947;&#949;&#956;&#940;&#964;&#959;</div>'
+    +daysTag+'</div>'
     +(midMsg?'<div class="vessel-msg">'+midMsg+'</div>':'')
     +'</div></div>'
     +'<span class="vessels-link" onclick="showVesselsPage(\''+client+'\')">&#932;&#945; &#916;&#959;&#967;&#949;&#943;&#945; &#924;&#959;&#965; &#8594;</span>';
 
+  var weekComplete=done>=SPW;
+  var notStarted=Date.now()<PROGRAM_START;
   if(btn){
-    btn.disabled=false;
-    btn.innerHTML='<span style="font-size:20px">&#10003;</span> &#927;&#955;&#959;&#954;&#955;&#942;&#961;&#969;&#963;&#945; &#964;&#951;&#957; &#960;&#961;&#959;&#960;&#972;&#957;&#951;&#963;&#951;';
+    btn.disabled=weekComplete||notStarted;
+    btn.innerHTML=weekComplete
+      ?'<span style="font-size:20px">&#128274;</span> &#917;&#946;&#948;&#959;&#956;&#940;&#948;&#945; &#954;&#955;&#949;&#953;&#948;&#974;&#952;&#951;&#954;&#949; — &#940;&#957;&#959;&#953;&#947;&#956;&#945; &#964;&#951; &#916;&#949;&#965;&#964;&#941;&#961;&#945;'
+      :notStarted
+        ?'<span style="font-size:20px">&#128197;</span> &#932;&#959; &#960;&#961;&#972;&#947;&#961;&#945;&#956;&#956;&#945; &#958;&#949;&#954;&#953;&#957;&#940;&#949;&#953; 1 &#921;&#959;&#965;&#957;&#943;&#959;&#965;'
+        :'<span style="font-size:20px">&#10003;</span> &#927;&#955;&#959;&#954;&#955;&#942;&#961;&#969;&#963;&#945; &#964;&#951;&#957; &#960;&#961;&#959;&#960;&#972;&#957;&#951;&#963;&#951;';
   }
 }
 
@@ -654,8 +714,9 @@ async function ciFinish(){
   showLoading('Αποθήκευση...');
   var photoURL=null;
   if(ci.photo){
-    var ext=ci.photo.name.split('.').pop();
-    photoURL=await sbUp(ci.client+'/w'+Date.now()+'.'+ext, ci.photo);
+    photoURL=await new Promise(function(resolve){
+      compressPhoto(ci.photo,function(b64){resolve(b64);});
+    });
   }
   var all=await sbSel('checkins','client=eq.'+ci.client);
   var aw=getActiveWeek(all);
