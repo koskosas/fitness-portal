@@ -538,7 +538,7 @@ async function renderVessel(client){
       +'<div style="font-size:17px;font-weight:500;margin-bottom:6px">Στόχος επιτεύχθηκε!</div>'
       +'<div style="font-size:13px;color:#888;line-height:1.6">Ολοκλήρωσες και τις 8 εβδομάδες.<br>Αυτό είναι αποτέλεσμα πραγματικής αφοσίωσης.</div>'
       +'</div>'
-      +'<span class="vessels-link" onclick="showVesselsPage(’'+client+'’)">Δες όλα τα δοχεία →</span>';
+      +'<span class="vessels-link" onclick="showVesselsPage(\''+client+'\')">Δες όλα τα δοχεία →</span>';
     if(btn){btn.disabled=true;btn.innerHTML='<span class="btn-icon">🏆</span> Πρόγραμμα ολοκληρωμένο';}
     return;
   }
@@ -546,14 +546,14 @@ async function renderVessel(client){
   var done=weekRows.length,pct=done/SPW;
   el.innerHTML='<div class="vessel-title">Δοχείο Εβδομάδας '+(activeWeek+1)+'</div>'
     +'<div class="vessel-wrap">'
-    +'<div class="vessel-svg-container" onclick="showVesselsPage(’'+client+'’)" title="Δες όλα τα δοχεία">'+vesselSVG(pct,110,true)+'</div>'
+    +'<div class="vessel-svg-container" onclick="showVesselsPage(\''+client+'\')" title="Δες όλα τα δοχεία">'+vesselSVG(pct,110,true)+'</div>'
     +'<div class="vessel-info">'
     +'<div><div class="vessel-stat-big">'+done+'/'+SPW+'</div>'
     +'<div class="vessel-stat-sub">προπονήσεις εβδ. '+(activeWeek+1)+'</div>'
     +'<div class="vessel-pct">'+Math.round(pct*100)+'% γεμάτο</div></div>'
     +(done>0&&done<SPW?'<div class="vessel-msg">'+getMidMsg(done)+'</div>':'')
     +'</div></div>'
-    +'<span class="vessels-link" onclick="showVesselsPage(’'+client+'’)">Τα Δοχεία Μου →</span>';
+    +'<span class="vessels-link" onclick="showVesselsPage(\''+client+'\')">Τα Δοχεία Μου →</span>';
   if(btn){btn.disabled=false;btn.innerHTML='<span class="btn-icon">✓</span> Ολοκλήρωσα την προπόνηση';}
 }
 
@@ -574,19 +574,19 @@ function renderModal(){
   var dots=[1,2,3,4].map(function(i){return '<div class="step-dot'+(i===s.step?' active':i<s.step?' done':'')+'"></div>';}).join('');
   var content='';
   if(s.step===1){
-    var b=Array.from({length:10},function(_,i){return '<button class="scale-btn'+(s.difficulty===i+1?' selected':'')+'" onclick="ciSet(’difficulty’,'+(i+1)+')">'+(i+1)+'</button>';}).join('');
+    var b=Array.from({length:10},function(_,i){return '<button class="scale-btn'+(s.difficulty===i+1?' selected':'')+'" onclick="ciSet(\'difficulty\','+(i+1)+')">'+(i+1)+'</button>';}).join('');
     content='<div class="modal"><h3>Πόσο δύσκολη ήταν;</h3><div class="modal-sub">1 = εύκολη &nbsp;·&nbsp; 10 = πολύ δύσκολη</div><div class="step-indicator">'+dots+'</div><div class="scale-btns">'+b+'</div><div class="modal-actions"><button class="modal-cancel" onclick="closeModal()">Ακύρωση</button><button class="modal-next" onclick="ciNext()" '+(s.difficulty?'':'disabled')+'>Επόμενο →</button></div></div>';
   }else if(s.step===2){
     var o=[['all','Ολοκλήρωσα όλο το πρόγραμμα ✓'],['most','Έκανα το μεγαλύτερο μέρος'],['part','Έκανα ένα μέρος μόνο']];
-    var b2=o.map(function(x){return '<button class="comp-btn'+(s.completion===x[0]?' selected':'')+'" onclick="ciSet(’completion’,’'+x[0]+'’)">'+x[1]+'</button>';}).join('');
+    var b2=o.map(function(x){return '<button class="comp-btn'+(s.completion===x[0]?' selected':'')+'" onclick="ciSet(\'completion\',\''+x[0]+'\')">'+x[1]+'</button>';}).join('');
     content='<div class="modal"><h3>Πόσο ολοκλήρωσες;</h3><div class="modal-sub">Επίλεξε αυτό που σε περιγράφει</div><div class="step-indicator">'+dots+'</div><div class="completion-btns">'+b2+'</div><div class="modal-actions"><button class="modal-back" onclick="ciBack()">← Πίσω</button><button class="modal-next" onclick="ciNext()" '+(s.completion?'':'disabled')+'>Επόμενο →</button></div></div>';
   }else if(s.step===3){
-    var b3=Array.from({length:10},function(_,i){return '<button class="scale-btn'+(s.energy===i+1?' selected':'')+'" onclick="ciSet(’energy’,'+(i+1)+')">'+(i+1)+'</button>';}).join('');
+    var b3=Array.from({length:10},function(_,i){return '<button class="scale-btn'+(s.energy===i+1?' selected':'')+'" onclick="ciSet(\'energy\','+(i+1)+')">'+(i+1)+'</button>';}).join('');
     content='<div class="modal"><h3>Πόση ενέργεια έβαλες;</h3><div class="modal-sub">1 = πολύ χαμηλή &nbsp;·&nbsp; 10 = μέγιστη</div><div class="step-indicator">'+dots+'</div><div class="scale-btns">'+b3+'</div><div class="modal-actions"><button class="modal-back" onclick="ciBack()">← Πίσω</button><button class="modal-next" onclick="ciNext()" '+(s.energy?'':'disabled')+'>Επόμενο →</button></div></div>';
   }else if(s.step===4){
     var has=!!s.photoURL;
     content='<div class="modal"><h3>Post-workout φωτογραφία 📷</h3><div class="modal-sub">Selfie, καθρέφτης, αστεία πόζα — ό,τι θες!</div><div class="step-indicator">'+dots+'</div>'
-      +'<div class="photo-area'+(has?' has-photo':'')+'" onclick="document.getElementById(’ph-inp’).click()">'
+      +'<div class="photo-area'+(has?' has-photo':'')+'" onclick="document.getElementById(\'ph-inp\').click()">'
       +'<input type="file" accept="image/*" capture="environment" id="ph-inp" style="display:none" onchange="handlePhoto(event)"/>'
       +(has?'<img src="'+s.photoURL+'" style="width:100%;max-height:160px;object-fit:cover;border-radius:10px"/>'
         :'<div class="photo-icon">📷</div><div class="photo-placeholder">Πάτησε για φωτογραφία ή upload</div>')
@@ -661,7 +661,7 @@ function showProgramComplete(client,allRows){
     +'<div class="complete-stat"><div class="complete-stat-val">'+avgD+'/10</div><div class="complete-stat-label">Μέση δυσκολία</div></div>'
     +'<div class="complete-stat"><div class="complete-stat-val">'+avgE+'/10</div><div class="complete-stat-label">Μέση ενέργεια</div></div>'
     +'</div>'
-    +'<button class="complete-close" onclick="closeModal();showVesselsPage(’'+client+'’)">Δες όλα τα δοχεία σου →</button>'
+    +'<button class="complete-close" onclick="closeModal();showVesselsPage(\''+client+'\')">Δες όλα τα δοχεία σου →</button>'
     +'</div></div></div>';
 }
 function closeModal(e){if(e&&e.target!==e.currentTarget)return;document.getElementById('modal-root').innerHTML='';}
@@ -682,7 +682,7 @@ async function showVesselsPage(client){
     var isClickable=!isLocked&&done>0&&!isCurrent;
     var cls='vessel-archive-card'+(isLocked?' locked':isCurrent?' current-week':'');
     var wData=JSON.stringify(wRows).replace(/"/g,'&quot;');
-    html+='<div class="'+cls+'" '+(isClickable?'onclick="showWeekReview(’'+client+'’,'+w+',this)" data-rows="'+wData+'"':'')+'>'+
+    html+='<div class="'+cls+'" '+(isClickable?'onclick="showWeekReview(\''+client+'\','+w+',this)" data-rows="'+wData+'"':'')+'>'+
       '<div class="archive-week">Εβδομάδα '+(w+1)+'</div>'+
       vesselSVG(pct,80,isCurrent&&done>0&&done<SPW)+
       '<div class="archive-name">'+(isLocked?'🔒 Κλειδωμένο':isCurrent?'● Τρέχουσα':done===0?'Δεν ξεκίνησε':done>=SPW?'✓ Ολοκληρώθηκε':'Μερική')+'</div>'+
