@@ -185,8 +185,10 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 .loading-text{font-size:13px;color:#888}
 @media(max-width:480px){
   .exercise-table th:nth-child(3),.exercise-table td:nth-child(3){display:none}
+  .mobile-note{display:block !important}
   .vessel-wrap{flex-direction:column;align-items:flex-start}
 }
+.mobile-note{display:none;font-size:11px;color:#888;margin-top:4px;line-height:1.5;font-style:italic}
 
 .wu-video-btn{display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;background:#fff1f2;border:1px solid #fca5a5;border-radius:5px;font-size:10px;color:#dc2626;text-decoration:none;margin-left:4px;vertical-align:middle;transition:background .15s}
 .wu-video-btn:hover{background:#fee2e2}
@@ -874,7 +876,12 @@ function showWorkout(key,cId,card){
     var vbtn=ex.video
       ?'<a href="'+ex.video+'" target="_blank" class="video-btn has-video">&#9654; Video</a>'
       :'<span class="video-btn" style="opacity:.35">+ video</span>';
-    return '<tr><td>'+ex.name+'</td><td style="white-space:nowrap">'+ex.sets+'</td><td class="note-cell">'+ex.note+'</td><td>'+vbtn+'</td></tr>';
+    return '<tr>'
+      +'<td>'+ex.name+'<span class="mobile-note">'+ex.note+'</span></td>'
+      +'<td style="white-space:nowrap">'+ex.sets+'</td>'
+      +'<td class="note-cell">'+ex.note+'</td>'
+      +'<td>'+vbtn+'</td>'
+      +'</tr>';
   }).join('');
   var cH=w.circuit?'<div style="padding:10px 16px 4px"><span class="circuit-note">'+w.circuitNote+'</span></div>':'';
   var eH=w.extra?'<div class="extra-note">'+w.extra+'</div>':'';
