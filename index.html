@@ -58,8 +58,13 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 .warmup-box{background:#f9f8f4;border-radius:12px;padding:14px 16px}
 .warmup-list{padding-left:18px;display:flex;flex-direction:column;gap:6px}
 .warmup-list li{font-size:13px;line-height:1.5}
-.warmup-video-link{display:inline-flex;align-items:center;gap:6px;margin-top:12px;padding:8px 14px;background:#fff1f2;border:1px solid #fca5a5;border-radius:8px;font-size:13px;font-weight:500;color:#dc2626;text-decoration:none;transition:background .15s}
-.warmup-video-link:hover{background:#fee2e2}
+.warmup-album-label{font-size:11px;font-weight:500;color:#999;text-transform:uppercase;letter-spacing:.06em;margin-top:14px;margin-bottom:8px}
+.warmup-album{display:flex;gap:8px;flex-wrap:wrap;margin-top:4px}
+.warmup-album-item{display:flex;flex-direction:column;align-items:center;gap:4px;text-decoration:none;background:#fff;border:1px solid #e8e8e6;border-radius:10px;padding:8px 10px;min-width:80px;max-width:100px;transition:border-color .15s,transform .1s;cursor:pointer}
+.warmup-album-item:hover{border-color:#dc2626;transform:translateY(-1px)}
+.warmup-album-icon{width:44px;height:44px;background:#fff1f2;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:18px;color:#dc2626}
+.warmup-album-name{font-size:10px;color:#666;text-align:center;line-height:1.3}
+.warmup-album-empty{font-size:12px;color:#bbb;font-style:italic;padding:8px 0}
 .week-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .day-card{background:#fff;border:1px solid #e8e8e6;border-radius:12px;padding:14px;cursor:pointer;transition:border-color .15s,transform .1s}
 .day-card:hover{border-color:#bbb;transform:translateY(-1px)}
@@ -85,7 +90,9 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 .exercise-table tr:last-child td{border-bottom:none}
 .exercise-table tbody tr:hover td{background:#fafaf8}
 .note-cell{color:#888;font-size:12px}
-.video-btn{display:inline-flex;align-items:center;gap:4px;font-size:12px;color:#ccc;padding:3px 8px;border-radius:5px;border:1px dashed #ddd;background:#fff;white-space:nowrap;cursor:pointer}
+.video-btn{display:inline-flex;align-items:center;gap:4px;font-size:12px;color:#ccc;padding:3px 8px;border-radius:5px;border:1px dashed #ddd;background:#fff;white-space:nowrap;cursor:pointer;text-decoration:none}
+.video-btn.has-video{color:#dc2626;border-color:#dc2626;border-style:solid;background:#fff1f2;font-weight:500}
+.video-btn.has-video:hover{background:#fee2e2}
 .extra-note{padding:10px 16px;background:#f9f8f4;border-top:1px solid #e8e8e6;font-size:12px;color:#777}
 .alert-note{padding:10px 16px;font-size:12px;border-top:1px solid #e8e8e6}
 .alert-note.orange{background:#fff7ed;color:#92400e}
@@ -227,7 +234,10 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
         <li>Wall slides μέχρι ανώδυνο εύρος — 8 reps</li>
         <li>External rotation isometric με πετσέτα — 2x15 sec/πλευρά</li>
       </ol>
-      <a class="warmup-video-link" href="https://www.youtube.com/results?search_query=shoulder+rehab+warmup+routine" target="_blank">&#9654; Βίντεο ζεστάματος (γενικό)</a>
+      <div class="warmup-album-label">&#127909; Βίντεο ζεστάματος</div>
+      <div class="warmup-album">
+        <div class="warmup-album-empty">Τα βίντεο ζεστάματος προστίθενται σύντομα.</div>
+      </div>
     </div>
   </div>
   <div class="section">
@@ -300,7 +310,10 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
         <li>External rotation isometric με πετσέτα — 2x15 sec/πλευρά</li>
         <li>Wall slide μέχρι 70-80 μοίρες μόνο — 6-8 reps, χωρίς πόνο</li>
       </ol>
-      <a class="warmup-video-link" href="https://www.youtube.com/results?search_query=low+impact+warmup+routine+mobility" target="_blank">&#9654; Βίντεο ζεστάματος (γενικό)</a>
+      <div class="warmup-album-label">&#127909; Βίντεο ζεστάματος</div>
+      <div class="warmup-album">
+        <div class="warmup-album-empty">Τα βίντεο ζεστάματος προστίθενται σύντομα.</div>
+      </div>
     </div>
   </div>
   <div class="section">
@@ -383,68 +396,68 @@ function compressPhoto(file,cb){
 
 var workouts={
   'p-day1':{title:'Ημέρα 1 - Lower body + core',circuit:false,exercises:[
-    {name:'Box squat / chair squat',sets:'3 x 10-12',note:'Κατεβαίνεις αργά μέχρι να αγγίξεις την καρέκλα, γόνατα στην κατεύθυνση των δακτύλων. Ανέβασμα με πίεση από τις φτέρνες.'},
-    {name:'Glute bridge',sets:'3 x 12-15',note:'Παύση 1-2 sec στην κορυφή. Να νιώθεις τους γλουτούς, όχι τη μέση. Μη βάζεις υπερέκταση.'},
-    {name:'Reverse lunge / split squat',sets:'2-3 x 8/πόδι',note:'Βήμα πίσω ελεγχόμενα, γόνατο μπροστινού ποδιού δεν ξεπερνά τα δάχτυλα. Κορμός όρθιος καθ\u2019 όλη τη διάρκεια.'},
-    {name:'Romanian deadlift με σακίδιο',sets:'3 x 10',note:'Στρίβεις από τους γοφούς, όχι από τη μέση. Σακίδιο κοντά στο σώμα, πλάτη ουδέτερη.'},
-    {name:'Dead bug',sets:'3 x 8/πλευρά',note:'Μέση κολλημένη στο πάτωμα όλη την ώρα. Εκπνοή καθώς τεντώνεις χέρι και πόδι. Αργή εκτέλεση.'},
-    {name:'Side plank από γόνατα',sets:'2 x 20-30 sec',note:'Σώμα σε ευθεία από γόνατο ως κεφάλι. Μη βυθίζεις τους γοφούς. Κοίτα μπροστά.'},
-    {name:'Walking cooldown',sets:'5-8 λεπτά',note:'Χαλαρό βάδισμα. Μπορείς να κάνεις απαλές διατάσεις ισχίων και τετρακεφάλων.'}]},
+    {name:'Box squat / chair squat',sets:'3 x 10-12',note:'Κατεβαίνεις αργά μέχρι να αγγίξεις την καρέκλα, γόνατα στην κατεύθυνση των δακτύλων. Ανέβασμα με πίεση από τις φτέρνες.',video:''},
+    {name:'Glute bridge',sets:'3 x 12-15',note:'Παύση 1-2 sec στην κορυφή. Να νιώθεις τους γλουτούς, όχι τη μέση. Μη βάζεις υπερέκταση.',video:'https://www.youtube.com/shorts/l1cRIZsf0MQ'},
+    {name:'Reverse lunge / split squat',sets:'2-3 x 8/πόδι',note:'Βήμα πίσω ελεγχόμενα, γόνατο μπροστινού ποδιού δεν ξεπερνά τα δάχτυλα. Κορμός όρθιος καθ\u2019 όλη τη διάρκεια.',video:'https://www.youtube.com/shorts/3bqDWUFm5DU'},
+    {name:'Romanian deadlift με σακίδιο',sets:'3 x 10',note:'Στρίβεις από τους γοφούς, όχι από τη μέση. Σακίδιο κοντά στο σώμα, πλάτη ουδέτερη.',video:'https://www.youtube.com/shorts/t1MBGAzqKbQ'},
+    {name:'Dead bug',sets:'3 x 8/πλευρά',note:'Μέση κολλημένη στο πάτωμα όλη την ώρα. Εκπνοή καθώς τεντώνεις χέρι και πόδι. Αργή εκτέλεση.',video:'https://www.youtube.com/shorts/laR0AEF1IF8'},
+    {name:'Side plank από γόνατα',sets:'2 x 20-30 sec',note:'Σώμα σε ευθεία από γόνατο ως κεφάλι. Μη βυθίζεις τους γοφούς. Κοίτα μπροστά.',video:'https://www.youtube.com/shorts/aljyp6EsOfs'},
+    {name:'Walking cooldown',sets:'5-8 λεπτά',note:'Χαλαρό βάδισμα. Μπορείς να κάνεις απαλές διατάσεις ισχίων και τετρακεφάλων.',video:''}]},
   'p-day2':{title:'Ημέρα 2 - Upper rehab + posture + zone 2',circuit:false,exercises:[
-    {name:'Band row',sets:'3 x 12-15',note:'Τράβηγμα με αγκώνες κοντά στο σώμα. Στο τέλος ενώνουν ελαφρώς οι ωμοπλάτες. Μη σηκώνεις τους ώμους.'},
-    {name:'Band pull-apart χαμηλά',sets:'2 x 12',note:'Χέρια στο ύψος της κοιλιάς, όχι ψηλότερα. Ανοίγεις αργά και επιστρέφεις ελεγχόμενα. Χωρίς πόνο στον ώμο.'},
-    {name:'Wall push-up σε ψηλό τοίχο',sets:'3 x 6-8',note:'Τοποθεσία χεριών ψηλά στον τοίχο. Κατεβαίνεις αργά και πιέζεις πίσω. Μόνο αν ο πόνος είναι 0-2/10.'},
-    {name:'External rotation με λάστιχο',sets:'2-3 x 12/πλ.',note:'Αγκώνας κολλημένος στο πλευρό, μόνο ο πήχης κινείται. Αργή κίνηση, ιδιαίτερα στην επιστροφή.'},
-    {name:'Scapular setting',sets:'2 x 10',note:'Κινείς τις ωμοπλάτες "κάτω και πίσω" χωρίς να σηκώνεις τους ώμους. Κράτα 2-3 sec. Απαλά.'},
-    {name:'Bird dog',sets:'3 x 8/πλευρά',note:'Λεκάνη σταθερή καθ\u2019 όλη τη διάρκεια. Τεντώνεις αργά και επιστρέφεις πριν αλλάξεις πλευρά. Εκπνοή στην έκταση.'},
-    {name:'Zone 2 περπάτημα',sets:'15-20 λεπτά',note:'Ρυθμός που σου επιτρέπει να μιλάς με πλήρεις προτάσεις. Αν λαχανιάζεις, επιβραδύνεις.'}]},
+    {name:'Band row',sets:'3 x 12-15',note:'Τράβηγμα με αγκώνες κοντά στο σώμα. Στο τέλος ενώνουν ελαφρώς οι ωμοπλάτες. Μη σηκώνεις τους ώμους.',video:'https://www.youtube.com/shorts/8wAvYMvj84E'},
+    {name:'Band pull-apart χαμηλά',sets:'2 x 12',note:'Χέρια στο ύψος της κοιλιάς, όχι ψηλότερα. Ανοίγεις αργά και επιστρέφεις ελεγχόμενα. Χωρίς πόνο στον ώμο.',video:'https://www.youtube.com/shorts/mAOPzGBz34o'},
+    {name:'Wall push-up σε ψηλό τοίχο',sets:'3 x 6-8',note:'Τοποθεσία χεριών ψηλά στον τοίχο. Κατεβαίνεις αργά και πιέζεις πίσω. Μόνο αν ο πόνος είναι 0-2/10.',video:'https://www.youtube.com/shorts/4iOMMGKEXtI'},
+    {name:'External rotation με λάστιχο',sets:'2-3 x 12/πλ.',note:'Αγκώνας κολλημένος στο πλευρό, μόνο ο πήχης κινείται. Αργή κίνηση, ιδιαίτερα στην επιστροφή.',video:'https://www.youtube.com/shorts/ZjNGA0J7kLc'},
+    {name:'Scapular setting',sets:'2 x 10',note:'Κινείς τις ωμοπλάτες "κάτω και πίσω" χωρίς να σηκώνεις τους ώμους. Κράτα 2-3 sec. Απαλά.',video:'https://www.youtube.com/shorts/2_OgQ_h8XJw'},
+    {name:'Bird dog',sets:'3 x 8/πλευρά',note:'Λεκάνη σταθερή καθ\u2019 όλη τη διάρκεια. Τεντώνεις αργά και επιστρέφεις πριν αλλάξεις πλευρά. Εκπνοή στην έκταση.',video:'https://www.youtube.com/shorts/ktCszueHIIg'},
+    {name:'Zone 2 περπάτημα',sets:'15-20 λεπτά',note:'Ρυθμός που σου επιτρέπει να μιλάς με πλήρεις προτάσεις. Αν λαχανιάζεις, επιβραδύνεις.',video:''}]},
   'p-day3':{title:'Ημέρα 3 - Full body conditioning',circuit:true,circuitNote:'3 γύροι - Διάλειμμα 60-90 sec ανά γύρο - RPE 6/10',exercises:[
-    {name:'Squat to chair',sets:'12 reps',note:'Κατεβαίνεις αργά ώσπου να αγγίξεις χωρίς να πέσεις. Γόνατα στην κατεύθυνση δακτύλων, ανέβασμα με φτέρνες.'},
-    {name:'Step-ups σε χαμηλό σκαλί',sets:'10/πόδι',note:'Πίεση αποκλειστικά από τη φτέρνα του ποδιού που ανεβαίνει. Κορμός όρθιος, μη σπρώχνεις από το πίσω πόδι.'},
-    {name:'Band row',sets:'12 reps',note:'Αγκώνες κοντά στο σώμα, ώμοι μακριά από τα αυτιά. Μη χρησιμοποιείς τη μέση για ορμή.'},
-    {name:'Glute bridge march',sets:'8/πόδι',note:'Η λεκάνη μένει σταθερή και οριζόντια. Δεν αφήνεις τη μέση να κάνει υπερέκταση.'},
-    {name:'Marching high knees',sets:'40 sec',note:'Ρυθμός μέτριος, όχι sprint. Στόχος να ανεβάσεις παλμούς χωρίς να χάνεις την αναπνοή.'},
-    {name:'Dead bug',sets:'8/πλευρά',note:'Μέση κολλημένη στο πάτωμα. Αργή εκτέλεση, εκπνοή όταν τεντώνεις πόδι και χέρι.'}]},
+    {name:'Squat to chair',sets:'12 reps',note:'Κατεβαίνεις αργά ώσπου να αγγίξεις χωρίς να πέσεις. Γόνατα στην κατεύθυνση δακτύλων, ανέβασμα με φτέρνες.',video:''},
+    {name:'Step-ups σε χαμηλό σκαλί',sets:'10/πόδι',note:'Πίεση αποκλειστικά από τη φτέρνα του ποδιού που ανεβαίνει. Κορμός όρθιος, μη σπρώχνεις από το πίσω πόδι.',video:''},
+    {name:'Band row',sets:'12 reps',note:'Αγκώνες κοντά στο σώμα, ώμοι μακριά από τα αυτιά. Μη χρησιμοποιείς τη μέση για ορμή.',video:'https://www.youtube.com/shorts/8wAvYMvj84E'},
+    {name:'Glute bridge march',sets:'8/πόδι',note:'Η λεκάνη μένει σταθερή και οριζόντια. Δεν αφήνεις τη μέση να κάνει υπερέκταση.',video:'https://www.youtube.com/shorts/hv_JL44J88k'},
+    {name:'Marching high knees',sets:'40 sec',note:'Ρυθμός μέτριος, όχι sprint. Στόχος να ανεβάσεις παλμούς χωρίς να χάνεις την αναπνοή.',video:''},
+    {name:'Dead bug',sets:'8/πλευρά',note:'Μέση κολλημένη στο πάτωμα. Αργή εκτέλεση, εκπνοή όταν τεντώνεις πόδι και χέρι.',video:'https://www.youtube.com/shorts/laR0AEF1IF8'}]},
   'p-day4':{title:'Ημέρα 4 - Lower/glutes + intervals',circuit:false,extra:'Intervals μετά: 6 x 30 sec γρήγορο περπάτημα / 60 sec χαλαρό.',exercises:[
-    {name:'Tempo squat 3 sec κάτω',sets:'3 x 8-10',note:'Κατεβαίνεις αργά μετρώντας 3 sec, μικρή παύση στο κάτω, ανέβασμα ελεγχόμενο.'},
-    {name:'Hip thrust σε καναπέ',sets:'3 x 10-12',note:'Ανεβάζεις τους γοφούς ώσπου το σώμα να είναι οριζόντιο. Πίεση από τις φτέρνες, παύση 1 sec πάνω.'},
-    {name:'Lateral walk με λάστιχο',sets:'3 x 10/πλευρά',note:'Μικρά βήματα, γόνατα ελαφρώς λυγισμένα, λεκάνη σταθερή. Δεν γέρνεις πλάγια.'},
-    {name:'Calf raises',sets:'3 x 15-20',note:'Πλήρης έλεγχος πάνω-κάτω. Μικρή παύση στην κορυφή, αργό κατέβασμα.'},
-    {name:'Pallof press με λάστιχο',sets:'3 x 10/πλευρά',note:'Ο κορμός δεν στρίβει προς τη μεριά του λάστιχου. Πιέζεις μπροστά αργά και επιστρέφεις ελεγχόμενα.'},
-    {name:'Wall sit',sets:'3 x 20-30 sec',note:'Πλάτη στον τοίχο, γόνατα περίπου 90 μοίρες. Βάρος στις φτέρνες, ανάσα ομαλή.'}]},
+    {name:'Tempo squat 3 sec κάτω',sets:'3 x 8-10',note:'Κατεβαίνεις αργά μετρώντας 3 sec, μικρή παύση στο κάτω, ανέβασμα ελεγχόμενο.',video:'https://www.youtube.com/shorts/tytXUCInTyo'},
+    {name:'Hip thrust σε καναπέ',sets:'3 x 10-12',note:'Ανεβάζεις τους γοφούς ώσπου το σώμα να είναι οριζόντιο. Πίεση από τις φτέρνες, παύση 1 sec πάνω.',video:'https://www.youtube.com/shorts/wiblBq8zADM'},
+    {name:'Lateral walk με λάστιχο',sets:'3 x 10/πλευρά',note:'Μικρά βήματα, γόνατα ελαφρώς λυγισμένα, λεκάνη σταθερή. Δεν γέρνεις πλάγια.',video:'https://www.youtube.com/shorts/QaWi0Fu7ibA'},
+    {name:'Calf raises',sets:'3 x 15-20',note:'Πλήρης έλεγχος πάνω-κάτω. Μικρή παύση στην κορυφή, αργό κατέβασμα.',video:'https://www.youtube.com/shorts/ODZaHwLdBrQ'},
+    {name:'Pallof press με λάστιχο',sets:'3 x 10/πλευρά',note:'Ο κορμός δεν στρίβει προς τη μεριά του λάστιχου. Πιέζεις μπροστά αργά και επιστρέφεις ελεγχόμενα.',video:'https://www.youtube.com/shorts/xOUPMUeOPzA'},
+    {name:'Wall sit',sets:'3 x 20-30 sec',note:'Πλάτη στον τοίχο, γόνατα περίπου 90 μοίρες. Βάρος στις φτέρνες, ανάσα ομαλή.',video:'https://www.youtube.com/shorts/U-2573o7so8'}]},
   'm-day1':{title:'Ημέρα 1 - Lower body + core',circuit:false,exercises:[
-    {name:'Sit-to-stand από καρέκλα',sets:'3 x 8-10',note:'Αργό κατέβασμα ελεγχόμενα. Ανέβασμα με πίεση από τις φτέρνες. Τα χέρια βοηθούν ελαφρά αρχικά.'},
-    {name:'Glute bridge',sets:'3 x 12',note:'Παύση 1-2 sec στην κορυφή. Να νιώθεις τους γλουτούς. Αν νιώθεις μέση, μειώνεις εύρος.'},
-    {name:'Step-up χαμηλό',sets:'2 x 8/πόδι',note:'Χαμηλό ύψος σκαλιού. Πίεση από τη φτέρνα του ποδιού που ανεβαίνει. Μπορεί να κρατιέται για ισορροπία.'},
-    {name:'Supported split squat',sets:'2 x 6-8/πόδι',note:'Κρατιέται σε σταθερό σημείο. Μικρό εύρος αρχικά, γόνατο μπροστινού ποδιού δεν ξεπερνά τα δάχτυλα.'},
-    {name:'Dead bug heel taps',sets:'3 x 6/πλευρά',note:'Μέση σταθερή και κολλημένη στο πάτωμα. Κατεβάζεις τη φτέρνα αργά χωρίς να ανασηκωθεί η μέση.'},
-    {name:'Side plank από γόνατα',sets:'2 x 10-20 sec',note:'Σώμα σε ευθεία από γόνατο ως κεφάλι. Ανώδυνο — αν πονά ο ώμος, σταματάς.'},
-    {name:'Breathing reset',sets:'2 λεπτά',note:'Εισπνοή από τη μύτη 4 sec, εκπνοή από το στόμα 6 sec. Ηρεμεί το νευρικό σύστημα μετά την προπόνηση.'}]},
+    {name:'Sit-to-stand από καρέκλα',sets:'3 x 8-10',note:'Αργό κατέβασμα ελεγχόμενα. Ανέβασμα με πίεση από τις φτέρνες. Τα χέρια βοηθούν ελαφρά αρχικά.',video:'https://www.youtube.com/shorts/nsugtYlDCBM'},
+    {name:'Glute bridge',sets:'3 x 12',note:'Παύση 1-2 sec στην κορυφή. Να νιώθεις τους γλουτούς. Αν νιώθεις μέση, μειώνεις εύρος.',video:'https://www.youtube.com/shorts/l1cRIZsf0MQ'},
+    {name:'Step-up χαμηλό',sets:'2 x 8/πόδι',note:'Χαμηλό ύψος σκαλιού. Πίεση από τη φτέρνα του ποδιού που ανεβαίνει. Μπορεί να κρατιέται για ισορροπία.',video:''},
+    {name:'Supported split squat',sets:'2 x 6-8/πόδι',note:'Κρατιέται σε σταθερό σημείο. Μικρό εύρος αρχικά, γόνατο μπροστινού ποδιού δεν ξεπερνά τα δάχτυλα.',video:'https://www.youtube.com/shorts/LSwKwxiI0iM'},
+    {name:'Dead bug heel taps',sets:'3 x 6/πλευρά',note:'Μέση σταθερή και κολλημένη στο πάτωμα. Κατεβάζεις τη φτέρνα αργά χωρίς να ανασηκωθεί η μέση.',video:'https://www.youtube.com/shorts/0QWdoaTm4Q4'},
+    {name:'Side plank από γόνατα',sets:'2 x 10-20 sec',note:'Σώμα σε ευθεία από γόνατο ως κεφάλι. Ανώδυνο — αν πονά ο ώμος, σταματάς.',video:'https://www.youtube.com/shorts/aljyp6EsOfs'},
+    {name:'Breathing reset',sets:'2 λεπτά',note:'Εισπνοή από τη μύτη 4 sec, εκπνοή από το στόμα 6 sec. Ηρεμεί το νευρικό σύστημα μετά την προπόνηση.',video:''}]},
   'm-day2':{title:'Ημέρα 2 - Shoulder-safe upper + posture',circuit:false,exercises:[
-    {name:'Band row με στήριξη πλάτης',sets:'3 x 12',note:'Η πλάτη ακουμπισμένη σε καρέκλα ή τοίχο. Τράβηγμα με αγκώνες κοντά στο σώμα, χωρίς πόνο.'},
-    {name:'Wall push-up',sets:'2-3 x 8-12',note:'Χέρια στον τοίχο στο ύψος των ώμων. Μόνο ανετό εύρος — αν πονά ο ώμος, μικραίνεις εύρος.'},
-    {name:'External rotation με λάστιχο',sets:'2 x 10-12',note:'Πολύ ήπια αντίσταση. Αγκώνας κοντά στο σώμα, μόνο ο πήχης κινείται. Αργή επιστροφή.'},
-    {name:'Isometric shoulder flexion στον τοίχο',sets:'2 x 10 sec',note:'Πιέζεις τον καρπό στον τοίχο από μπρος, κάτω από 90 μοίρες. Σταματάς αν υπάρξει πόνος.'},
-    {name:'Isometric abduction στον τοίχο',sets:'2 x 10 sec',note:'Πιέζεις τον καρπό πλάγια, κάτω από 60-70 μοίρες. Χωρίς πόνο.'},
-    {name:'Pallof press',sets:'2-3 x 8/πλ.',note:'Κορμός σταθερός, δεν στρίβει. Πίεση μπροστά αργά, επιστροφή ελεγχόμενα. Γόνατα ελαφρώς λυγισμένα.'},
-    {name:'Περπάτημα',sets:'10-15 λεπτά',note:'Ήπιος ρυθμός. Αν νιώσεις ζάλη ή ναυτία, σταματάς και ξεκουράζεσαι.'}]},
+    {name:'Band row με στήριξη πλάτης',sets:'3 x 12',note:'Η πλάτη ακουμπισμένη σε καρέκλα ή τοίχο. Τράβηγμα με αγκώνες κοντά στο σώμα, χωρίς πόνο.',video:'https://www.youtube.com/shorts/8wAvYMvj84E'},
+    {name:'Wall push-up',sets:'2-3 x 8-12',note:'Χέρια στον τοίχο στο ύψος των ώμων. Μόνο ανετό εύρος — αν πονά ο ώμος, μικραίνεις εύρος.',video:'https://www.youtube.com/shorts/4iOMMGKEXtI'},
+    {name:'External rotation με λάστιχο',sets:'2 x 10-12',note:'Πολύ ήπια αντίσταση. Αγκώνας κοντά στο σώμα, μόνο ο πήχης κινείται. Αργή επιστροφή.',video:'https://www.youtube.com/shorts/ZjNGA0J7kLc'},
+    {name:'Isometric shoulder flexion στον τοίχο',sets:'2 x 10 sec',note:'Πιέζεις τον καρπό στον τοίχο από μπρος, κάτω από 90 μοίρες. Σταματάς αν υπάρξει πόνος.',video:'https://www.youtube.com/shorts/BI22LhQ3gcw'},
+    {name:'Isometric abduction στον τοίχο',sets:'2 x 10 sec',note:'Πιέζεις τον καρπό πλάγια, κάτω από 60-70 μοίρες. Χωρίς πόνο.',video:'https://www.youtube.com/shorts/a7o5bzTeNrU'},
+    {name:'Pallof press',sets:'2-3 x 8/πλ.',note:'Κορμός σταθερός, δεν στρίβει. Πίεση μπροστά αργά, επιστροφή ελεγχόμενα. Γόνατα ελαφρώς λυγισμένα.',video:'https://www.youtube.com/shorts/xOUPMUeOPzA'},
+    {name:'Περπάτημα',sets:'10-15 λεπτά',note:'Ήπιος ρυθμός. Αν νιώσεις ζάλη ή ναυτία, σταματάς και ξεκουράζεσαι.',video:''}]},
   'm-day3':{title:'Ημέρα 3 - Low-impact full body',circuit:true,circuitNote:'3 γύροι - RPE 5-6/10 - Χαλαρό προς μέτριο',
     ozempicNote:'Λόγω Ozempic: αν έχει ναυτία, 2 γύροι μόνο και 10-15 λεπτά χαλαρό περπάτημα.',
     backNote:'Για τη μέση: αν εμφανιστεί ενόχληση, μικρότερο εύρος και ενεργοποίηση κορμού.',
     exercises:[
-    {name:'Sit-to-stand',sets:'10 reps',note:'Αργό κατέβασμα, ανέβασμα με πίεση από τις φτέρνες. Τα χέρια βοηθούν ελαφρά μόνο αν χρειάζεται.'},
-    {name:'Glute bridge',sets:'12 reps',note:'Παύση 1 sec πάνω. Να νιώθει γλουτούς, όχι μέση. Αν νιώθει μέση, μειώνει εύρος.'},
-    {name:'Step-up χαμηλό',sets:'10/πόδι',note:'Χαμηλό σκαλί. Πίεση από τη φτέρνα, κορμός όρθιος. Μπορεί να κρατιέται για ισορροπία. Ρυθμός ήπιος.'},
-    {name:'Band row',sets:'12 reps',note:'Αγκώνες κοντά στο σώμα, ώμοι μακριά από τα αυτιά. Αν νιώσει τον ώμο, μικραίνει εύρος.'},
-    {name:'Bird dog',sets:'6/πλευρά',note:'Αργή εκτέλεση. Η λεκάνη δεν ανοίγει στο πλάι. Αν ενοχλεί ο ώμος, κάνει μόνο πόδια.'},
-    {name:'Marching',sets:'40 sec',note:'Ήπια ένταση. Χέρια χαλαρά στο πλάι. Στόχος να κινηθεί χωρίς κραδασμούς.'}]},
+    {name:'Sit-to-stand',sets:'10 reps',note:'Αργό κατέβασμα, ανέβασμα με πίεση από τις φτέρνες. Τα χέρια βοηθούν ελαφρά μόνο αν χρειάζεται.',video:'https://www.youtube.com/shorts/nsugtYlDCBM'},
+    {name:'Glute bridge',sets:'12 reps',note:'Παύση 1 sec πάνω. Να νιώθει γλουτούς, όχι μέση. Αν νιώθει μέση, μειώνει εύρος.',video:'https://www.youtube.com/shorts/l1cRIZsf0MQ'},
+    {name:'Step-up χαμηλό',sets:'10/πόδι',note:'Χαμηλό σκαλί. Πίεση από τη φτέρνα, κορμός όρθιος. Μπορεί να κρατιέται για ισορροπία. Ρυθμός ήπιος.',video:''},
+    {name:'Band row',sets:'12 reps',note:'Αγκώνες κοντά στο σώμα, ώμοι μακριά από τα αυτιά. Αν νιώσει τον ώμο, μικραίνει εύρος.',video:'https://www.youtube.com/shorts/8wAvYMvj84E'},
+    {name:'Bird dog',sets:'6/πλευρά',note:'Αργή εκτέλεση. Η λεκάνη δεν ανοίγει στο πλάι. Αν ενοχλεί ο ώμος, κάνει μόνο πόδια.',video:'https://www.youtube.com/shorts/ktCszueHIIg'},
+    {name:'Marching',sets:'40 sec',note:'Ήπια ένταση. Χέρια χαλαρά στο πλάι. Στόχος να κινηθεί χωρίς κραδασμούς.',video:''}]},
   'm-day4':{title:'Ημέρα 4 - Glutes + core + cardio',circuit:false,extra:'Περπάτημα 10-20 λεπτά ήπιο προς μέτριο μετά τις ασκήσεις.',exercises:[
-    {name:'Glute bridge',sets:'4 x 12',note:'Παύση 1-2 sec στην κορυφή. Πίεση από τις φτέρνες, γλουτοί σφιγμένοι. Αν νιώθεις μέση, μειώνεις εύρος.'},
-    {name:'Clamshell με λάστιχο ή χωρίς',sets:'3 x 12/πλευρά',note:'Αργό άνοιγμα γονάτου χωρίς να στρίβει η λεκάνη. Να νιώθεις τον έξω γλουτό.'},
-    {name:'Supported Romanian deadlift',sets:'3 x 10',note:'Ελαφρύ βάρος. Στρίβεις από τους γοφούς, πλάτη ουδέτερη. Σταματάς στο τέντωμα.'},
-    {name:'Lateral walk με λάστιχο',sets:'2-3 x 8-10/πλ.',note:'Μικρά βήματα, γόνατα ελαφρώς λυγισμένα. Δεν γέρνεις πλάγια με κάθε βήμα.'},
-    {name:'Dead bug',sets:'3 x 6-8/πλευρά',note:'Μέση σταθερή στο πάτωμα. Εκπνοή καθώς τεντώνεις. Αν η μέση σηκώνεται, μικραίνεις εύρος.'},
-    {name:'Wall sit',sets:'2-3 x 15-25 sec',note:'Πλάτη στον τοίχο, γόνατα σε γωνία άνεσης. Βάρος στις φτέρνες. Όχι μέχρι εξάντληση.'}]}
+    {name:'Glute bridge',sets:'4 x 12',note:'Παύση 1-2 sec στην κορυφή. Πίεση από τις φτέρνες, γλουτοί σφιγμένοι. Αν νιώθεις μέση, μειώνεις εύρος.',video:'https://www.youtube.com/shorts/l1cRIZsf0MQ'},
+    {name:'Clamshell με λάστιχο ή χωρίς',sets:'3 x 12/πλευρά',note:'Αργό άνοιγμα γονάτου χωρίς να στρίβει η λεκάνη. Να νιώθεις τον έξω γλουτό.',video:'https://www.youtube.com/shorts/CSbCtY8AO7o'},
+    {name:'Supported Romanian deadlift',sets:'3 x 10',note:'Ελαφρύ βάρος. Στρίβεις από τους γοφούς, πλάτη ουδέτερη. Σταματάς στο τέντωμα.',video:'https://www.youtube.com/shorts/t1MBGAzqKbQ'},
+    {name:'Lateral walk με λάστιχο',sets:'2-3 x 8-10/πλ.',note:'Μικρά βήματα, γόνατα ελαφρώς λυγισμένα. Δεν γέρνεις πλάγια με κάθε βήμα.',video:'https://www.youtube.com/shorts/QaWi0Fu7ibA'},
+    {name:'Dead bug',sets:'3 x 6-8/πλευρά',note:'Μέση σταθερή στο πάτωμα. Εκπνοή καθώς τεντώνεις. Αν η μέση σηκώνεται, μικραίνεις εύρος.',video:'https://www.youtube.com/shorts/laR0AEF1IF8'},
+    {name:'Wall sit',sets:'2-3 x 15-25 sec',note:'Πλάτη στον τοίχο, γόνατα σε γωνία άνεσης. Βάρος στις φτέρνες. Όχι μέχρι εξάντληση.',video:'https://www.youtube.com/shorts/U-2573o7so8'}]}
 };
 
 var NWMSGS=[
@@ -864,7 +877,10 @@ function showWorkout(key,cId,card){
   document.getElementById(cId+'-page').querySelectorAll('.day-card').forEach(function(c){c.classList.remove('active-day');});
   card.classList.add('active-day');
   var rows=w.exercises.map(function(ex){
-    return '<tr><td>'+ex.name+'</td><td style="white-space:nowrap">'+ex.sets+'</td><td class="note-cell">'+ex.note+'</td><td><span class="video-btn">+ video</span></td></tr>';
+    var vbtn=ex.video
+      ?'<a href="'+ex.video+'" target="_blank" class="video-btn has-video">&#9654; Video</a>'
+      :'<span class="video-btn" style="opacity:.35">+ video</span>';
+    return '<tr><td>'+ex.name+'</td><td style="white-space:nowrap">'+ex.sets+'</td><td class="note-cell">'+ex.note+'</td><td>'+vbtn+'</td></tr>';
   }).join('');
   var cH=w.circuit?'<div style="padding:10px 16px 4px"><span class="circuit-note">'+w.circuitNote+'</span></div>':'';
   var eH=w.extra?'<div class="extra-note">'+w.extra+'</div>':'';
