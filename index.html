@@ -358,7 +358,7 @@ var SKEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6I
 var SH={'Content-Type':'application/json','apikey':SKEY,'Authorization':'Bearer '+SKEY};
 var TW=8,SPW=4;
 /* ---- PROGRAM START DATE — change this when starting a new client ---- */
-var PROGRAM_START=new Date('2026-06-01T00:00:00').getTime(); // Monday 1 June 2026
+var PROGRAM_START=new Date('2026-05-25T00:00:00').getTime(); // TEST: Monday 25 May 2026 — change back to 2026-06-01 for live
 
 async function sbSel(t,f){var r=await fetch(SURL+'/rest/v1/'+t+'?'+f+'&order=created_at.asc',{headers:SH});return r.ok?r.json():[];}
 async function sbIns(t,b){var r=await fetch(SURL+'/rest/v1/'+t,{method:'POST',headers:Object.assign({},SH,{'Prefer':'return=representation'}),body:JSON.stringify(b)});return r.ok?r.json():null;}
