@@ -423,7 +423,7 @@ var workouts={
     {name:'Hip thrust σε καναπέ',sets:'3 x 10-12',note:'Ανεβάζεις τους γοφούς ώσπου το σώμα να είναι οριζόντιο. Πίεση από τις φτέρνες, παύση 1 sec πάνω.',video:'https://www.youtube.com/shorts/wiblBq8zADM'},
     {name:'Lateral walk με λάστιχο',sets:'3 x 10/πλευρά',note:'Μικρά βήματα, γόνατα ελαφρώς λυγισμένα, λεκάνη σταθερή. Δεν γέρνεις πλάγια.',video:'https://www.youtube.com/shorts/QaWi0Fu7ibA'},
     {name:'Calf raises',sets:'3 x 15-20',note:'Πλήρης έλεγχος πάνω-κάτω. Μικρή παύση στην κορυφή, αργό κατέβασμα.',video:'https://www.youtube.com/shorts/ODZaHwLdBrQ'},
-    {name:'Pallof press με λάστιχο',sets:'3 x 10/πλευρά',note:'Ο κορμός δεν στρίβει προς τη μεριά του λάστιχου. Πιέζεις μπροστά αργά και επιστρέφεις ελεγχόμενα.',video:'https://www.youtube.com/shorts/xOUPMUeOPzA'},
+    {name:'Pallof press με λάστιχο',sets:'3 x 10/πλευρά',note:'Ο κορμός δεν στρίβει προς τη μεριά του λάστιχου. Πιέζεις μπροστά αργά και επιστρέφεις ελεγχόμενα.',video:''},
     {name:'Wall sit',sets:'3 x 20-30 sec',note:'Πλάτη στον τοίχο, γόνατα περίπου 90 μοίρες. Βάρος στις φτέρνες, ανάσα ομαλή.',video:'https://www.youtube.com/shorts/U-2573o7so8'}]},
   'm-day1':{title:'Ημέρα 1 - Lower body + core',circuit:false,exercises:[
     {name:'Sit-to-stand από καρέκλα',sets:'3 x 8-10',note:'Αργό κατέβασμα ελεγχόμενα. Ανέβασμα με πίεση από τις φτέρνες. Τα χέρια βοηθούν ελαφρά αρχικά.',video:'https://www.youtube.com/shorts/nsugtYlDCBM'},
@@ -626,17 +626,14 @@ async function renderVessel(client){
   }
 
   var wi=getWeekInfo(aw);
-  var daysTag='';
-  if(done>0){
-    var dl=wi.daysLeft;
-    var dcolor=dl<=2?'#dc2626':'#888';
-    daysTag='<div style="font-size:12px;color:'+dcolor+';margin-top:4px">'
-      +(wi.expired?'&#128337; Η εβδομάδα έληξε'
-       :dl===0?'&#9201; Τελευταία μέρα!'
-       :dl===1?'&#9201; Απομένει 1 μέρα'
-       :'&#128197; Απομένουν '+dl+' μέρες')
-      +'</div>';
-  }
+  var dl=wi.daysLeft;
+  var dcolor=dl<=2&&!wi.expired?'#dc2626':'#888';
+  var daysTag='<div style="font-size:12px;color:'+dcolor+';margin-top:4px">'
+    +(wi.expired?'&#128337; Η εβδομάδα έληξε — νέα ξεκινά τη Δευτέρα'
+     :dl===0?'&#9201; Τελευταία μέρα της εβδομάδας!'
+     :dl===1?'&#9201; Απομένει 1 μέρα'
+     :'&#128197; Απομένουν '+dl+' μέρες')
+    +'</div>';
   var midMsg=done>0&&done<SPW&&!wi.expired?getMidMsg(done):'';
   el.innerHTML='<div class="vessel-title">&#916;&#959;&#967;&#949;&#943;&#959; &#917;&#946;&#948;&#959;&#956;&#940;&#948;&#945;&#962; '+(aw+1)+' &nbsp;&#183;&nbsp; '+getWeekDayRange(aw)+'</div>'
     +'<div class="vessel-wrap">'
