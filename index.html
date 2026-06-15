@@ -384,8 +384,28 @@ var TW=8, SPW=4;
 /* ---- PROGRAM START DATE: Saturday 7 June 2026 — Week 1 starts here ---- */
 var PROGRAM_START = new Date('2026-06-07T00:00:00').getTime();
 
-async function sbSel(t,f){var r=await fetch(SURL+'/rest/v1/'+t+'?'+f+'&order=created_at.asc',{headers:SH});return r.ok?r.json():[];}
-async function sbIns(t,b){var r=await fetch(SURL+'/rest/v1/'+t,{method:'POST',headers:Object.assign({},SH,{'Prefer':'return=representation'}),body:JSON.stringify(b)});return r.ok?r.json():null;}
+/* ---- FIX: sbSel with try/catch — never silently hangs ---- */
+async function sbSel(t,f){
+  try {
+    var r = await fetch(SURL+'/rest/v1/'+t+'?'+f+'&order=created_at.asc', {headers:SH});
+    if(!r.ok){ console.warn('sbSel HTTP '+r.status+' on '+t); return []; }
+    var data = await r.json();
+    return Array.isArray(data) ? data : [];
+  } catch(e) {
+    console.warn('sbSel network error:', e);
+    return [];
+  }
+}
+
+async function sbIns(t,b){
+  try {
+    var r=await fetch(SURL+'/rest/v1/'+t,{method:'POST',headers:Object.assign({},SH,{'Prefer':'return=representation'}),body:JSON.stringify(b)});
+    return r.ok ? await r.json() : null;
+  } catch(e) {
+    console.warn('sbIns error:', e);
+    return null;
+  }
+}
 
 function compressPhoto(file,cb){
   var MAX=800,Q=0.72;
@@ -593,12 +613,20 @@ function getWeekDayRange(w){
   return ws.getDate()+' '+MONTHS[ws.getMonth()]+' – '+we.getDate()+' '+MONTHS[we.getMonth()];
 }
 
-/* ---- RENDER VESSEL ---- */
+/* ---- RENDER VESSEL — FIX: full try/catch + fallback UI if Supabase fails ---- */
 async function renderVessel(client){
   var el  = document.getElementById(client+'-vessel');
   var btn = document.getElementById(client+'-checkin-btn');
   if(!el) return;
-  var all  = await sbSel('checkins','client=eq.'+client);
+
+  var all = [];
+  try {
+    all = await sbSel('checkins','client=eq.'+client);
+  } catch(e) {
+    console.warn('renderVessel fetch failed:', e);
+  }
+  if(!Array.isArray(all)) all = [];
+
   var aw   = getActiveWeek();
   var done = all.filter(function(r){ return r.week_index===aw; }).length;
   var pct  = Math.min(done/SPW, 1);
@@ -639,6 +667,8 @@ async function renderVessel(client){
     +'</div></div>'
     +'<span class="vessels-link" onclick="showVesselsPage(\''+client+'\')">Τα Δοχεία Μου &#8594;</span>';
 
+  /* FIX: weekComplete only locks if the current week (aw) is full.
+     Past weeks being full does NOT disable the button. */
   var weekComplete = done >= SPW;
   var notStarted   = Date.now() < PROGRAM_START;
   if(btn){
@@ -721,11 +751,13 @@ async function ciFinish(){
     });
   }
   var all  = await sbSel('checkins','client=eq.'+ci.client);
+  if(!Array.isArray(all)) all=[];
   var aw   = getActiveWeek();
   var oldDone = all.filter(function(r){ return r.week_index===aw; }).length;
   var oldPct  = oldDone/SPW;
   await sbIns('checkins',{client:ci.client,week_index:aw,difficulty:ci.difficulty,completion:ci.completion,energy:ci.energy,photo_url:photoURL});
-  var all2    = await sbSel('checkins','client=eq.'+ci.client);
+  var all2 = await sbSel('checkins','client=eq.'+ci.client);
+  if(!Array.isArray(all2)) all2=[];
   var newDone = all2.filter(function(r){ return r.week_index===aw; }).length;
   var newPct  = newDone/SPW;
   hideLoading();
@@ -794,12 +826,13 @@ function showProgramComplete(client,all){
 
 function closeModal(e){ if(e&&e.target!==e.currentTarget)return; document.getElementById('modal-root').innerHTML=''; }
 
-/* ---- VESSELS PAGE — FIX: canClick includes current week if it has entries ---- */
+/* ---- VESSELS PAGE ---- */
 async function showVesselsPage(client){
   document.querySelectorAll('.page').forEach(function(p){p.classList.remove('active');});
   document.getElementById(client+'-vessels-page').classList.add('active');
   window.scrollTo(0,0);
   var all = await sbSel('checkins','client=eq.'+client);
+  if(!Array.isArray(all)) all=[];
   var aw  = getActiveWeek();
   var grid = document.getElementById(client+'-vessels-grid');
   var html = '';
@@ -808,7 +841,6 @@ async function showVesselsPage(client){
     var done = wr.length, pct = done/SPW;
     var isCur  = w===aw && aw<TW;
     var isLock = w > aw;
-    /* ✅ FIX: allow click on ANY week (including current) that has at least 1 entry */
     var canClick = !isLock && done > 0;
     var cls = 'vessel-archive-card'+(isLock?' locked':isCur?' current-week':'');
     var wd  = JSON.stringify(wr).replace(/"/g,'&quot;');
@@ -856,13 +888,23 @@ function showHome(){
   document.getElementById('home-page').classList.add('active');
   window.scrollTo(0,0);
 }
+
+/* FIX: showClient catches renderVessel errors so page always loads */
 function showClient(name){
   document.querySelectorAll('.page').forEach(function(p){p.classList.remove('active');});
   document.getElementById(name+'-page').classList.add('active');
   document.getElementById(name+'-workout-area').innerHTML='';
-  renderVessel(name);
   window.scrollTo(0,0);
+  renderVessel(name).catch(function(e){
+    console.warn('renderVessel top-level catch:', e);
+    var el = document.getElementById(name+'-vessel');
+    var btn = document.getElementById(name+'-checkin-btn');
+    if(el) el.innerHTML='<div class="vessel-title">Δοχείο Εβδομάδας '+(getActiveWeek()+1)+'</div>'
+      +'<div style="font-size:13px;color:#aaa;padding:4px 0">Δεν ήταν δυνατή η φόρτωση. Δοκίμασε ξανά.</div>';
+    if(btn){ btn.disabled=false; btn.innerHTML='<span style="font-size:20px">&#10003;</span> Ολοκλήρωσα την προπόνηση'; }
+  });
 }
+
 function showWorkout(key,cId,card){
   var w=workouts[key]; if(!w)return;
   document.getElementById(cId+'-page').querySelectorAll('.day-card').forEach(function(c){c.classList.remove('active-day');});
