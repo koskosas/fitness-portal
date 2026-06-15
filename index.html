@@ -382,7 +382,7 @@ var SH={'Content-Type':'application/json','apikey':SKEY,'Authorization':'Bearer 
 var TW=8, SPW=4;
 
 /* ---- PROGRAM START DATE: Saturday 7 June 2026 — Week 1 starts here ---- */
-var PROGRAM_START = new Date('2026-06-07T00:00:00').getTime();
+var PROGRAM_START = new Date('2026-06-14T00:00:00').getTime();
 
 /* ---- FIX: sbSel with try/catch — never silently hangs ---- */
 async function sbSel(t,f){
@@ -889,19 +889,59 @@ function showHome(){
   window.scrollTo(0,0);
 }
 
-/* FIX: showClient catches renderVessel errors so page always loads */
+/* ---- END-OF-WEEK RECAP — shows once per week transition ---- */
+function getRecapMsg(done){
+  if(done===0) return {icon:'&#128197;', title:'Η εβδομάδα πέρασε', msg:'Δεν καταγράφηκε καμία προπόνηση — αλλά αυτή η εβδομάδα είναι η ευκαιρία σου. Φρέσκο δοχείο, φρέσκια αρχή.'};
+  if(done===1) return {icon:'&#128167;', title:'1 προπόνηση την περασμένη εβδομάδα', msg:'Μια αρχή έγινε. Αυτή η εβδομάδα μπορείς να κάνεις περισσότερες — στόχος τουλάχιστον 2.'};
+  if(done===2) return {icon:'&#128167;', title:'2 προπονήσεις την περασμένη εβδομάδα', msg:'Καλή βάση. Αυτή η εβδομάδα μπορείς να το ανεβάσεις — δοκίμασε για 3 ή και 4.'};
+  if(done===3) return {icon:'&#9889;', title:'3/4 την περασμένη εβδομάδα — σχεδόν!', msg:'Μία μέρα έλειψε. Αυτή η εβδομάδα κλείνεις τέλειο δοχείο — το ξέρεις ότι μπορείς.'};
+  return null;
+}
+
+async function maybeShowWeekRecap(client){
+  var aw = getActiveWeek();
+  if(aw === 0) return;
+  var prevWeek = aw - 1;
+  var seenKey = 'recap_seen_'+client+'_w'+aw;
+  if(localStorage.getItem(seenKey)) return;
+  var all = await sbSel('checkins','client=eq.'+client);
+  if(!Array.isArray(all)) return;
+  var prevDone = all.filter(function(r){ return r.week_index===prevWeek; }).length;
+  if(prevDone >= SPW) return;
+  var info = getRecapMsg(prevDone);
+  if(!info) return;
+  localStorage.setItem(seenKey, '1');
+  showWeekRecapModal(info, aw, seenKey);
+}
+
+function showWeekRecapModal(info, aw, seenKey){
+  document.getElementById('modal-root').innerHTML=
+    '<div class="modal-backdrop" style="align-items:center">'
+    +'<div class="modal" style="text-align:center;padding:32px 24px">'
+    +'<div style="font-size:52px;margin-bottom:14px">'+info.icon+'</div>'
+    +'<div style="font-size:18px;font-weight:500;margin-bottom:10px;letter-spacing:-.2px">'+info.title+'</div>'
+    +'<div style="font-size:14px;color:#666;line-height:1.7;margin-bottom:8px">'+info.msg+'</div>'
+    +'<div style="font-size:12px;color:#bbb;margin-bottom:24px">Εβδομάδα '+aw+' ξεκινά τώρα</div>'
+    +'<button class="checkin-btn-big" onclick="closeModal()">Πάμε! →</button>'
+    +'</div></div>';
+}
+
+/* showClient — renders vessel then checks for week recap */
 function showClient(name){
   document.querySelectorAll('.page').forEach(function(p){p.classList.remove('active');});
   document.getElementById(name+'-page').classList.add('active');
   document.getElementById(name+'-workout-area').innerHTML='';
   window.scrollTo(0,0);
-  renderVessel(name).catch(function(e){
+  renderVessel(name).then(function(){
+    maybeShowWeekRecap(name);
+  }).catch(function(e){
     console.warn('renderVessel top-level catch:', e);
     var el = document.getElementById(name+'-vessel');
     var btn = document.getElementById(name+'-checkin-btn');
     if(el) el.innerHTML='<div class="vessel-title">Δοχείο Εβδομάδας '+(getActiveWeek()+1)+'</div>'
       +'<div style="font-size:13px;color:#aaa;padding:4px 0">Δεν ήταν δυνατή η φόρτωση. Δοκίμασε ξανά.</div>';
     if(btn){ btn.disabled=false; btn.innerHTML='<span style="font-size:20px">&#10003;</span> Ολοκλήρωσα την προπόνηση'; }
+    maybeShowWeekRecap(name);
   });
 }
 
