@@ -381,8 +381,8 @@ var SKEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6I
 var SH={'Content-Type':'application/json','apikey':SKEY,'Authorization':'Bearer '+SKEY};
 var TW=8, SPW=4;
 
-/* ---- PROGRAM START DATE: Saturday 7 June 2026 — Week 1 starts here ---- */
-var PROGRAM_START = new Date('2026-06-14T00:00:00').getTime();
+/* ---- PROGRAM START DATE: Monday 22 June 2026 — Week 1 starts here ---- */
+var PROGRAM_START = new Date('2026-06-22T00:00:00').getTime();
 
 /* ---- FIX: sbSel with try/catch — never silently hangs ---- */
 async function sbSel(t,f){
@@ -648,7 +648,7 @@ async function renderVessel(client){
   var dl = wi.daysLeft;
   var dcolor = dl<=2 && !wi.expired ? '#dc2626' : '#888';
   var daysTag = '<div style="font-size:12px;color:'+dcolor+';margin-top:4px">'
-    +(wi.expired ? '&#128337; Η εβδομάδα έληξε — νέα ξεκινά το Σάββατο'
+    +(wi.expired ? '&#128337; Η εβδομάδα έληξε — νέα ξεκινά τη Δευτέρα'
      : dl===0 ? '&#9201; Τελευταία μέρα της εβδομάδας!'
      : dl===1 ? '&#9201; Απομένει 1 μέρα'
      : '&#128197; Απομένουν '+dl+' μέρες')
@@ -674,9 +674,9 @@ async function renderVessel(client){
   if(btn){
     btn.disabled = weekComplete || notStarted;
     btn.innerHTML = weekComplete
-      ? '<span style="font-size:20px">&#128274;</span> Εβδομάδα κλειδώθηκε — άνοιγμα το Σάββατο'
+      ? '<span style="font-size:20px">&#128274;</span> Εβδομάδα κλειδώθηκε — άνοιγμα τη Δευτέρα'
       : notStarted
-        ? '<span style="font-size:20px">&#128197;</span> Το πρόγραμμα ξεκινά 7 Ιουνίου'
+        ? '<span style="font-size:20px">&#128197;</span> Το πρόγραμμα ξεκινά 22 Ιουνίου'
         : '<span style="font-size:20px">&#10003;</span> Ολοκλήρωσα την προπόνηση';
   }
 }
